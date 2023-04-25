@@ -1,35 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Header from './components/Header';
+// Before: import About from '../pages/About.js';
+import About from './pages/About.jsx';
+import Home from './pages/Home.jsx';
+import Register from './pages/Register.jsx';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HgfgfMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more more more more xd
-      </p>
-    </div>
-  )
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/home" exact component={Home} />
+        <Route path="/about" exact component={About} />
+        <Route path="/register" exact component={Register} />
+      </Switch>
+    </Router>
+  );
 }
-
-export default App
