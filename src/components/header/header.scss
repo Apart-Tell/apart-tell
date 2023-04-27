@@ -1,0 +1,30 @@
+header {
+    width: 100%;
+    background-color: var(--white);
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 999;
+
+        img {
+            max-width: 15rem;
+        }
+
+        .nav-items {
+            // Allows nav items to 'sit' next to each other
+            display: flex;
+            max-width: 45rem;
+           
+            li {
+                margin-right: 3rem;
+            }
+            // For responsiveness
+            @media (max-width: 600px) {
+                display: none;
+            }
+        }
+    }
+}
