@@ -1,9 +1,16 @@
 import React from 'react'
 import './login.scss';
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 
-const Login = () => {
+function Login () {
   return (
-    <div>Login</div>
+    <>
+    <Header/>
+    <div>This is the Login Page!</div>
+    <Footer/>
+    </>
+  
   )
 }
 

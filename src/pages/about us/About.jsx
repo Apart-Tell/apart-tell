@@ -1,14 +1,14 @@
 import React from "react";
 import './about.scss';
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 
 export default function About(){
     return(
         <>
-        <Header>
-            <h2>
-                About Page
-            </h2>
-        </Header> 
+            <Header/>
+            <div>This is the About Us Page!</div>
+            <Footer/>
         </>
     )
 }
