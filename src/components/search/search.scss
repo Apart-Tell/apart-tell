@@ -1,0 +1,57 @@
+* {
+    text-align: center;
+}
+
+h1 {
+    font-size: 35px;
+    white-space: pre;
+    color: var(--white);
+    padding-top: 6rem;
+    -webkit-text-stroke-color: var(--martinique);
+    -webkit-text-stroke-width: 0.5px;
+    padding-top: 7rem;
+}
+
+.search {
+    margin-top: -10rem;
+    background-image: url("landing-img.png");
+    background-size: cover;
+    background-position: center;
+    height: 23rem;
+    border-radius: 20px;
+
+    .search-box-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    // not yet responsive, will add codes to make it more responsive
+    form input {
+        margin-top: 1rem;
+        width: 50rem;
+        height: 3rem;
+        border-radius: 55px;
+        border-style: none;
+        box-sizing: border-box;
+    }
+
+    button {
+        margin-top: 1rem;
+        width: 6rem;
+        height: 2rem;
+        border-radius: 55px;
+        border-style: none;
+        background-color: var(--martinique);
+        color: white;
+        cursor: pointer;
+        &:hover {
+            color: var(--martinique);;
+            background-color: var(--white);
+            border-color: var(--martinique);
+            text-decoration: underline;
+        }
+        // Add codes that when the button is hovered, there are changes
+    } 
+}
+
