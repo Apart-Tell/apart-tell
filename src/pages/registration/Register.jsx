@@ -31,7 +31,9 @@ const Register = () => {
         <Header/>
         <div className="sign-up-container">
       <form onSubmit={signUp}>
-        
+      <div className="logo1">
+                        <a href="/"><img src="logo-icon.png" alt="apart-tell logo"/></a>
+                    </div>
         <h1>Register</h1>
         <input
           type="text"
