@@ -31,6 +31,7 @@ const Register = () => {
         <Header/>
         <div className="sign-up-container">
       <form onSubmit={signUp}>
+        
         <h1>Register</h1>
         <input
           type="text"
