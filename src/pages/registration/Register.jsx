@@ -28,55 +28,79 @@ const Register = () => {
 
     return(
         <>
-        <Header/>
-        <div className="sign-up-container">
+        <div className="logo1">
+          <a href="/"><img src="logo-icon.png" alt="apart-tell logo"/></a>
+        </div>
+
+    <div className="sign-up-container">
       <form onSubmit={signUp}>
-      <div className="logo1">
-                        <a href="/"><img src="logo-icon.png" alt="apart-tell logo"/></a>
-                    </div>
-        <h1>Register</h1>
+        <h1 className="Register-text">Register</h1>
         <input
           type="text"
           placeholder="First Name"
           value={firstname}
+          className="inputfname"
           onChange={(e) => setFname(e.target.value)}
         ></input><br/>
          <input
           type="text"
           placeholder="Middle Name"
           value={middlename}
+          className="inputmname"
           onChange={(e) => setMname(e.target.value)}
         ></input><br/>
          <input
           type="text"
           placeholder="Last Name"
           value={lastname}
+          className="inputlname"
           onChange={(e) => setLname(e.target.value)}
         ></input><br/>
            <input
           type="text"
           placeholder="Create username"
           value={username}
+          className="inputuname"
           onChange={(e) => setUsername(e.target.value)}
         ></input><br/>
         <input
           type="email"
           placeholder="Enter your email"
           value={email}
+          className="inputemail"
           onChange={(e) => setEmail(e.target.value)}
         ></input><br/>
         <input
           type="password"
           placeholder="Enter your password"
           value={password}
+          className="inputpword"
           onChange={(e) => setPassword(e.target.value)}
         ></input><br/>
-        <button type="submit">Register</button>
-      </form>
-      <form>
-        <button type="submit">or Log In With Google</button>
+
+
+        <button className="Reg-Button" type="submit" >Register</button>
+        <div class="or-lines">
+    <hr class="line"></hr>
+    <span class="or-text">or</span>
+    <hr class="line-1"></hr>
+        </div>
+
+        <button className="Google-Button" type="submit">Register with Google</button>
+
+
       </form>
     </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <Footer/>
     </>
   );
