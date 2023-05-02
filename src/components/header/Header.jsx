@@ -11,16 +11,16 @@ export default function Header(){
             <header>
                 <nav className="navbar container">
                     <div className="logo">
-                        <a href="/"><img src="logo-transparent-small.png" alt="apart-tell logo"/></a>
+                        <a href="/"><img src="src/assets/brand/logo-transparent-small.png" alt="apart-tell logo"/></a>
                     </div>
                 <ul className="nav-items">
                     <li><a href="/"><b>Home</b></a></li>
                     <li><a href='/explore'>Explore</a></li>
                     <li><a href='/about'>About Us</a></li>
                     <div className="login-icon icon">
-                        <HiUser/>   
+                        <HiUser/>
                     </div>
-                    <li><a href='/login'><b>Log In</b> <i>(as admin)</i></a></li>                   
+                    <li><a href='/login'><b>Log In</b> <i>(as admin)</i></a></li>
                     <div className="register-icon icon">
                         <HiUserAdd/>
                     </div>
