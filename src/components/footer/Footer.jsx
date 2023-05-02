@@ -11,7 +11,7 @@ export default function Footer(){
         <div className='footer-row'>
           <div className='footer-column'>
             <a href='/'><p>About Us</p></a>
-            <p>2023 Apart-tell. All Rights Reserved.</p>
+            <p>2023 Apart-Tell. All Rights Reserved.</p>
           </div>
         </div>
         </div>
