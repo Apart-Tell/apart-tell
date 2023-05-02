@@ -13,7 +13,6 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    
   
     const signUp = (e) => {
       e.preventDefault();
@@ -87,6 +86,21 @@ const Register = () => {
         </div>
 
         <button className="Google-Button" type="submit">Register with Google</button>
+
+{/*images*/} 
+<img src="Vector.png" alt="apart-tell vector" className="vector"/>
+<img src="Vector.png" alt="apart-tell vector" className="vector1"/>
+<img src="Vector.png" alt="apart-tell vector" className="vector2"/>
+<img src="Vector.png" alt="apart-tell vector" className="vector3"/>
+<img src="lock.png" alt="apart-tell vector1" className="lock"/>
+<img src="pnum.png" alt="apart-tell vector2" className="pnum"/>
+
+
+
+
+
+
+
 
 
       </form>
