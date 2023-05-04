@@ -14,7 +14,7 @@ export default function Header(){
                         <a href="/"><img src="logo-transparent-small.png" alt="apart-tell logo"/></a>
                     </div>
                 <ul className="nav-items">
-                    <li><a href="/"><b>Home</b></a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href='/explore'>Explore</a></li>
                     <li><a href='/about'>About Us</a></li>
                     <div className="login-icon icon">

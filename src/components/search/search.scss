@@ -2,16 +2,6 @@
     text-align: center;
 }
 
-h1 {
-    font-size: 35px;
-    white-space: pre;
-    color: var(--white);
-    padding-top: 6rem;
-    -webkit-text-stroke-color: var(--martinique);
-    -webkit-text-stroke-width: 0.5px;
-    padding-top: 7rem;
-}
-
 .search {
     margin-top: -10rem;
     background-image: url("landing-img.png");
@@ -19,39 +9,50 @@ h1 {
     background-position: center;
     height: 23rem;
     border-radius: 20px;
+    width: 100%;
 
-    .search-box-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .search-text {
+        padding: 6rem 2rem 1rem 3rem;
     }
 
-    // not yet responsive, will add codes to make it more responsive
-    form input {
-        margin-top: 1rem;
-        width: 50rem;
-        height: 3rem;
-        border-radius: 55px;
-        border-style: none;
-        box-sizing: border-box;
-    }
-
-    button {
-        margin-top: 1rem;
-        width: 6rem;
-        height: 2rem;
-        border-radius: 55px;
-        border-style: none;
-        background-color: var(--martinique);
+    h1 {
         color: white;
-        cursor: pointer;
-        &:hover {
-            color: var(--martinique);;
-            background-color: var(--white);
-            border-color: var(--martinique);
-            text-decoration: underline;
+        font-size: 30px;
+        -webkit-text-stroke: 1px var(--martinique);
+    }
+
+    .search-bar-container {
+        // T L B R
+        padding: 5px 10rem 5px 10rem;
+        width: 100%;
+        
+        input {
+            border-radius: 50px;
+            border: none;
+            padding: 15px;
+            width: inherit
         }
+    }
+    
+    .submit-btn-container {
+        padding-top: 10px;
+        width: 100%;
+
+        button {
+            border-radius: 55px;
+            border: none;
+            width: 6rem;
+            height: 2rem;
+            background-color: var(--martinique);
+            color: white;
+
+            &:hover {
+                background-color: white;
+                color: var(--martinique);
+                border-color: var(--martinique);
+                cursor: pointer;    
+            }
+        }
+    }
         // Add codes that when the button is hovered, there are changes
     } 
-}
-

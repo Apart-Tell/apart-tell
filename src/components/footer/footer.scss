@@ -1,14 +1,18 @@
-hr {
-    margin-top: -1rem;
-}
-
-.footer-row {
+footer{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    hr {
+        width: 75%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .footer-content{
+        display: flex;
+        width: 80%;
+        justify-content: space-between;
+        padding: 2rem;
+    }
 }
 
-.footer-column {
-    margin-top: 2rem;
-    position: relative;
-    max-width: 55rem;
-}
+
