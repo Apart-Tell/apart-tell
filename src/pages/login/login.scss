@@ -1,0 +1,173 @@
+.logo1{
+    position: relative;
+    width: 4%;
+    height: auto;
+    left: 47.5%;
+    top: 70px;
+    
+}
+
+
+.login-container {
+    margin-top: 2rem;
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+
+    width: 300px; /* or specific value, e.g. 500px */
+    height: 350px; /* or specific value, e.g. 500px */
+    background: #FDFDFD;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    top: 100px;
+}
+
+
+
+
+.Register-text{
+    position: absolute;
+    width: 103px;
+    height: 30px;
+    left: 95px;
+    top: -100px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 30px;
+
+    color: #303655;
+}
+
+.inputEmail{
+    text-indent: -24px;
+
+}
+
+.inputEmail{
+    box-sizing: border-box;
+            
+    position: absolute;
+    width: 238px;
+    height: 45px;
+    left: 30px;
+    top: 80px;
+            
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    }
+
+.inputPword{
+    box-sizing: border-box;
+        
+    position: absolute;
+    width: 238px;
+    height: 45px;
+    left: 30px;
+    top: 150px;
+        
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    }
+
+    .Login-Button, .Google-ButtonA {
+        color: #ffffff;
+        
+      }
+
+    .Google-Button{
+        text-indent: -2px;
+    }
+
+.Login-Button{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 11px 32px;
+    gap: 10px;
+    float: left;
+    position: absolute;
+    width: 111px;
+    height: 37px;
+    left: 90px;
+    top: 220px;
+
+    /* Martinique */
+
+    background: #595da4;
+    border-radius: 50px;
+}
+
+.Google-ButtonA{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 11px 32px;
+    gap: 12px;
+    float: left;
+    
+    position: absolute;
+    width: 197px;
+    height: 38px;
+    left: 50px;
+    top: 290px;
+    
+    background: #2f3d83;
+    border-radius: 50px;
+}
+
+.linea{
+    border-bottom: 1px solid #d9d9d9;
+    float: left;
+    height: 1px;
+    margin: 305px 0px 0 80px;
+    width: 50px;
+}
+
+.line-1a{
+    border-bottom: 1px solid #d9d9d9;
+    float: right;
+    height: 1px;
+    margin: 305px 80px 0 10px;
+    width: 50px;
+}
+
+.or-textA {
+    position: absolute;
+    width: 103px;
+    height: 30px;
+    left: 98px;
+    top: 259px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 30px;
+
+    color: #9f9b9b
+    ;
+}
+
+
+
+.vectorA{
+    position: relative;
+    max-width: 100%;
+    height:20px;
+    width: 20px;
+    left: -29%;
+    top: 90px;
+}
+
+.lockA{
+    position: relative;
+    max-width: 100%;
+    height:20px;
+    width: 20px;
+    left: -29%;
+    top: 140px;
+}
+
