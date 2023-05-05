@@ -2,9 +2,6 @@ import React from "react";
 import "./header.scss";
 import { HiUser, HiUserAdd} from 'react-icons/hi'
 
-import { Link } from "react-router-dom";
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
 export default function Header(){
     return(
         <div>

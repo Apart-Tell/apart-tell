@@ -6,7 +6,7 @@ export default function Footer(){
       <footer>
         <hr/>
         <div className='footer-content'>
-          <a href='/'><p>About Us</p></a>
+          <a href='/about'><p>About Us</p></a>
           <p>2023 Apart-Tell. All Rights Reserved.</p>
         </div>
       </footer>
