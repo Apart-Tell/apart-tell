@@ -107,7 +107,7 @@ const Register = () => {
           <img src="pnum.png" alt="apart-tell vector2" className="pnum" />
         </form>
       </div>
-      <br />
+      <brs />
       <br />
       <br />
       <br />
