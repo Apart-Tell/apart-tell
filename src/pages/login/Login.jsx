@@ -23,9 +23,9 @@ function Login() {
 
   return (
     <>
-      <Header />
+      
       <div className="logo1">
-        <a>
+      <a href="/">
           <img src="logo-icon.png" alt="apart-tell logo" />
         </a>
       </div>

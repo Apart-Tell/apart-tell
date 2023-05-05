@@ -26,7 +26,7 @@ const Register = () => {
 
   return (
     <>
-      <Header />
+
       <div className="logo1">
         <a href="/">
           <img src="logo-icon.png" alt="apart-tell logo" />
