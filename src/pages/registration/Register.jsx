@@ -26,7 +26,7 @@ const Register = () => {
 
   return (
     <>
-      <Header />
+
       <div className="logo1">
         <a href="/">
           <img src="logo-icon.png" alt="apart-tell logo" />
@@ -107,7 +107,7 @@ const Register = () => {
           <img src="pnum.png" alt="apart-tell vector2" className="pnum" />
         </form>
       </div>
-      <br />
+      <brs />
       <br />
       <br />
       <br />

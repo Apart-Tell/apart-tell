@@ -1,0 +1,58 @@
+* {
+    text-align: center;
+}
+
+.search {
+    margin-top: -10rem;
+    background-image: url("src/assets/images/search-bg-img.png");
+    background-size: cover;
+    background-position: center;
+    height: 23rem;
+    border-radius: 20px;
+    width: 100%;
+
+    .search-text {
+        padding: 6rem 2rem 1rem 3rem;
+    }
+
+    h1 {
+        color: white;
+        font-size: 30px;
+        -webkit-text-stroke: 1px var(--martinique);
+    }
+
+    .search-bar-container {
+        // T L B R
+        padding: 5px 10rem 5px 10rem;
+        width: 100%;
+        
+        input {
+            border-radius: 50px;
+            border: none;
+            padding: 15px;
+            width: inherit
+        }
+    }
+    
+    .submit-btn-container {
+        padding-top: 10px;
+        width: 100%;
+
+        button {
+            border-radius: 55px;
+            border: none;
+            width: 6rem;
+            height: 2rem;
+            background-color: var(--martinique);
+            color: white;
+
+            &:hover {
+                background-color: white;
+                color: var(--martinique);
+                border-color: var(--martinique);
+                cursor: pointer;    
+            }
+        }
+    }
+        // Add codes that when the button is hovered, there are changes
+    } 

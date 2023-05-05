@@ -23,15 +23,15 @@ function Login() {
 
   return (
     <>
-      <Header />
+      
       <div className="logo1">
-        <a >
-          <img src="logo-icon.png" alt="apart-tell logo"/>
+      <a href="/">
+          <img src="logo-icon.png" alt="apart-tell logo" />
         </a>
       </div>
       <div className="login-container">
         <form onSubmit={login}>
-        <h1 className="Register-text">Log In</h1>
+          <h1 className="Register-text">Log In</h1>
 
           <input
             type="email"
@@ -47,7 +47,9 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             className="inputPword"
           ></input>
-          <button type="submit" className="Login-Button">Log In</button>
+          <button type="submit" className="Login-Button">
+            Log In
+          </button>
           <div class="or-lines">
             <hr class="linea"></hr>
             <span class="or-textA">or</span>
@@ -60,13 +62,23 @@ function Login() {
           {/*images*/}
           <img src="Vector.png" alt="apart-tell vector" className="vectorA" />
           <img src="lock.png" alt="apart-tell vector1" className="lockA" />
-
-      
         </form>
       </div>
 
-
-<br /><br /><br /><br /><br /><br /><br /><br /><AuthDetails /><br /><br /><br /><br /><br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <AuthDetails />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <Footer />
     </>
   );

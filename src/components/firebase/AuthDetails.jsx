@@ -29,7 +29,8 @@ const AuthDetails = () => {
     <div>
       {authUser ? (
         <>
-          <p>signed in as {authUser.email}</p><br/>
+          <p>signed in as {authUser.email}</p>
+          <br />
           <button onClick={userSignOut}>sign out</button>
         </>
       ) : (
