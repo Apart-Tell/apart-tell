@@ -10,29 +10,29 @@ export default function Option (){
         <div className='option-column'>
           <a href='/'>
             <h4>Apartment</h4>
-            <img src='apartment-img.png' alt='apartment-img'></img>
+            <img src='src/assets/images/apartment-img.png' alt='apartment-img'></img>
           </a>
         </div>
 
         <div className='option-column'>
           <a href='/'>
             <h4>Boarding House</h4>
-            <img src='bh-img.png' alt='bh-img'></img>
+            <img src='src/assets/images/bh-img.png' alt='bh-img'></img>
           </a>
         </div>
 
         <div className='option-column'>
           <a href='/'>
             <h4>Dormitory</h4>
-            <img src='dorm-img.png' alt='dorm-img'></img>
+            <img src='src/assets/images/dorm-img.png' alt='dorm-img'></img>
           </a>
-        </div>   
+        </div>
 
         <div className='explore-btn'>
         <a href='/explore'><button>Explore</button></a> 
         </div>
-         
-      </div>  
+
+      </div>
     </div>
   )
 }
