@@ -2,9 +2,6 @@ import React from "react";
 import "./header.scss";
 import { HiUser, HiUserAdd} from 'react-icons/hi'
 
-import { Link } from "react-router-dom";
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
 export default function Header(){
     return(
         <div>
@@ -14,7 +11,7 @@ export default function Header(){
                         <a href="/"><img src="src/assets/brand/logo-transparent-small.png" alt="apart-tell logo"/></a>
                     </div>
                 <ul className="nav-items">
-                    <li><a href="/"><b>Home</b></a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href='/explore'>Explore</a></li>
                     <li><a href='/about'>About Us</a></li>
                     <div className="login-icon icon">
