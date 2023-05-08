@@ -8,7 +8,6 @@ import { db } from "../../firebase";
 
 const Register = () => {
   const [firstname, setFname] = useState("");
-  const [middlename, setMname] = useState("");
   const [lastname, setLname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

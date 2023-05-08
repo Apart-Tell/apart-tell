@@ -5,9 +5,10 @@
 }
 
 .logo{
-    margin-top: 150px;
 
-    @media (min-width: 768px) {
+    margin-top: 120px;
+
+    @media (max-width: 768px) {
         margin-top: 50px;
       }
     display: flex;
@@ -18,6 +19,7 @@
 
     // outline: solid 1px black;
 }
+
 
 .registration {
     display: flex;
@@ -34,13 +36,24 @@
     height: fit-content;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 3px 3px 11px 0px rgba(111, 144, 175, 0.25);
+    // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 
     // outline: solid 1px black;
 }
 
 .register-title {
     font-size: small;
+
+    @media screen and (max-width: 768px) {
+        font-size: x-small;
+    }
+
+    @media screen and (max-width: 480px) {
+        font-size: xx-small;
+    }
+
+    // outline: solid 1px black;
 }
 
 .register-input-container {
@@ -52,15 +65,67 @@
     // outline: solid 1px black;
 }
 
-input {
+@mixin input-style {
     width: 100%;
     max-width: 240px;
     height: 45px;
     text-align: left;
-    text-indent: 5%;
+    text-indent: 10%;
     border-radius: 5px;
     border: solid 1px var(--loblolly);
+    padding-left: 15px;
+
+    @media (max-width: 768px) {
+        padding-left: 10px;
+    }
+
+    @media (max-width: 480px) {
+        padding-left: 5px;
+    }
 }
+
+input {
+    @include input-style;
+    padding-left: 30px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    @include input-style;
+    background-repeat: no-repeat;
+    background-position: 13px center;
+    background-size: 15px;
+
+    @media (max-width: 768px) {
+        background-size: 16px;
+        background-position: 8px center;
+    }
+
+    @media (max-width: 480px) {
+        background-size: 12px;
+        background-position: 6px center;
+    }
+}
+
+input[type="text"] {
+    background-image: url("../../assets/svg/person.svg");
+}
+
+input[type="email"] {
+    background-image: url("../../assets/svg/email.svg");
+}
+
+input[type="password"] {
+    background-image: url("../../assets/svg/password.svg");
+}
+
+input:focus {
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 2px var(--wildblueyonder);
+  }
+
 
 .register-button {
     margin-top: 30px;
