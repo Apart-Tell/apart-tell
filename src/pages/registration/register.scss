@@ -8,7 +8,7 @@
     margin-top: 150px;
 
     @media (min-width: 768px) {
-        margin-top: 100px;
+        margin-top: 50px;
       }
     display: flex;
     flex-wrap: wrap;
@@ -29,7 +29,8 @@
 }
 
 .register-container {
-    width: 300px; /* or specific value, e.g. 500pxss */
+    width: 100%;
+    max-width: 300px; /* or specific value, e.g. 500pxss */
     height: fit-content;
     padding: 30px;
     border-radius: 10px;
@@ -43,9 +44,7 @@
 }
 
 .register-input-container {
-
     margin-top: 30px;
-
     input:not(:last-child) {
       margin-bottom: 12px;
     }
@@ -54,7 +53,8 @@
 }
 
 input {
-    width: 240px;
+    width: 100%;
+    max-width: 240px;
     height: 45px;
     text-align: left;
     text-indent: 5%;
@@ -63,7 +63,7 @@ input {
 }
 
 .register-button {
-    margin-top: 20px;
+    margin-top: 30px;
 
     // outline: solid 1px black;
 }
@@ -73,8 +73,10 @@ button {
     color: var(--white);
     font-size: small;
     font-weight: bold;
-    width: 106px;
+    width: 100%;
+    max-width: 106px;
     height: 41px;
+    border: none;
     border-radius: 44px;
     cursor: pointer;
 }

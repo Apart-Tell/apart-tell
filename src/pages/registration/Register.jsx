@@ -61,13 +61,6 @@ const Register = () => {
                   ></input>
                   <input
                     type="text"
-                    placeholder="Middle Name"
-                    value={middlename}
-                    className="inputmname"
-                    onChange={(e) => setMname(e.target.value)}
-                  ></input>
-                  <input
-                    type="text"
                     placeholder="Last Name"
                     value={lastname}
                     className="inputlname"
