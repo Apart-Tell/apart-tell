@@ -13,9 +13,25 @@ const AuthDetails = () => {
         const uid = user.uid;
         const userRef = doc(collection(db, "users"), uid);
         const userDoc = await getDoc(userRef);
+        const userReq = doc(collection(db, "requests"), uid);
+        const userReqDoc = await getDoc(userReq);
         if (userDoc.exists()) {
-          const userData = userDoc.data();
-          setAuthUser({ uid, email: user.email, userName: userData.userName });
+          const userReqData = userReqDoc.data();
+          if (userReqData.status !== "approved") {
+            alert(
+              "Your account is awaiting approval from an admin. Please check back later."
+            );
+            await signOut(auth);
+          } else {
+            const userData = userDoc.data();
+            setAuthUser({
+              uid,
+              email: user.email,
+              userName: userData.userName,
+            });
+          }
+        } else {
+          setAuthUser(null);
         }
       } else {
         setAuthUser(null);
@@ -35,16 +51,15 @@ const AuthDetails = () => {
   };
   return (
     <div>
-      {authUser ? (
-        <>
-          <p>signed in as {authUser.userName}</p>
-          <br />
-          <button onClick={userSignOut}>sign out</button>
-        </>
-      ) : (
-        <p>signed out</p>
-      )}
-    </div>
-  );
+    {authUser && authUser.userName && (
+      <>
+        <p>signed in as {authUser.userName}</p>
+        <br />
+        <button onClick={userSignOut}>sign out</button>
+      </>
+    )}
+    {!authUser && <p>signed out</p>}
+  </div>
+);
 };
 export default AuthDetails;
