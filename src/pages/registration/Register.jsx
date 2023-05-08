@@ -38,97 +38,76 @@ const Register = () => {
 
   return (
     <>
-      <div className="logo1">
+    <div className="logo">
         <a href="/">
           <img src="logo-icon.png" alt="apart-tell logo" />
         </a>
-      </div>
+    </div>
+    <div className="registration">
+        <div className="register-container">
+            <form onSubmit={signUp}>
 
-      <div className="sign-up-container">
-        <form onSubmit={signUp}>
-          <h1 className="Register-text">Register</h1>
-          <input
-            type="text"
-            placeholder="First Name"
-            value={firstname}
-            className="inputfname"
-            onChange={(e) => setFname(e.target.value)}
-          ></input>
-          <br />
-          <input
-            type="text"
-            placeholder="Middle Name"
-            value={middlename}
-            className="inputmname"
-            onChange={(e) => setMname(e.target.value)}
-          ></input>
-          <br />
-          <input
-            type="text"
-            placeholder="Last Name"
-            value={lastname}
-            className="inputlname"
-            onChange={(e) => setLname(e.target.value)}
-          ></input>
-          <br />
-          <input
-            type="text"
-            placeholder="Create username"
-            value={username}
-            className="inputuname"
-            onChange={(e) => setUsername(e.target.value)}
-          ></input>
-          <br />
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            className="inputemail"
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
-          <br />
-          <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            className="inputpword"
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-          <br />
+              <div className="register-title">
+                <h1>Register</h1>
+              </div>
 
-          <button className="Reg-Button" type="submit">
-            Register
-          </button>
-          <div class="or-lines">
-            <hr class="line"></hr>
-            <span class="or-text">or</span>
-            <hr class="line-1"></hr>
-          </div>
+              <div className="register-input-container">
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    value={firstname}
+                    className="inputfname"
+                    onChange={(e) => setFname(e.target.value)}
+                  ></input>
+                  <input
+                    type="text"
+                    placeholder="Middle Name"
+                    value={middlename}
+                    className="inputmname"
+                    onChange={(e) => setMname(e.target.value)}
+                  ></input>
+                  <input
+                    type="text"
+                    placeholder="Last Name"
+                    value={lastname}
+                    className="inputlname"
+                    onChange={(e) => setLname(e.target.value)}
+                  ></input>
+                  <input
+                    type="text"
+                    placeholder="Create username"
+                    value={username}
+                    className="inputuname"
+                    onChange={(e) => setUsername(e.target.value)}
+                  ></input>
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    className="inputemail"
+                    onChange={(e) => setEmail(e.target.value)}
+                  ></input>
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    className="inputpword"
+                    onChange={(e) => setPassword(e.target.value)}
+                  ></input>
+              </div>
 
-          <button className="Google-Button" type="submit">
-            Register with Google
-          </button>
+              <div className="register-button">
+                <button type="button" onClick={() => document.querySelector('form').onSubmit()}>
+                  Register
+                </button>
+              </div>
+            </form>
+        </div>
+    </div>
 
-          {/*images*/}
-          <img src="Vector.png" alt="apart-tell vector" className="vector" />
-          <img src="Vector.png" alt="apart-tell vector" className="vector1" />
-          <img src="Vector.png" alt="apart-tell vector" className="vector2" />
-          <img src="Vector.png" alt="apart-tell vector" className="vector3" />
-          <img src="lock.png" alt="apart-tell vector1" className="lock" />
-          <img src="pnum.png" alt="apart-tell vector2" className="pnum" />
-        </form>
-      </div>
-      <brs />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+    <div className="footer">
       <Footer />
+    </div>
     </>
   );
 };
