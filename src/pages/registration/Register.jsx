@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./register.scss";
-import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Register = () => {
   const [firstname, setFname] = useState("");
@@ -17,7 +18,18 @@ const Register = () => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        const docRef = doc(db, "users", userCredential.user.uid);
+        setDoc(docRef, {
+          firstName: firstname,
+          lastName: lastname,
+          userName: username,
+          email: email,
+        }).catch((error) => {
+          console.log(
+            "Something went wrong with adding user to Firestore: ",
+            error
+          );
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -26,7 +38,6 @@ const Register = () => {
 
   return (
     <>
-
       <div className="logo1">
         <a href="/">
           <img src="logo-icon.png" alt="apart-tell logo" />
