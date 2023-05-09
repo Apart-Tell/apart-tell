@@ -48,13 +48,13 @@ const Register = () => {
 
   return (
     <>
-    <div className="logo-reg">
+      <div className="logo-reg">
         <a href="/">
           <img src="logo-icon.png" alt="apart-tell logo" />
         </a>
-    </div>
-    <div className="registration">
-        <div className="register-container">
+      </div>
+      <div className="registration">
+          <div className="register-container">
             <form onSubmit={signUp}>
 
               <div className="register-title">
@@ -106,11 +106,11 @@ const Register = () => {
               </div>
             </form>
         </div>
-    </div>
+      </div>
 
-    <div className="footer">
-      <Footer />
-    </div>
+      <div className="footer">
+        <Footer />
+      </div>
     </>
   );
 };
