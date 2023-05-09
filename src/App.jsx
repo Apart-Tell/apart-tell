@@ -10,6 +10,8 @@ import About from "./pages/about us/About";
 import Login from "./pages/login/Login";
 import Register from "./pages/registration/Register";
 import AdminHome from "./pages/admin/home/AdminHome";
+import Account from "./pages/admin/account/Account";
+import Directory from "./pages/admin/directory/Directory";
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/admin-home" element={<AdminHome/>}/>
+        <Route path="/user/account" element={<Account/>}/>
+        <Route path="/user/directory" element={<Directory/>}/>
       </Routes>
     </Router>
   </div>

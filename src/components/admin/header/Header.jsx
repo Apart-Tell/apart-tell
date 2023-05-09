@@ -36,9 +36,9 @@ export default function Header(){
                                     <HiUser/> Welcome, user! <HiChevronDown/>
                                 </a>
                                 <ul className={`dropdown-items ${dropdownOpen ? 'active' : ''}`}>
-                                    <li><a href="/user/profile">Account</a></li>
-                                    <li><a href="/user/settings">Directory</a></li>
-                                    <li><a href="/user/logout">Log Out</a></li>
+                                    <li><a href="/user/account">Account</a></li>
+                                    <li><a href="/user/directory">Directory</a></li>
+                                    <li><a href="/login">Log Out</a></li>
                                 </ul>
                             </li>
                         </ul>
