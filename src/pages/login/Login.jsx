@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./login.scss";
-import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -23,64 +22,55 @@ function Login() {
 
   return (
     <>
-      
-      <div className="logo1">
-      <a href="/">
+      <div className="logo-login">
+        <a href="/">
           <img src="logo-icon.png" alt="apart-tell logo" />
         </a>
       </div>
-      <div className="login-container">
-        <form onSubmit={login}>
-          <h1 className="Register-text">Log In</h1>
+      <div className="login">
+        <div className="login-container">
+          <form onSubmit={login}>
 
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="inputEmail"
-          ></input>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="inputPword"
-          ></input>
-          <button type="submit" className="Login-Button">
-            Log In
-          </button>
-          <div class="or-lines">
-            <hr class="linea"></hr>
-            <span class="or-textA">or</span>
-            <hr class="line-1a"></hr>
-          </div>
+            <div className="login-title">
+              <h1>Log In</h1>
+            </div>
 
-          <button className="Google-ButtonA" type="submit">
-            Log In with Google
-          </button>
-          {/*images*/}
-          <img src="Vector.png" alt="apart-tell vector" className="vectorA" />
-          <img src="lock.png" alt="apart-tell vector1" className="lockA" />
-        </form>
+            <div className="login-input-container">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="email-input"
+              ></input>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="password-input"
+              ></input>
+            </div>
+
+            <div className="login-button">
+              <button type="button" onClick={() => document.querySelector('form').onSubmit()}>
+                Log In
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      {/* testing section */}
       <br />
       <AuthDetails />
+      <br />
       <a href="/admin-home">Testing</a>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <Footer />
+      {/* end of testing section */}
+
+      <div className="footer">
+        <Footer />
+      </div>
     </>
   );
 }

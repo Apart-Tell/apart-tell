@@ -1,7 +1,6 @@
 * {
     margin: 0;
     box-sizing: border-box;
-
 }
 
 .logo-reg{
@@ -135,17 +134,20 @@ input:focus {
     // outline: solid 1px black;
 }
 
-button {
-    background-color: var(--martinique);
-    color: var(--white);
-    font-size: small;
-    font-weight: bold;
-    width: 100%;
-    max-width: 106px;
-    height: 41px;
-    border: none;
-    border-radius: 44px;
-    cursor: pointer;
+.register-button,
+.login-button {
+    button {
+        background-color: var(--martinique);
+        color: var(--white);
+        font-size: small;
+        font-weight: bold;
+        width: 100%;
+        max-width: 106px;
+        height: 41px;
+        border: none;
+        border-radius: 44px;
+        cursor: pointer;
+    }
 }
 
 .footer {
