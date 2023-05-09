@@ -4,7 +4,7 @@
 
 }
 
-.logo{
+.logo-reg{
 
     margin-top: 120px;
 
@@ -84,14 +84,16 @@
     }
 }
 
-input {
+.text-input,
+.email-input,
+.password-input {
     @include input-style;
     padding-left: 30px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+.text-input,
+.email-input,
+.password-input {
     @include input-style;
     background-repeat: no-repeat;
     background-position: 13px center;
@@ -108,21 +110,21 @@ input[type="password"] {
     }
 }
 
-input[type="text"] {
+.text-input {
     background-image: url("../../assets/svg/person.svg");
 }
 
-input[type="email"] {
+.email-input {
     background-image: url("../../assets/svg/email.svg");
 }
 
-input[type="password"] {
+.password-input {
     background-image: url("../../assets/svg/password.svg");
 }
 
 input:focus {
     outline: none;
-    background-color: #fff;
+    background-color: var(--white);
     box-shadow: 0 0 0 2px var(--wildblueyonder);
   }
 
