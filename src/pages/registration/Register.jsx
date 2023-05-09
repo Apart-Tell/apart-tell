@@ -3,7 +3,7 @@ import "./register.scss";
 import Footer from "../../components/footer/Footer";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const Register = () => {
@@ -23,12 +23,23 @@ const Register = () => {
           lastName: lastname,
           userName: username,
           email: email,
+          role: "pending"
         }).catch((error) => {
           console.log(
             "Something went wrong with adding user to Firestore: ",
             error
           );
         });
+        const requestDocRef = doc(db, "requests", userCredential.user.uid);
+        setDoc(requestDocRef,{
+          firstName: firstname,
+          lastName: lastname,
+          userName:username,
+          email: email,
+          createdAt:serverTimestamp(),
+          status:"pending"
+        })
+
       })
       .catch((error) => {
         console.log(error);

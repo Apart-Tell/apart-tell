@@ -1,6 +1,6 @@
 import React from "react";
 import "./header.scss";
-import { HiUser, HiUserAdd, HiMenu, HiX} from 'react-icons/hi';
+import { HiUser, HiMenu, HiX, HiChevronDown} from 'react-icons/hi';
 import { useState } from "react";
 
 export default function Header(){
@@ -9,6 +9,12 @@ export default function Header(){
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
+    };
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setDropdownOpen(!dropdownOpen);
     };
 
     return(
@@ -25,14 +31,16 @@ export default function Header(){
                             <li><a href="/">Home</a></li>
                             <li><a href='/explore'>Explore</a></li>
                             <li><a href='/about'>About Us</a></li>
-                            {/*<div className="login-icon icon">
-                                <HiUser/>
-                            </div>*/}
-                            <li><a href='/login'><HiUser/><b>Log In</b> <i>(as admin)</i></a></li>
-                            {/*div className="register-icon icon">
-                                <HiUserAdd/>
-                            </div>*/}
-                        <li><a href='/register'><HiUserAdd/><b>Register</b> <i>(as admin)</i></a></li>
+                            <li className={`dropdown-icon ${dropdownOpen ? 'active' : ''}`} onClick={toggleDropdown}>
+                                <a>
+                                    <HiUser/> Welcome, user! <HiChevronDown/>
+                                </a>
+                                <ul className={`dropdown-items ${dropdownOpen ? 'active' : ''}`}>
+                                    <li><a href="/user/profile">Account</a></li>
+                                    <li><a href="/user/settings">Directory</a></li>
+                                    <li><a href="/user/logout">Log Out</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </nav>

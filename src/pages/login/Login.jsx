@@ -74,6 +74,7 @@ function Login() {
       <br />
       <br />
       <AuthDetails />
+      <a href="/admin-home">Testing</a>
       <br />
       <br />
       <br />
