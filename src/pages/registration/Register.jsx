@@ -48,7 +48,7 @@ const Register = () => {
 
   return (
     <>
-    <div className="logo">
+    <div className="logo-reg">
         <a href="/">
           <img src="logo-icon.png" alt="apart-tell logo" />
         </a>
@@ -66,35 +66,35 @@ const Register = () => {
                     type="text"
                     placeholder="First Name"
                     value={firstname}
-                    className="inputfname"
+                    className="text-input"
                     onChange={(e) => setFname(e.target.value)}
                   ></input>
                   <input
                     type="text"
                     placeholder="Last Name"
                     value={lastname}
-                    className="inputlname"
+                    className="text-input"
                     onChange={(e) => setLname(e.target.value)}
                   ></input>
                   <input
                     type="text"
-                    placeholder="Create username"
+                    placeholder="text-input"
                     value={username}
-                    className="inputuname"
+                    className="text-input"
                     onChange={(e) => setUsername(e.target.value)}
                   ></input>
                   <input
                     type="email"
                     placeholder="Enter your email"
                     value={email}
-                    className="inputemail"
+                    className="email-input"
                     onChange={(e) => setEmail(e.target.value)}
                   ></input>
                   <input
                     type="password"
                     placeholder="Enter your password"
                     value={password}
-                    className="inputpword"
+                    className="password-input"
                     onChange={(e) => setPassword(e.target.value)}
                   ></input>
               </div>
