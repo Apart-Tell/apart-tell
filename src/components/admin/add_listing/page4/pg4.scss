@@ -1,0 +1,63 @@
+.pg4-wrapper {
+    margin-top: 5rem;
+    text-align: left;
+    form {
+        margin-top: 3rem;
+        border-radius: 0.5rem;
+      }
+      
+      form div {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+      }
+      
+      label {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        text-align: left;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], select {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: 1px solid #ccc;
+        font-size: 1.2rem;
+        color: #333;
+        margin-top: 0.5rem;
+        text-align: left;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+      }
+      
+      
+      select {
+        cursor: pointer;
+        .select-type {
+          text-align: left;
+        }
+      }
+      
+      button{
+        margin-top: 1rem;
+        width: 6rem;
+        height: 2rem;
+        border-radius: 55px;
+        border: 1px solid var(--martinique);
+        // border-color: black;
+        background-color: white;
+        color: var(--martinique);
+        cursor: pointer;
+        
+        &:hover {
+            background-color: var(--martinique);
+            a {
+              color: white;
+            }
+        }   
+  }
+  .prev-btn{
+    margin-right: 1rem;
+    }
+}

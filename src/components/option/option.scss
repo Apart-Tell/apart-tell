@@ -15,6 +15,10 @@
     img {
         width: 90%;
         border-radius: 20px;
+        &:hover {
+            transform: scale(1.1); // Increase the scale of the image
+            transition: transform 0.3s, filter 0.3s; // Add smooth transition effect
+        }
     }
 
     .option-column {
