@@ -7,6 +7,7 @@ const Account = () => {
   return (
     <>
     <Header/>
+    <h1>This is the account page!</h1>
     <Footer/>
     </>
   )

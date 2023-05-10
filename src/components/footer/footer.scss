@@ -1,17 +1,19 @@
 footer{
+    width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
     hr {
         width: 75%;
-        margin-left: 0;
-        margin-right: 0;
+        // margin-left: 0;
+        // margin-right: 0;
     }
     .footer-content{
         display: flex;
         width: 80%;
-        justify-content: space-between;
+        justify-content: space-evenly;
         padding: 2rem;
+        flex-wrap: wrap;
     }
 }
 
