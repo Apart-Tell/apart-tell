@@ -1,56 +1,8 @@
-.hr1{
-position: absolute;
-width: 740px;
-height: 0px;
-left: 350px;
-top: 237px;
-
-/* Loblolly */
-
-border: 1px solid #BDCBCF;
-transform: rotate(-0.08deg);
+* {
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.footer{
-    //tba
-}
-.myacc{
-position: absolute;
-width: 141px;
-height: 29px;
-left: 252px;
-top: 130px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 24px;
-line-height: 29px;
-/* identical to box height */
 
 
-/* Martinique */
 
-color: #313357;
-
-}
-
-.personal{
-position: absolute;
-width: 195px;
-height: 24px;
-left: 350px;
-top: 210px;
-
-/* h3 */
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 24px;
-
-/* Martinique */
-
-color: #313357;
-}

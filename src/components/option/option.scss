@@ -2,15 +2,10 @@
     box-sizing: border-box;
 }
 
-h2 {
-    text-align: left;
-    margin-top: -8rem;
-}
-
-h4 {
-    margin-bottom: 1rem;
-    &:hover {
-        text-decoration: underline;
+.container {
+    h2 {
+        text-align: left;
+        margin-top: -8rem;
     }
 }
 
@@ -43,5 +38,12 @@ h4 {
                 color: white;
             }
             // Add codes that when the button is hovered, there are changes
+    }
+
+    h4 {
+        margin-bottom: 1rem;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
