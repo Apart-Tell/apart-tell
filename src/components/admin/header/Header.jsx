@@ -33,7 +33,7 @@ export default function Header(){
                             <li><a href='/about'>About Us</a></li>
                             <li className={`dropdown-icon ${dropdownOpen ? 'active' : ''}`} onClick={toggleDropdown}>
                                 <a>
-                                    <HiUser/> Welcome, user! <HiChevronDown/>
+                                    <HiUser/>Welcome, user! <HiChevronDown/>
                                 </a>
                                 <ul className={`dropdown-items ${dropdownOpen ? 'active' : ''}`}>
                                     <li><a href="/user/account">Account</a></li>

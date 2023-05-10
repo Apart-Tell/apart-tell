@@ -1,0 +1,75 @@
+.wrapper {
+    margin-top: 5rem;
+    text-align: left;
+    form {
+        margin-top: 3rem;
+        border-radius: 0.5rem;
+      }
+      
+      form div {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+      }
+      
+      label {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        text-align: left;
+      }
+      
+      input[type="text"], select {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: 1px solid #ccc;
+        font-size: 1.2rem;
+        color: #333;
+        margin-top: 0.5rem;
+        text-align: left;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+      }
+      
+      input[type="checkbox"] {
+        margin-right: 0.5rem;
+      }
+
+      textarea {
+        margin-top: 0.5rem;
+        height: 5rem;
+        border-radius: 0.5rem;
+        border: 1px solid #ccc;
+        padding: 0.5rem;
+        text-align: left;
+        max-width: 100%;
+        font-size: larger;
+      }
+      
+      select {
+        cursor: pointer;
+        .select-type {
+          text-align: left;
+        }
+      }
+      
+      button{
+        margin-top: 1rem;
+        width: 6rem;
+        height: 2rem;
+        border-radius: 55px;
+        border: 1px solid var(--martinique);
+        // border-color: black;
+        background-color: white;
+        color: var(--martinique);
+        cursor: pointer;
+        
+        &:hover {
+            background-color: var(--martinique);
+            a {
+              color: white;
+            }
+        }
+        // Add codes that when the button is hovered, there are changes
+  }
+}
