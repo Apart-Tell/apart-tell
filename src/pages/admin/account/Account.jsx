@@ -7,7 +7,56 @@ const Account = () => {
   return (
     <>
     <Header/>
-    <Footer/>
+      <div className='myacc'>
+        My Account
+      </div>
+      <div className='personal'>
+        Personal Information
+      </div>
+      <div className=''>
+        <form>
+          <input type='text' className=''/>
+          <input type='text' className=''/>
+          <input type='text' className=''/>
+          <input type='text' className=''/>
+        </form>
+        <hr className='hr1'></hr>
+        <form>
+         <input type='text' className=''/>
+        </form>
+        <form>
+         <input type='text' className=''/>
+         <input type='text' className=''/>
+         <input type='text' className=''/>
+
+        </form>
+      </div>
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/> 
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+    <Footer className="footer"/>
     </>
   )
 }
