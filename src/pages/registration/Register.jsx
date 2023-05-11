@@ -102,7 +102,7 @@ const Register = () => {
               <div className="register-button">
                 <button type="button" onClick={() => {
                   console.log('Button clicked'); // Make sure the button click event is being executed
-                  document.querySelector('form').submit();
+                  document.querySelector('form').submit(); // Changed from .onSubmit() to .submit()
                   }}>
                   Register
                 </button>
