@@ -7,9 +7,12 @@ const Account = () => {
   return (
     <>
     <Header/>
-    <div className="container">
-      <h1>My Account</h1>
-      <h2>Personal Information</h2>
+    <div className="account container">
+      <h2 className='account-h2'>My Account</h2>
+      <div className="personal-information">
+        <h3>Personal Information</h3>
+      </div>
+
     </div>
     <Footer/>
   
