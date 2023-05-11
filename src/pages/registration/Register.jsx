@@ -23,7 +23,7 @@ const Register = () => {
           lastName: lastname,
           userName: username,
           email: email,
-          role: "pending"
+          // role: "pending"
         }).catch((error) => {
           console.log(
             "Something went wrong with adding user to Firestore: ",
@@ -100,7 +100,10 @@ const Register = () => {
               </div>
 
               <div className="register-button">
-                <button type="button" onClick={() => document.querySelector('form').onSubmit()}>
+                <button type="button" onClick={() => {
+                  console.log('Button clicked'); // Make sure the button click event is being executed
+                  document.querySelector('form').submit(); // Changed from .onSubmit() to .submit()
+                  }}>
                   Register
                 </button>
               </div>
