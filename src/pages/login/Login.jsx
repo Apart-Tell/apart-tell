@@ -54,7 +54,7 @@ function Login() {
 
             <div className="login-button">
               {/* changed from onSubmit() to submit() */}
-              <button type="button" onClick={() => document.querySelector('form').submit()}> 
+              <button type="submit"> 
                 Log In
               </button>
             </div>
