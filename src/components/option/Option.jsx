@@ -4,7 +4,7 @@ import './option.scss';
 export default function Option (){
   return (
     <div className='option container'>
-      <h2>Find the most convenient accommodation</h2>
+      <h2 className='option-h2'>Find the most convenient accommodation</h2>
       <div className='option-row'>
 
         <div className='option-column'>
