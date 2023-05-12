@@ -67,20 +67,24 @@ const Account = () => {
 
           <div className="password-info-container">
 
-            <div className="account-info">
-              <label htmlFor="currpass">CURRENT PASSWORD</label>
-              <input type="text" id='currpass'/>
-            </div>
-            <div className="account-info">
-              <label htmlFor="newpass">NEW PASSWORD</label>
-              <input type="text" id='newpass'/>
-            </div>
-            <div className="account-info">
-              <label htmlFor="confirmpass">CONFIRM PASSWORD</label>
-              <input type="text" id='confirmpass'/>
-            </div>
-
+          <div className="account-input-field">
+            <label htmlFor="currpass">CURRENT PASSWORD</label>
+            <input type="password" id="currpass" />
+            <span>hello</span>
           </div>
+
+          <div className="account-input-field">
+            <label htmlFor="newpass">NEW PASSWORD</label>
+            <input type="password" id="newpass" />
+          </div>
+
+          <div className="account-input-field">
+            <label htmlFor="confirmpass">CONFIRM PASSWORD</label>
+            <input type="password" id="confirmpass" />
+          </div>
+
+        </div>
+
           <div className="account-save-btn">
               <button type="submit">Save</button>
           </div>

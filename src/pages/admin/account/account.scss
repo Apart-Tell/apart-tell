@@ -62,7 +62,7 @@
             min-width: 240px;
             height: 4vh;
             text-align: left;
-            text-indent: 10%;
+            text-indent: 4%;
             border-radius: 5px;
             border: solid 1px var(--martinique);
         }
@@ -75,18 +75,21 @@
 
 .password-info-container {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 4vh;
 
-    .account-info {
+    .account-input-field {
         display: flex;
         flex-direction: column;
         margin-top: 2em;
         margin-right: auto;
+        position: relative;
 
         label {
+            display: block;
             text-align: left;
             margin-bottom: 0.5em;
             font-size: small;
@@ -97,10 +100,11 @@
             min-width: 240px;
             height: 4vh;
             text-align: left;
-            text-indent: 10%;
+            text-indent: 4%;
             border-radius: 5px;
             border: solid 1px var(--martinique);
         }
+
 
         // outline: 1px solid red;
     }
