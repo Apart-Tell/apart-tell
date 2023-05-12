@@ -5,7 +5,7 @@
 
 .logo-reg{
 
-    margin-top: 120px;
+    margin-top: 10vh;
 
     @media (max-width: 768px) {
         margin-top: 50px;
@@ -14,9 +14,6 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
-
-    // outline: solid 1px black;
 }
 
 
@@ -25,20 +22,16 @@
     justify-content: center;
     align-items: center;
     background: var(--white);
-
-    // outline: solid 1px black;
 }
 
 .register-container {
+    margin-top: 3vh;
     width: 100%;
-    max-width: 300px; /* or specific value, e.g. 500pxss */
+    max-width: 300px;
     height: fit-content;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 3px 3px 11px 0px rgba(111, 144, 175, 0.25);
-    // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-
-    // outline: solid 1px black;
 }
 
 .register-title {
@@ -51,8 +44,6 @@
     @media screen and (max-width: 480px) {
         font-size: xx-small;
     }
-
-    // outline: solid 1px black;
 }
 
 .register-input-container {
@@ -60,8 +51,6 @@
     input:not(:last-child) {
       margin-bottom: 12px;
     }
-
-    // outline: solid 1px black;
 }
 
 @mixin input-style {
@@ -130,8 +119,6 @@ input:focus {
 
 .register-button {
     margin-top: 30px;
-
-    // outline: solid 1px black;
 }
 
 .register-button,
