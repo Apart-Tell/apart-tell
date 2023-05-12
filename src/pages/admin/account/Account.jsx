@@ -34,24 +34,28 @@ const Account = () => {
 
           <div className="acc-info-container">
 
-            <div className="account-info">
-              <label htmlFor="fname">FIRST NAME</label>
-              <input type="text" id='fname'/>
+            <div className="name-container">
+
+              <div className="account-info">
+                <label htmlFor="fname">FIRST NAME</label>
+                <input type="text" id='fname'/>
+              </div>
+
+              <div className="account-info">
+                <label htmlFor="lname">LAST NAME</label>
+                <input type="text" id='lname'/>
+              </div>
             </div>
-            <div className="account-info">
-              <label htmlFor="mname">MIDDLE NAME</label>
-              <input type="text" id='mname'/>
-            </div>
-            <div className="account-info">
-              <label htmlFor="lname">LAST NAME</label>
-              <input type="text" id='lname'/>
-            </div>
+
             <div className="account-info">
               <label htmlFor="pnum">PHONE NUMBER</label>
               <input type="number" id='pnum'/>
+              <div className='num-reminder'>
+                <p>Keep 11-digit format with no spaces and dashes</p>
+              </div>
             </div>
-
           </div>
+
           <div className="account-save-btn">
               <button type="submit">Save</button>
           </div>
