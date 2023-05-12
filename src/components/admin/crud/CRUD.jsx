@@ -6,7 +6,7 @@ const CRUD = () => {
   return (
     <>
     <div className='crud-wrapper container'>
-        <h2>My Directory</h2>
+        <h2 className='directory-text'>My Directory</h2>
         <div className='search-add'>
             <input type='text' placeholder='Search by name'></input>
             <button className='search-btn button'>
