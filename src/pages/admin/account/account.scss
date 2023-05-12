@@ -50,6 +50,7 @@
         flex-direction: column;
         margin-top: 2em;
         margin-right: auto;
+        position: relative;
 
         label {
             text-align: left;
@@ -59,12 +60,13 @@
         }
 
         input {
-            min-width: 240px;
-            height: 4vh;
+            width: 100%;
+            height: 2.5em;
             text-align: left;
-            text-indent: 4%;
             border-radius: 5px;
             border: solid 1px var(--martinique);
+            padding: 0 1.3em 0 0.8em;
+            font-size: medium;
         }
 
         // outline: 1px solid red;
@@ -75,7 +77,6 @@
 
 .password-info-container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
@@ -97,12 +98,24 @@
         }
 
         input {
-            min-width: 240px;
-            height: 4vh;
+            width: 100%;
+            height: 2.5em;
             text-align: left;
-            text-indent: 4%;
             border-radius: 5px;
             border: solid 1px var(--martinique);
+            padding: 0 2.2em 0 0;
+            font-size: medium;
+            text-indent: 3%;
+        }
+
+        span {
+            width: 1.1em;
+            height: 1.2em;
+            position: absolute;
+            z-index: 200;
+            top: 1.9em;
+            right: 0.6em;
+            cursor: pointer;
         }
 
 
@@ -111,6 +124,7 @@
 
     // outline: 1px solid red;
 }
+
 
 .account-save-btn {
     text-align: left;

@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './account.scss';
 import Header from '../../../components/admin/header/Header';
 import Footer from '../../../components/footer/Footer';
+import eyeIcon from '../../../assets/svg/eye.svg';
+import eyeHideIcon from '../../../assets/svg/eye-hide.svg';
 
 const Account = () => {
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+
+  const toggleCurrentPasswordVisibility = () => {
+    setShowCurrentPassword(!showCurrentPassword);
+  };
+
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword(!showNewPassword);
+  };
+
   return (
     <>
     <Header/>
@@ -69,13 +82,29 @@ const Account = () => {
 
           <div className="account-input-field">
             <label htmlFor="currpass">CURRENT PASSWORD</label>
-            <input type="password" id="currpass" />
-            <span>hello</span>
+            <input
+              type={showCurrentPassword ? "text" : "password"}
+              id="currpass"
+            />
+            <span onClick={toggleCurrentPasswordVisibility}>
+              {showCurrentPassword ? (
+                <img src={eyeHideIcon} alt="hide password" />
+              ) : (
+                <img src={eyeIcon} alt="show password" />
+              )}
+            </span>
           </div>
 
           <div className="account-input-field">
             <label htmlFor="newpass">NEW PASSWORD</label>
-            <input type="password" id="newpass" />
+            <input type={showNewPassword ? "text" : "password"} id="newpass" />
+            <span onClick={toggleNewPasswordVisibility}>
+              {showNewPassword ? (
+                <img src={eyeHideIcon} alt="hide password" />
+              ) : (
+                <img src={eyeIcon} alt="show password" />
+              )}
+            </span>
           </div>
 
           <div className="account-input-field">
