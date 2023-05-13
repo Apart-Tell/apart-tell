@@ -9,6 +9,7 @@
 
 .option-row {
     padding-top: 3rem;
+    margin-bottom: 3rem;
 
     img {
         width: 90%;
@@ -22,24 +23,6 @@
     .option-column {
         float: left;
         width: 33.33%;
-    }
-
-    button{
-            margin-top: 2rem;
-            width: 6rem;
-            height: 2rem;
-            border-radius: 55px;
-            border: 1px solid var(--martinique);
-            // border-color: black;
-            background-color: white;
-            color: var(--martinique);
-            cursor: pointer;
-            
-            &:hover {
-                background-color: var(--martinique);
-                color: white;
-            }
-            // Add codes that when the button is hovered, there are changes
     }
 
     h4 {
