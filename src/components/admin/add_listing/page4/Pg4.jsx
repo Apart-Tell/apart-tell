@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import "./pg4.scss";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../../../firebase";
+import { updateDoc, doc, collection } from "firebase/firestore";
+import { db, auth } from "../../../../firebase";
 
 const Pg4 = () => {
   // handles owner name data
@@ -46,15 +46,15 @@ const Pg4 = () => {
     if (!isFormValid) {
       alert("Please fill in all the required fields.");
     }
-
-    await addDoc(collection(db, "accommodations"), {
+    const currentUser = auth.currentUser;
+    const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+    await updateDoc(accRef, {
       ...formData,
       progress: 4,
     });
     console.log("success");
     window.location.href = "/user/directory";
   };
-
   return (
     <>
       <div className="pg4-wrapper container">

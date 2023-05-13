@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import "./pg3.scss";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../../../firebase";
+import { updateDoc, doc, collection } from "firebase/firestore";
+import { db , auth} from "../../../../firebase";
 
 const Pg3 = () => {
   // handles rental fee/room data
@@ -29,7 +29,7 @@ const Pg3 = () => {
   };
 
   // form validation: checks whether all input fields are filled out before letting the user be redirected to the next page
-  const handleNextClick = (event) => {
+  const handleNextClick = async(event) => {
     event.preventDefault();
     if (!formData.roomFee || !formData.headFee) {
       alert("Please fill in all the required fields.");
@@ -47,7 +47,9 @@ const Pg3 = () => {
       alert("Please fill in the deposit fee.");
       return;
     }
-    addDoc(collection(db, "accommodations"), {
+    const currentUser=auth.currentUser;
+    const accRef=doc(collection(db, "accommodations"), currentUser.uid);
+    await updateDoc(accRef, {
       ...formData,
       progress: 3,
     })
