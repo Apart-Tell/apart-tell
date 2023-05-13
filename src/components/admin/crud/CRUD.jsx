@@ -69,6 +69,8 @@ const CRUD = () => {
                     <button onClick={() => handleViewClick(accommodation.id)} className="view-btn">
                       <a>View</a>
                     </button>
+                    <button className="edit-btn"><a>Edit</a>
+                    </button>
                     <button  onClick={() => handleDeleteClick(accommodation.id)} className="delete-btn">
                       <a>Delete</a>
                     </button>
