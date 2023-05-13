@@ -24,6 +24,7 @@ const Pg2 = () => {
     occupants: "",
     dimensions: "",
     crType: "",
+    photos:[],
   });
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileLimit, setFileLimit] = useState(false);
