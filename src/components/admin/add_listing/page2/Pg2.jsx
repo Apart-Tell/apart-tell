@@ -3,13 +3,16 @@ import { useState } from "react";
 import "./pg2.scss";
 import { useNavigate } from "react-router-dom";
 import {
-  addDoc,
+  setDoc,
   collection,
   onSnapshot,
   serverTimestamp,
+  updateDoc,
+  doc,
 } from "firebase/firestore";
+import { auth, db } from "../../../../firebase";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { db } from "../../../../firebase";
+
 const MAX_COUNT = 4;
 
 const Pg2 = () => {
@@ -78,21 +81,24 @@ const Pg2 = () => {
   const handleNextClick = async (e) => {
     // Perform any additional validation if needed
     if (!isFormValid) {
+      e.preventDefault();
       alert("Please fill in all the required fields.");
-      return;
-    }
-
-    try {
-      const newDocRef = await addDoc(collection(db, "accommodations"), {
+    } else {
+      const currentUser = auth.currentUser;
+      const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+      updateDoc(accRef, {
         ...formData,
         progress: 2,
-        // photos: photoRefs,
+        //photos: photoRefs,
         createdAt: serverTimestamp(),
-      });
-      console.log("Document written with ID: ", newDocRef.id);
-      window.location.href = "/page3";
-    } catch (error) {
-      console.error("Error adding document: ", error);
+      })
+        .then(() => {
+          console.log("Document written with ID: ", newDocRef.id);
+          window.location.href = "/page3";
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
     }
   };
 
