@@ -28,10 +28,6 @@ export default function Option (){
           </a>
         </div>
 
-        <div className='explore-btn'>
-        <a href='/explore'><button>Explore</button></a> 
-        </div>
-
       </div>
     </div>
   )
