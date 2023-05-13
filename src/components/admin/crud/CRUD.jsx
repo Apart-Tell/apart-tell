@@ -1,27 +1,43 @@
 import React, { useEffect } from "react";
 import "./crud.scss";
-import { HiPlus } from "react-icons/hi";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc} from "firebase/firestore";
 import { db } from "../../../firebase";
+import { useState } from "react";
 
 const CRUD = () => {
+  const [accommodations, setAccommodations] = useState([]);
+
   const getAllAccommodations = async () => {
     const accommodationsCollectionRef = collection(db, "accommodations");
     const accommodationsSnapshot = await getDocs(accommodationsCollectionRef);
-    const accommodations = accommodationsSnapshot.docs.map((doc) => ({
+    const accommodationsData = accommodationsSnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
-    return accommodations;
+    setAccommodations(accommodationsData);
   };
 
   useEffect(() => {
-    const getAccommodations = async () => {
-      const accommodations = await getAllAccommodations();
-      console.log(accommodations);
-    };
-    getAccommodations();
+    getAllAccommodations();
   }, []);
+
+  // when view is clicked from a specific listing/accommodation, it will show the details of the listing in the console log
+  const handleViewClick = (accommodationId) => {
+    const accommodation = accommodations.find(
+      (item) => item.id === accommodationId
+    );
+    console.log("View clicked:", accommodation);
+  };
+
+  //  // when view is clicked from a specific listing/accommodation, it will delete the listing (and its details) in the table and in the firebase
+  const handleDeleteClick = async (accommodationId) => {
+    await deleteDoc(doc(db, "accommodations", accommodationId));
+    setAccommodations((prevAccommodations) =>
+      prevAccommodations.filter((item) => item.id !== accommodationId)
+    );
+    console.log("Delete clicked:", accommodationId);
+  };
+
   return (
     <>
       <div className="crud-wrapper container">
@@ -40,11 +56,26 @@ const CRUD = () => {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Location</th>
+                <th>Address</th>
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              {accommodations.map((accommodation) => (
+                <tr key={accommodation.id}>
+                  <td>{accommodation.accName}</td>
+                  <td>{accommodation.accAddress}</td>
+                  <td>
+                    <button onClick={() => handleViewClick(accommodation.id)} className="view-btn">
+                      <a>View</a>
+                    </button>
+                    <button  onClick={() => handleDeleteClick(accommodation.id)} className="delete-btn">
+                      <a>Delete</a>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
