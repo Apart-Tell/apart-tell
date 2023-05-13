@@ -155,13 +155,12 @@ const Pg2 = () => {
           </div>
           <br></br>
           <div>
-            <label htmlFor="photos">Upload photos</label>
+            <label htmlFor="fileUpload">Upload photos</label>
             <br />
             <input
               id="fileUpload"
               type="file"
-              multiple
-              accept="image/png"
+              multiple accept="image/png"
               onChange={handleFileEvent}
               disabled={fileLimit}
               required
