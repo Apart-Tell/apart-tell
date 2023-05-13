@@ -4,7 +4,8 @@ import Option from "../../components/option/Option";
 import Footer from "../../components/footer/Footer";
 import './home.scss';
 import Search from "../../components/search/Search";
-import AppRouter from "../../AppRouter";
+import Listings from "../../components/listings/Listings";
+// import AppRouter from "../../AppRouter";
 
 export default function Home(){
     return(
@@ -12,6 +13,7 @@ export default function Home(){
             <Header/>
             <Search/>
             <Option/>
+            <Listings/>
             <Footer/>
         </div>
     )
