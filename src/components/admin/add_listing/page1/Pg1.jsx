@@ -1,8 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./pg1.scss";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../../../firebase";
+import { addDoc, collection, getDoc, doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../../../../firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 const Pg1 = () => {
@@ -70,7 +71,9 @@ const Pg1 = () => {
       e.preventDefault();
       alert("Please fill in all the required fields.");
     } else {
-      const accRef = addDoc(collection(db, "accommodations"), {
+      const currentUser = auth.currentUser;
+      const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+      setDoc(accRef, {
         ...formData,
         progress: 1,
       })
