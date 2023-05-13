@@ -53,7 +53,8 @@ const AuthDetails = () => {
     <div>
     {authUser && authUser.userName && (
       <>
-        <p>signed in as {authUser.userName}</p>
+      
+        <a href="/admin-home"> <p>signed in as {authUser.userName}</p></a>
         <br />
         <button onClick={userSignOut}>sign out</button>
       </>
