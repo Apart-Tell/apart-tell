@@ -38,6 +38,12 @@
         }
     }
 
+    .view-btn, .delete-btn{
+        padding: 9px;
+        cursor: pointer;
+        margin: 5px;
+    }
+
     .search-btn{
         margin-left: -5rem;
     }
@@ -55,7 +61,7 @@
             th, td {
               border: 1px solid #ddd;
               padding: 8px;
-              text-align: left;
+              text-align: center;
             }
         
             th {

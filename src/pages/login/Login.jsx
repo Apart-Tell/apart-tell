@@ -16,7 +16,12 @@ function Login() {
         console.log(userCredential);
       })
       .catch((error) => {
-        console.log(error);
+        // will display if anyone tries to login without an account
+        if (error.code === "auth/user-not-found") {
+          alert("User not found. Please create an account.");
+        } else {
+          console.log(error);
+        }
       });
   };
 
@@ -66,9 +71,7 @@ function Login() {
       <br />
       <AuthDetails />
       <br />
-      <a href="/admin-home">Testing</a>
-      {/* end of testing section */}
-
+      
       <div className="footer">
         <Footer />
       </div>
