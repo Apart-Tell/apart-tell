@@ -66,7 +66,7 @@ function Login() {
       <br />
       <AuthDetails />
       <br />
-      <a href="/admin-home">Testing</a>
+
       {/* end of testing section */}
 
       <div className="footer">
