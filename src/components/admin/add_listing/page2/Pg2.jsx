@@ -81,24 +81,23 @@ const Pg2 = () => {
   const handleNextClick = async (e) => {
     // Perform any additional validation if needed
     if (!isFormValid) {
-      e.preventDefault();
       alert("Please fill in all the required fields.");
-    } else {
+      return;
+    }
+
+    try {
       const currentUser = auth.currentUser;
       const accRef = doc(collection(db, "accommodations"), currentUser.uid);
-      updateDoc(accRef, {
+      await updateDoc(accRef, {
         ...formData,
         progress: 2,
-        //photos: photoRefs,
+       // photos: photoRefs,
         createdAt: serverTimestamp(),
-      })
-        .then(() => {
-          console.log("Document written with ID: ", newDocRef.id);
-          window.location.href = "/page3";
-        })
-        .catch((error) => {
-          console.error("Error adding document: ", error);
-        });
+      });
+      console.log("Document written with ID: ", accRef.id);
+      window.location.href = "/page3";
+    } catch (error) {
+      console.error("Error adding document: ", error);
     }
   };
 
