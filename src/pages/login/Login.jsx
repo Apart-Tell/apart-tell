@@ -66,9 +66,7 @@ function Login() {
       <br />
       <AuthDetails />
       <br />
-
-      {/* end of testing section */}
-
+      
       <div className="footer">
         <Footer />
       </div>
