@@ -11,7 +11,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { auth, db } from "../../../../firebase";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const MAX_COUNT = 4;
 
@@ -24,11 +24,13 @@ const Pg2 = () => {
     occupants: "",
     dimensions: "",
     crType: "",
+    photos:[],
   });
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileLimit, setFileLimit] = useState(false);
-
+  //const [fileURL, setFileURL]=useState([]);
   // handles input change for OCCUPANTS
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevFormdata) => {
@@ -40,33 +42,27 @@ const Pg2 = () => {
     validateForm();
     console.log(id, value);
   };
-
-  // handles file uplaod
-  const handleUploadFiles = async (files) => {
-    const uploaded = [...uploadedFiles];
-    let limitExceeded = false;
-    for (const file of files) {
-      if (uploaded.findIndex((f) => f.name === file.name) === -1) {
-        uploaded.push(file);
-        if (uploaded.length === MAX_COUNT) setFileLimit(true);
-        if (uploaded.length > MAX_COUNT) {
-          alert(`You can only add a maximum of ${MAX_COUNT} files`);
-          setFileLimit(false);
-          limitExceeded = true;
-          break;
-        } else {
-          const storageRef = ref(getStorage(), `room_photos/${file.name}`);
-          await uploadBytes(storageRef, file);
-        }
-      }
-    }
-    if (!limitExceeded) setUploadedFiles(uploaded);
-  };
-
-  const handleFileEvent = (e) => {
+  async function handleFileEvent(e) {
     const chosenFiles = Array.from(e.target.files);
-    handleUploadFiles(chosenFiles);
+    const fileURLs=[];
+    // Upload the images to Firebase Storage
+    for (const file of chosenFiles) {
+      const storageRef = ref(getStorage(), `room_photos/${file.name}`);
+      const snapshot = await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      console.log("download link to your file: ", downloadURL);
+      fileURLs.push(downloadURL);
+    }
+  
+    // Send the references to the images to Firebase Firestore
+    const currentUser = auth.currentUser;
+    const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+    await updateDoc(accRef, {
+      photos: fileURLs,
+    });
+    
   };
+  
 
   const validateForm = () => {
     const { occupants, dimensions, crType } = formData;
@@ -84,14 +80,20 @@ const Pg2 = () => {
       alert("Please fill in all the required fields.");
       return;
     }
-
+  
     try {
       const currentUser = auth.currentUser;
       const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+  //    const chosenFiles = Array.from(e.target.files);
+  //    if (!chosenFiles.length) {
+    //    alert("Please upload at least one file.");
+   //     return;
+   //   }
+    //  const photoUrls = await getPhotoUrls(chosenFiles);
       await updateDoc(accRef, {
         ...formData,
+    //    photos: photoUrls,
         progress: 2,
-       // photos: photoRefs,
         createdAt: serverTimestamp(),
       });
       console.log("Document written with ID: ", accRef.id);
