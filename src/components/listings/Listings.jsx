@@ -34,7 +34,7 @@ export default function Option (){
                 <h4 className='accommodation-price'>7,000 PHP</h4>
             </div>
             <div className="card-text">
-                <h5 className='accommodation-occupants'>2 person per room</h5>
+                <h5 className='accommodation-occupants'>2 persons per room</h5>
                 <h5 className='accommodation-amenities'>Own CR, Wifi</h5>
             </div>
         </div>
@@ -48,7 +48,7 @@ export default function Option (){
                 <h4 className='accommodation-price'>5,000 PHP</h4>
             </div>
             <div className="card-text">
-                <h5 className='accommodation-occupants'>2 person per room</h5>
+                <h5 className='accommodation-occupants'>2 persons per room</h5>
                 <h5 className='accommodation-amenities'>Own CR, Wifi</h5>
             </div>
         </div>
