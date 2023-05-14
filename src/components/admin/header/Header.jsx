@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./header.scss";
-import { HiUser, HiMenu, HiX, HiChevronDown } from 'react-icons/hi';
+import { HiUser, HiMenu, HiX, HiChevronDown } from "react-icons/hi";
+import { getAuth } from "firebase/auth";
+import { auth, db } from "../../../firebase";
+import { collection, getDoc, doc, updateDoc } from "firebase/firestore";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [authUser, setAuthUser] = useState(null);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -28,28 +33,71 @@ export default function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const uid = user.uid;
+        const userRef = doc(collection(db, "users"), uid);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setAuthUser({
+            uid,
+            userName: userData.userName,
+          });
+        }
+      } else {
+        setAuthUser(null);
+      }
+    });
+    return () => {
+      listen();
+    };
+  }, []);
+
   return (
     <header>
       <nav className="navbar container">
         <div className="logo">
-          <a href="/"><img src="../src/assets/brand/logo-transparent-small.png" alt="apart-tell logo" /></a>
+          <a href="/">
+            <img
+              src="../src/assets/brand/logo-transparent-small.png"
+              alt="apart-tell logo"
+            />
+          </a>
         </div>
         <div className="nav-container">
           <button className="menu-button" onClick={toggleMenu}>
             {menuOpen ? <HiX /> : <HiMenu />}
           </button>
-          <ul className={`nav-items ${menuOpen ? 'active' : ''}`}>
-            <li><a href="/">Home</a></li>
-            <li><a href='/explore'>Explore</a></li>
-            <li><a href='/about'>About Us</a></li>
-            <li className={`dropdown-icon ${dropdownOpen ? 'active' : ''}`} onClick={toggleDropdown}>
+          <ul className={`nav-items ${menuOpen ? "active" : ""}`}>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/explore">Explore</a>
+            </li>
+            <li>
+              <a href="/about">About Us</a>
+            </li>
+            <li
+              className={`dropdown-icon ${dropdownOpen ? "active" : ""}`}
+              onClick={toggleDropdown}
+            >
               <a>
-                <HiUser />Welcome, user! <HiChevronDown />
+                <HiUser />
+                Welcome, {authUser ? authUser.userName : ""} <HiChevronDown />
               </a>
-              <ul className={`dropdown-items ${dropdownOpen ? 'active' : ''}`}>
-                <li><a href="/user/account">Account</a></li>
-                <li><a href="/user/directory">Directory</a></li>
-                <li><a href="/login">Log Out</a></li>
+              <ul className={`dropdown-items ${dropdownOpen ? "active" : ""}`}>
+                <li>
+                  <a href="/user/account">Account</a>
+                </li>
+                <li>
+                  <a href="/user/directory">Directory</a>
+                </li>
+                <li>
+                  <a href="/login">Log Out</a>
+                </li>
               </ul>
             </li>
           </ul>
