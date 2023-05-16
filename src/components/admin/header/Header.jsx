@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./header.scss";
 import { HiUser, HiMenu, HiX, HiChevronDown } from "react-icons/hi";
-import { getAuth } from "firebase/auth";
 import { auth, db } from "../../../firebase";
 import { collection, getDoc, doc, updateDoc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [authUser, setAuthUser] = useState(null);
@@ -18,6 +19,17 @@ export default function Header() {
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
+  const handleLogout = () => {
+    signOut(auth)
+    .then(() => {
+      navigate("/login"); // Replace "/" with the appropriate landing page URL
+      alert("Logging out..");
+    })
+    .catch((error) => {
+      console.log("Error occurred while logging out:", error);
+    });
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,11 +67,21 @@ export default function Header() {
     };
   }, []);
 
+  const handleLogOut = () =>{
+    signOut(auth)
+    .then(() => {
+      alert("Logging out..");
+      navigate("/login");
+      console.log("Log out successful!");
+    })
+      .catch((error) => console.log(error));
+  }
+
   return (
     <header>
       <nav className="navbar container">
         <div className="logo">
-          <a href="/">
+          <a href="/admin-home">
             <img
               src="../src/assets/brand/logo-transparent-small.png"
               alt="apart-tell logo"
@@ -72,13 +94,13 @@ export default function Header() {
           </button>
           <ul className={`nav-items ${menuOpen ? "active" : ""}`}>
             <li>
-              <a href="/">Home</a>
+              <a href="/admin-home">Home</a>
             </li>
             <li>
-              <a href="/explore">Explore</a>
+              <a href="/admin-explore">Explore</a>
             </li>
             <li>
-              <a href="/about">About Us</a>
+              <a href="/admin-about">About Us</a>
             </li>
             <li
               className={`dropdown-icon ${dropdownOpen ? "active" : ""}`}
@@ -96,7 +118,7 @@ export default function Header() {
                   <a href="/user/directory">Directory</a>
                 </li>
                 <li>
-                  <a href="/login">Log Out</a>
+                  <a onClick={handleLogOut}>Log Out</a>
                 </li>
               </ul>
             </li>

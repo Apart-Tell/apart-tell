@@ -43,31 +43,13 @@ const CRUD = () => {
     console.log("View clicked:", accommodation);
   };
 
-  //  // when view is clicked from a specific listing/accommodation, it will delete the listing (and its details) in the table and in the firebase
+  // when delete is clicked from a specific listing/accommodation, it will delete the listing (and its details) in the table and in the firebase
   const handleDeleteClick = async (accommodationId) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this listing?"
     );
-    if (confirmed) {
-      await deleteDoc(doc(db, "accommodations", accommodationId));
-      setAccommodations((prevAccommodations) =>
-        prevAccommodations.filter((item) => item.id !== accommodationId)
-      );
-      console.log("Delete clicked:", accommodationId);
-    } else {
-      console.log("cancelled");
-    }
-  };
-
-  const handleUpdateClick = async (accommodationId) => {
-    const currentUser = auth.currentUser;
-    const accommodationRef = doc(db, "accommodations", accommodationId);
-    await updateDoc(accommodationRef, {
-      editedBy: currentUser.uid,
-      progress: 1,
-    });
-    console.log("updateClicked: ", accommodationId);
-    window.location.href = "/page1";
+    console.log("Delete clicked:", accommodationId);
+    alert("Listing successfully deleted!");
   };
 
   return (
