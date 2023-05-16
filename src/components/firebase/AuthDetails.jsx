@@ -49,7 +49,6 @@ const AuthDetails = () => {
       })
       .catch((error) => console.log(error));
   };
-  
   return (
     <div>
       {authUser && authUser.userName && (

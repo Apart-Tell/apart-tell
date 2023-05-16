@@ -16,8 +16,6 @@ import Page1 from "./pages/admin/add_listing/page1/Page1";
 import Page2 from "./pages/admin/add_listing/page2/Page2";
 import Page3 from "./pages/admin/add_listing/page3/Page3";
 import Page4 from "./pages/admin/add_listing/page4/Page4";
-import AdminExplore from "./pages/admin/explore/AdminExplore";
-import AdminAbout from "./pages/admin/about/AdminAbout";
 
 export default function App() {
   return (
@@ -30,8 +28,6 @@ export default function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/admin-home" element={<AdminHome/>}/>
-        <Route path="/admin-explore" element={<AdminExplore/>}/>
-        <Route path="/admin-about" element={<AdminAbout/>}/>
         <Route path="/user/account" element={<Account/>}/>
         <Route path="/user/directory" element={<Directory/>}/>
         <Route path="/page1" element={<Page1/>}/>
