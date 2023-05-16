@@ -48,9 +48,27 @@ const CRUD = () => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this listing?"
     );
-    console.log("Delete clicked:", accommodationId);
-    alert("Listing successfully deleted!");
+    if (confirmed) {
+      await deleteDoc(doc(db, "accommodations", accommodationId));
+      setAccommodations((prevAccommodations) =>
+        prevAccommodations.filter((item) => item.id !== accommodationId)
+      );
+      console.log("Delete clicked:", accommodationId);
+    } else {
+      console.log("cancelled");
+    }
   };
+
+  const handleUpdateClick = async(accommodationId)=>{
+    const currentUser=auth.currentUser;
+    const accommodationRef=doc(db, "accommodations", accommodationId);
+    await updateDoc(accommodationRef, {
+      editedBy: currentUser.uid,
+      progress:1,
+    });
+    console.log("update clicked: ", accommodationId);
+    window.location.href="/page1";
+  }
 
   return (
     <>

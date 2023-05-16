@@ -17,7 +17,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const MAX_COUNT = 4;
 
 const Pg2 = () => {
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
   // handles occupants data
   const [formData, setFormData] = useState({
     occupants: "",
@@ -86,20 +86,32 @@ const Pg2 = () => {
       alert("Please fill in all the required fields.");
       e.preventDefault();
       return;
-    }
-    try {
-      const currentUser = auth.currentUser;
-      const accRef = doc(collection(db, "accommodations"), currentUser.uid);
-      await updateDoc(accRef, {
-        ...formData,
-        progress: 2,
-        createdAt: serverTimestamp(),
-      });
-      console.log("Document written with ID: ", accRef.id);
-      navigate("/page3");
-    } catch (error) {
-      console.error("Error adding document: ", error);
-    }
+    } else if(existingDocId!=null){
+      const accRef=doc(collection(db, "accommodations"), existingDocId);
+      await setDoc(
+        accRef, 
+        {
+          ...formData,
+          progress:2,
+        }, {merge: true}
+      );
+      console.log("document edited: ", accRef.id);
+      window.location.href="/page3";
+    } else{
+      console.log("hui badi check mo ang code");
+    };
+ //   try {
+   //   const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+   //   await updateDoc(accRef, {
+   //     ...formData,
+    //    progress: 2,
+     //   createdAt: serverTimestamp(),
+    //  });
+    //  console.log("Document written with ID: ", accRef.id);
+      
+   // } catch (error) {
+   //   console.error("Error adding document: ", error);
+   // }
   };
 
   const handleFileEvent = async (e) => {

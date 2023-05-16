@@ -122,6 +122,7 @@ const Pg1 = () => {
         editedBy: currentUser.uid,
         editedAt: serverTimestamp(),
         createdBy: currentUser.uid,
+        createdAt: serverTimestamp(),
         progress: 1,
       });
     }
