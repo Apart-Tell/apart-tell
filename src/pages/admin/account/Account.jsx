@@ -217,22 +217,7 @@ const Account = () => {
               </div>
             </div>
 
-            <div className="account-info">
-              <label htmlFor="pnum">PHONE NUMBER</label>
-              <input
-              type="number"
-              id='pnum'
-              value={personalInfo.phoneNumber}
-              onChange={(e) =>
-                setPersonalInfo({
-                  ...personalInfo,
-                  phoneNumber: e.target.value })
-                }
-              />
-              <div className='num-reminder'>
-                <p>Keep 11-digit format with no spaces and dashes</p>
-              </div>
-            </div>
+           
           </div>
 
           <div className="account-save-btn">
