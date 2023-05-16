@@ -10,7 +10,7 @@ import { auth, db } from "../../../firebase"
 import { doc, updateDoc } from 'firebase/firestore';
 // Firebase SDK to update to a new email
 // Firebase SDK to re-authenticate user when changing password
-import { updateEmail, reauthenticateWithCredential, updatePassword, EmailAuthProvider} from 'firebase/auth';
+import { updateEmail, reauthenticateWithCredential, updatePassword, EmailAuthProvider } from 'firebase/auth';
 
 const Account = () => {
 
@@ -32,7 +32,7 @@ const Account = () => {
     await updatePassword(user, newPassword);
   }
 
-// User information update states
+  // User information update states
   // New personal info
   const [personalInfo, setPersonalInfo] = useState({
     firstName: '',
@@ -166,161 +166,157 @@ const Account = () => {
   };
 
 
-
-
-
   return (
     <>
-    <Header/>
-    <div className="account-wrapper container">
+      <Header />
+      <div className="account-wrapper container">
 
-      <div className="account-header">
-        <h2>My Account</h2>
-      </div>
-
-      <div className="account-section">
-
-        <form onSubmit={handlePersonalInfoSubmit} className="account-form">
-          <h3>Personal Information</h3>
-          <hr />
-
-          <div className="acc-info-container">
-
-            <div className="name-container">
-
-              <div className="account-info">
-                <label htmlFor="fname">FIRST NAME</label>
-                <input
-                type="text"
-                id='fname'
-                value={personalInfo.firstName}
-                onChange={(e) =>
-                  setPersonalInfo({
-                    ...personalInfo,
-                    firstName: e.target.value })
-                }
-              />
-              </div>
-
-              <div className="account-info">
-                <label htmlFor="lname">LAST NAME</label>
-                <input
-                type="text"
-                id='lname'
-                value={personalInfo.lastName}
-                onChange={(e) =>
-                  setPersonalInfo({
-                    ...personalInfo,
-                    lastName: e.target.value })
-                }
-                />
-              </div>
-            </div>
-
-           
-          </div>
-
-          <div className="account-save-btn">
-              <button type="submit">Save</button>
-          </div>
-        </form>
-        {personalInfoError && <p>{personalInfoError}</p>} {/* Display error message if an error occurred */}
-
-        <form onSubmit={handleEmailSubmit} className="account-form">
-          <h3>E-mail Address</h3>
-          <hr />
-
-          <div className="email-info-container">
-
-            <div className="email-info">
-              <label htmlFor="email">E-MAIL ADDRESS</label>
-              <input
-                type="email"
-                id='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-
-            <div className="account-input-field">
-              <label htmlFor="confirmationpass">CONFIRM PASSWORD</label>
-              <input
-                type={showConfirmationPassword ? "text" : "password"}
-                id="confirmationpass"
-                value={password.currentConfirmationPassword}
-                onChange={(e) => setPassword({ ...password, currentConfirmationPassword: e.target.value })}
-              />
-              <PasswordVisibilityToggle onToggle={toggleConfirmationPasswordVisibility} />
-            </div>
-
-
-          </div>
-          <div className="account-save-btn">
-              <button type="submit">Save</button>
-          </div>
-        </form>
-        {emailError && <p>{emailError}</p>} {/* Display error message if an error occurred */}
-
-        <form onSubmit={handlePasswordSubmit} className="account-form">
-          <h3>Password</h3>
-          <hr />
-
-          <div className="password-info-container">
-            <div className="account-input-field">
-              <label htmlFor="currpass">CURRENT PASSWORD</label>
-              <input
-                type={showCurrentPassword ? "text" : "password"}
-                id="currpass"
-                value={password.currentPassword}
-                onChange={(e) =>
-                  setPassword({
-                    ...password,
-                    currentPassword: e.target.value,
-                  })
-                }
-              />
-              <PasswordVisibilityToggle onToggle={toggleCurrentPasswordVisibility} />
-            </div>
-
-            <div className="account-input-field">
-              <label htmlFor="newpass">NEW PASSWORD</label>
-              <input
-              type={showNewPassword ? "text" : "password"}
-              id="newpass"
-              value={password.newPassword}
-              onChange={handleNewPasswordChange}
-              />
-              <PasswordVisibilityToggle onToggle={toggleNewPasswordVisibility} />
-            </div>
-
-            <div className="account-input-field">
-              <label htmlFor="confirmnewpass">CONFIRM NEW PASSWORD</label>
-              <input
-              type ={showNewConfirmationPassword ? "text" : "password"}
-              id="confirmnewpass"
-              value={password.newConfirmationPassword}
-              onChange={handleNewConfirmationPasswordChange}
-              />
-              <PasswordVisibilityToggle onToggle={toggleNewConfirmationPasswordVisibility} />
-              <div className='password-matching'>
-                {password.newConfirmationPassword && !passwordMatch && (
-                  <p>Passwords do not match</p>
-                )}
-              </div>
-            </div>
-
+        <div className="account-header">
+          <h2>My Account</h2>
         </div>
 
-          <div className="account-save-btn">
+        <div className="account-section">
+          <form onSubmit={handlePersonalInfoSubmit} className="account-form">
+            <h3>Personal Information</h3>
+            <hr />
+
+            <div className="acc-info-container">
+
+              <div className="name-container">
+
+                <div className="account-info">
+                  <label htmlFor="fname">FIRST NAME</label>
+                  <input
+                    type="text"
+                    id='fname'
+                    value={personalInfo.firstName}
+                    onChange={(e) =>
+                      setPersonalInfo({
+                        ...personalInfo,
+                        firstName: e.target.value
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="account-info">
+                  <label htmlFor="lname">LAST NAME</label>
+                  <input
+                    type="text"
+                    id='lname'
+                    value={personalInfo.lastName}
+                    onChange={(e) =>
+                      setPersonalInfo({
+                        ...personalInfo,
+                        lastName: e.target.value
+                      })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="account-save-btn">
               <button type="submit">Save</button>
-          </div>
-        </form>
-        {passwordError && <p>{passwordError}</p>} {/* Display error message if an error occurred */}
+            </div>
+          </form>
+          {personalInfoError && <p>{personalInfoError}</p>} {/* Display error message if an error occurred */}
 
+          {/*--end of personal info form-- */}
+
+          <form onSubmit={handleEmailSubmit} className="account-form">
+            <h3>E-mail Address</h3>
+            <hr />
+            <div className="email-info-container">
+              <div className="email-info">
+                <label htmlFor="email">E-MAIL ADDRESS</label>
+                <input
+                  type="email"
+                  id='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="account-input-field">
+                <label htmlFor="confirmationpass">CONFIRM PASSWORD</label>
+                <input
+                  type={showConfirmationPassword ? "text" : "password"}
+                  id="confirmationpass"
+                  value={password.currentConfirmationPassword}
+                  onChange={(e) => setPassword({ ...password, currentConfirmationPassword: e.target.value })}
+                />
+                <PasswordVisibilityToggle onToggle={toggleConfirmationPasswordVisibility} />
+              </div>
+
+
+            </div>
+            <div className="account-save-btn">
+              <button type="submit">Save</button>
+            </div>
+          </form>
+
+          {emailError && <p>{emailError}</p>} {/* Display error message if an error occurred */}
+
+          <form onSubmit={handlePasswordSubmit} className="account-form">
+            <h3>Password</h3>
+            <hr />
+            <div className="password-info-container">
+              <div className="account-input-field">
+                <label htmlFor="currpass">CURRENT PASSWORD</label>
+                <input
+                  type={showCurrentPassword ? "text" : "password"}
+                  id="currpass"
+                  value={password.currentPassword}
+                  onChange={(e) =>
+                    setPassword({
+                      ...password,
+                      currentPassword: e.target.value,
+                    })
+                  }
+                />
+                <PasswordVisibilityToggle onToggle={toggleCurrentPasswordVisibility} />
+              </div>
+
+              <div className="account-input-field">
+                <label htmlFor="newpass">NEW PASSWORD</label>
+                <input
+                  type={showNewPassword ? "text" : "password"}
+                  id="newpass"
+                  value={password.newPassword}
+                  onChange={handleNewPasswordChange}
+                />
+                <PasswordVisibilityToggle onToggle={toggleNewPasswordVisibility} />
+              </div>
+
+              <div className="account-input-field">
+                <label htmlFor="confirmnewpass">CONFIRM NEW PASSWORD</label>
+                <input
+                  type={showNewConfirmationPassword ? "text" : "password"}
+                  id="confirmnewpass"
+                  value={password.newConfirmationPassword}
+                  onChange={handleNewConfirmationPasswordChange}
+                />
+                <PasswordVisibilityToggle onToggle={toggleNewConfirmationPasswordVisibility} />
+                <div className='password-matching'>
+                  {password.newConfirmationPassword && !passwordMatch && (
+                    <p>Passwords do not match</p>
+                  )}
+                </div>
+              </div>
+
+            </div>
+
+            <div className="account-save-btn">
+              <button type="submit">Save</button>
+            </div>
+          </form>
+          {passwordError && <p>{passwordError}</p>} {/* Display error message if an error occurred */}
+
+        </div>
       </div>
-    </div>
 
-    <Footer/>
+      <Footer />
 
     </>
   )
