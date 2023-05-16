@@ -17,7 +17,6 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const MAX_COUNT = 4;
 
 const Pg2 = () => {
-  // const {docUid}=navigate.getState().state;
   // handles occupants data
   const [formData, setFormData] = useState({
     occupants: "",
@@ -28,10 +27,9 @@ const Pg2 = () => {
 
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileLimit, setFileLimit] = useState(false);
-  //const [fileURL, setFileURL]=useState([]);
-  // handles input change for OCCUPANTS
 
-  const currentUser = auth.currentUser;
+  // handles input change for OCCUPANTS
+  // const currentUser = auth.currentUser;
   const [existingDocId, setExistingDocId] = useState(null);
   useEffect(() => {
     const checkExistingDoc = async () => {
@@ -67,7 +65,7 @@ const Pg2 = () => {
     validateForm();
     // console.log(name, value);
   };
-  
+
   const validateForm = () => {
     const inputs = document.querySelectorAll(
       "input[required], select[required]"
@@ -101,19 +99,6 @@ const Pg2 = () => {
       console.log("document updated: ", accRef.id);
       window.location.href = "/page3";
     }
-    //try {
-    //      const currentUser = auth.currentUser;
-    //      const accRef = doc(collection(db, "accommodations"), currentUser.uid);
-    //      await updateDoc(accRef, {
-    //        ...formData,
-    //        progress: 2,
-    //        createdAt: serverTimestamp(),
-    //      });
-    //      console.log("Document written with ID: ", accRef.id);
-    //     window.location.href = "/page3";
-    //} catch (error) {
-    //      console.error("Error adding document: ", error);
-    //    }
   };
 
   const handleFileEvent = async (e) => {
@@ -152,10 +137,6 @@ const Pg2 = () => {
         { merge: true }
       );
       console.log("document updated: ", accRef.id);
-      //const currentUser = auth.currentUser;
-      //const accRef = doc(collection(db, "accommodations"), currentUser.uid);
-      //await updateDoc(accRef, {
-      //  photos: fileURLs,
     } else {
       console.log("may namali lol: ");
     }
@@ -168,8 +149,7 @@ const Pg2 = () => {
     setUploadedFiles(updatedUploadedFiles);
 
     // Update the photos array in Firebase Firestore
-    const currentUser = auth.currentUser;
-    const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+    const accRef = doc(collection(db, "accommodations"), existingDocId);
     const updatedPhotos = updatedUploadedFiles
       .filter((_, i) => i !== index)
       .map((file) => fileURLs[file]);
@@ -178,62 +158,7 @@ const Pg2 = () => {
       photos: updatedPhotos,
     });
   };
-  
 
-  const handleFileEvent = async (e) => {
-    const chosenFiles = Array.from(e.target.files);
-    const fileURLs = [];
-    const updatedUploadedFiles = [];
-
-    if (chosenFiles.length + uploadedFiles.length > MAX_COUNT) {
-      setFileLimit(true);
-      return;
-    } else {
-      setFileLimit(false);
-    }
-
-    for (const file of chosenFiles) {
-      const storageRef = ref(
-        getStorage(),
-        `room_photos/${file.name}`
-      );
-      const snapshot = await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(snapshot.ref);
-      console.log("download link to your file: ", downloadURL);
-      fileURLs.push(downloadURL);
-      updatedUploadedFiles.push(file);
-    }
-
-    setUploadedFiles((prevUploadedFiles) => [
-      ...prevUploadedFiles,
-      ...updatedUploadedFiles,
-    ]);
-
-    const currentUser = auth.currentUser;
-    const accRef = doc(collection(db, "accommodations"), currentUser.uid);
-    await updateDoc(accRef, {
-      photos: fileURLs,
-    });
-  };
-
-  // Issue: Will refresh the whole page when the 1st uploaded photo is
-  const handleDeletePhoto = (index) => {
-    const updatedUploadedFiles = [...uploadedFiles];
-    updatedUploadedFiles.splice(index, 1);
-    setUploadedFiles(updatedUploadedFiles);
-  
-    // Update the photos array in Firebase Firestore
-    const currentUser = auth.currentUser;
-    const accRef = doc(collection(db, "accommodations"), currentUser.uid);
-    const updatedPhotos = updatedUploadedFiles
-      .filter((_, i) => i !== index)
-      .map((file) => fileURLs[file]);
-  
-    updateDoc(accRef, {
-      photos: updatedPhotos,
-    });
-  };
-  
   return (
     <>
       <div className="wrapper container">
