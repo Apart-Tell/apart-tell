@@ -92,10 +92,15 @@ const Pg1 = () => {
   return (
     <>
       <div className="wrapper container">
-        <h2 className="acc-details-txt">General Accommodation Details</h2>
+        <h2>Add New Listing</h2>
+        <div className="form-wrapper">
         <form>
+          <div className="h3-wrapper">
+          <h3 className="acc-details-txt">General Accommodation Details</h3><hr className="hr-style"/>
+          </div>
+        <br/>
           <div>
-            <label htmlFor="accName">Name</label>
+            <label htmlFor="accName">NAME*</label>
             <input
               type="text"
               id="accName"
@@ -105,7 +110,7 @@ const Pg1 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="accAddress">Address</label>
+            <label htmlFor="accAddress">ADDRESS*</label>
             <input
               type="text"
               id="accAddress"
@@ -115,8 +120,8 @@ const Pg1 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="accType">Type</label>
-            <select id="accType" required onChange={handleInputChange}>
+            <label htmlFor="accType">TYPE*</label>
+            <select id="accType" required onChange={handleInputChange} className="select-type">
               <option value="" className="select-type">
                 Select a type
               </option>
@@ -133,7 +138,7 @@ const Pg1 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="accDescription">Description</label>
+            <label htmlFor="accDescription">DESCRIPTION*</label>
             <textarea
               id="accDescription"
               className="description-style"
@@ -143,7 +148,7 @@ const Pg1 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="accRules">Rules and Regulations</label>
+            <label htmlFor="accRules">RULES & REGULATIONS*</label>
             <textarea
               id="accRules"
               className="rules-style"
@@ -153,7 +158,7 @@ const Pg1 = () => {
           </div>
           <br />
           <div>
-            <label>Amenities</label>
+            <label>AMENITIES*</label>
             <br />
             <div>
               <label htmlFor="amenities">
@@ -199,7 +204,7 @@ const Pg1 = () => {
             </div>
           </div>
           <div>
-            <label>Nearby</label>
+            <label>NEARBY*</label>
             <div>
               <br />
               <label htmlFor="nearby">
@@ -258,6 +263,7 @@ const Pg1 = () => {
             <a>Next</a>
           </button>
         </form>
+        </div>
       </div>
     </>
   );
