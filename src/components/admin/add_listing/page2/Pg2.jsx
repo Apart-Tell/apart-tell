@@ -198,7 +198,7 @@ const Pg2 = () => {
                 {uploadedFiles.map((file, index) => (
                   <li key={index}>
                     <img src={URL.createObjectURL(file)} alt={`photo-${index}`} />
-                    <button onClick={() => handleDeletePhoto(index)}><a>Delete</a></button>
+                    <button type="button" onClick={() => handleDeletePhoto(index)}><a>Delete</a></button>
                   </li>
                 ))}
               </ul>

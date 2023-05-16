@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, {  useEffect, useState } from "react";
 import "./login.scss";
 import Footer from "../../components/footer/Footer";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import AuthDetails from "../../components/firebase/AuthDetails";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { collection, getDoc, doc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,6 +28,48 @@ function Login() {
         }
       });
   };
+
+  const handleLogin = () => {
+    const [authUser, setAuthUser] = useState(null);
+
+    useEffect(() => {
+      const listen = onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          setAuthUser(user);
+          const uid = user.uid;
+          const userRef = doc(collection(db, "users"), uid);
+          const userDoc = await getDoc(userRef);
+          const userReq = doc(collection(db, "requests"), uid);
+          const userReqDoc = await getDoc(userReq);
+          if (userDoc.exists()) {
+            const userReqData = userReqDoc.data();
+            if (userReqData.status !== "approved") {
+              alert(
+                "Your account is awaiting approval from an admin. Please check back later."
+              );
+              await signOut(auth);
+            } else {
+              const userData = userDoc.data();
+              setAuthUser({
+                uid,
+                email: user.email,
+                userName: userData.userName,
+              });
+              navigate("/admin-home");
+            }
+          } else {
+            setAuthUser(null);
+          }
+        } else {
+          setAuthUser(null);
+        }
+      });
+      return () => {
+        listen();
+      };
+    }, []);
+  
+  }
 
   return (
     <>
@@ -59,7 +105,7 @@ function Login() {
 
             <div className="login-button">
               {/* changed from onSubmit() to submit() */}
-              <button type="submit"> 
+              <button type="submit" onClick={handleLogin}> 
                 Log In
               </button>
             </div>
