@@ -1,7 +1,15 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./pg4.scss";
-import { updateDoc, doc, collection } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  getDocs,
+  setDoc,
+  where,
+  query,
+  limit,
+} from "firebase/firestore";
 import { db, auth } from "../../../../firebase";
 
 const Pg4 = () => {
@@ -16,6 +24,32 @@ const Pg4 = () => {
   });
   const [isFormValid, setIsFormValid] = useState(false);
   // handles submit button
+
+  const currentuser = auth.currentUser;
+  const [existingDocId, setExistingDocId] = useState(null);
+
+  useEffect(() => {
+    const checkExistingDoc = async () => {
+      const q = query(
+        collection(db, "accommodations"),
+        where("progress", "==", 3),
+        limit(1)
+      );
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.size > 0) {
+        const firstDoc = querySnapshot.docs[0].id;
+        setExistingDocId(firstDoc);
+        console.log("exists");
+      } else {
+        setExistingDocId(null);
+        console.log("doesnot");
+      }
+    };
+    checkExistingDoc();
+    console.log("checking");
+    console.log(existingDocId);
+  });
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevFormData) => {
@@ -46,12 +80,22 @@ const Pg4 = () => {
     if (!isFormValid) {
       alert("Please fill in all the required fields.");
     }
-    const currentUser = auth.currentUser;
-    const accRef = doc(collection(db, "accommodations"), currentUser.uid);
-    await updateDoc(accRef, {
-      ...formData,
-      progress: 4,
-    });
+    if (existingDocId != null) {
+      const accRef = doc(collection(db, "accommodations"), existingDocId);
+      await setDoc(
+        accRef,
+        {
+          ...formData,
+          progress: 4,
+        },
+        { merge: true }
+      );
+    }
+    // const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+    // await updateDoc(accRef, {
+    //  ...formData,
+    //  progress: 4,
+
     console.log("success");
     window.location.href = "/user/directory";
   };
@@ -60,6 +104,8 @@ const Pg4 = () => {
       <div className="pg4-wrapper container">
         <h2>Management details</h2>
         <form>
+          <h3 className="details-txt">Management Details</h3>
+          <hr className="hr-style-pg4" />
           <div>
             <label htmlFor="owner-name">Owner's name</label>
             <input
@@ -106,7 +152,9 @@ const Pg4 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="caretaker-phonenum">Caretaker's phone number</label>
+            <label htmlFor="caretaker-phonenum">
+              CARETAKER'S PHONE NUMBER*
+            </label>
             <input
               type="tel"
               id="caretakerPhone"
