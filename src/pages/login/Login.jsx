@@ -59,7 +59,7 @@ function Login() {
 
             <div className="login-button">
               {/* changed from onSubmit() to submit() */}
-              <button type="submit"> 
+              <button type="submit">
                 Log In
               </button>
             </div>
@@ -71,7 +71,7 @@ function Login() {
       <br />
       <AuthDetails />
       <br />
-      
+
       <div className="footer">
         <Footer />
       </div>
