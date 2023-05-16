@@ -53,8 +53,10 @@ const CRUD = () => {
       setAccommodations((prevAccommodations) =>
         prevAccommodations.filter((item) => item.id !== accommodationId)
       );
+      console.log("Delete clicked:", accommodationId);
+    } else {
+      console.log("cancelled");
     }
-    console.log("Delete clicked:", accommodationId);
   };
 
   const handleUpdateClick = async (accommodationId) => {
