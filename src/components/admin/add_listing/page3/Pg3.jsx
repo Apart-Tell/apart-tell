@@ -64,10 +64,12 @@ const Pg3 = () => {
   return (
     <>
       <div className="wrapper container">
-        <h2>Billing Details</h2>
-        <form>
+        <h2>Add New Listing</h2>
+        <form className="bdetails-wrapper">
+          <h3>Billing Details</h3><hr className="hr-style-pg3"/>
           <div>
-            <label htmlFor="rental-fee-room">Rental fee per room</label>
+            <br/><br/>
+            <label htmlFor="rental-fee-room">RENTAL FEE (per room)*</label>
             <input
               type="text"
               id="roomFee"
@@ -80,7 +82,7 @@ const Pg3 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="rental-fee-head">Rental fee per head</label>
+            <label htmlFor="rental-fee-head">RENTAL FEE (per head)*</label>
             <input
               type="text"
               id="headFee"
@@ -94,7 +96,7 @@ const Pg3 = () => {
           <div>
             <br />
             <div>
-              <label>Additional fees</label>
+              <label>ADDITIONAL FEES</label>
               <br />
               <div>
                 <label htmlFor="electricity">

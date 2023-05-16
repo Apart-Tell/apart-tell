@@ -56,7 +56,7 @@ export default function Option (){
         </div>
 
         <div className='explore-btn'>
-            <a href='/explore'><button>Explore</button></a>
+            <button><a href='/explore'></a>Explore</button>
         </div>
 
     </div>

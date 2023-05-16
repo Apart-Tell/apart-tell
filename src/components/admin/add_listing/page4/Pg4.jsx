@@ -55,13 +55,15 @@ const Pg4 = () => {
     console.log("success");
     window.location.href = "/user/directory";
   };
+
   return (
     <>
       <div className="pg4-wrapper container">
-        <h2>Management details</h2>
+        <h2>Add New Listing</h2>
         <form>
+          <h3 className="details-txt">Management Details</h3><hr className="hr-style-pg4"/>
           <div>
-            <label htmlFor="owner-name">Owner's name</label>
+            <label htmlFor="owner-name">OWNER'S NAME*</label>
             <input
               type="text"
               id="ownerName"
@@ -72,7 +74,7 @@ const Pg4 = () => {
           <br />
           <div>
             <label htmlFor="owner-phonenum" required>
-              Owner's phone number
+              OWNER'S PHONE NUMBER*
             </label>
             <input
               type="tel"
@@ -85,7 +87,7 @@ const Pg4 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="owner-email">Owner's e-mail</label>
+            <label htmlFor="owner-email">OWNER'S E-MAIL*</label>
             <input
               type="text"
               id="ownerEmail"
@@ -96,7 +98,7 @@ const Pg4 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="caretaker-name">Caretaker's name</label>
+            <label htmlFor="caretaker-name">CARETAKER'S NAME*</label>
             <input
               type="text"
               id="caretakerName"
@@ -106,7 +108,7 @@ const Pg4 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="caretaker-phonenum">Caretaker's phone number</label>
+            <label htmlFor="caretaker-phonenum">CARETAKER'S PHONE NUMBER*</label>
             <input
               type="tel"
               id="caretakerPhone"

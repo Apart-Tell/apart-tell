@@ -7,7 +7,7 @@ export default function Search(){
       <div className = "container">
         <div className='search'>
           <div className='search-text'>
-          <h1>Experience comfort and community, <br></br>tell us where you want to be.</h1>
+            <h1>Experience comfort and community,<br/>tell us where you want to be.</h1>
           </div>
               <div className='search-box-container'>
                   {/**enclose search bar inside div */}

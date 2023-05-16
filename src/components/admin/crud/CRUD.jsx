@@ -43,7 +43,7 @@ const CRUD = () => {
       <div className="crud-wrapper container">
         <h2 className="directory-text">My Directory</h2>
         <div className="search-add">
-          <input type="text" placeholder="Search by name"></input>
+          <input type="text" placeholder="Search"></input>
           <button className="search-btn button">
             <a href="/">Search</a>
           </button>
