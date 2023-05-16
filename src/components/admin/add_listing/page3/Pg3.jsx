@@ -129,7 +129,7 @@ const Pg3 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="rental-fee-head">Rental fee per head</label>
+            <label htmlFor="rental-fee-head">RENTAL FEE (per head)*</label>
             <input
               type="text"
               id="headFee"
@@ -143,7 +143,7 @@ const Pg3 = () => {
           <div>
             <br />
             <div>
-              <label>Additional fees</label>
+              <label>ADDITIONAL FEES</label>
               <br />
               <div>
                 <label htmlFor="electricity">

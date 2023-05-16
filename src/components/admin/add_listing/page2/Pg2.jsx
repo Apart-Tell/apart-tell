@@ -17,16 +17,15 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const MAX_COUNT = 4;
 
 const Pg2 = () => {
-  // const navigate=useNavigate();
   // const {docUid}=navigate.getState().state;
   // handles occupants data
-  const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
     occupants: "",
     dimensions: "",
     crType: "",
-    photos:[],
   });
+  const [isFormValid, setIsFormValid] = useState(false);
+
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileLimit, setFileLimit] = useState(false);
   //const [fileURL, setFileURL]=useState([]);
@@ -58,6 +57,7 @@ const Pg2 = () => {
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
+
     setFormData((prevFormdata) => {
       return {
         ...prevFormdata,
@@ -65,23 +65,28 @@ const Pg2 = () => {
       };
     });
     validateForm();
-    console.log(id, value);
+    // console.log(name, value);
   };
   
   const validateForm = () => {
-    const { occupants, dimensions, crType } = formData;
-    if (occupants == "" || dimensions == "" || crType == "") {
-      setIsFormValid(false);
-    } else {
-      setIsFormValid(true);
-    }
+    const inputs = document.querySelectorAll(
+      "input[required], select[required]"
+    );
+    let isValid = true;
+    inputs.forEach((input) => {
+      if (!input.value) {
+        isValid = false;
+      }
+    });
+    setIsFormValid(isValid);
   };
 
   // checks whether all input fields are filled out
-  const handleNextClick = async (e) => {
+  const handleNextClick = async () => {
     // Perform any additional validation if needed
     if (!isFormValid) {
       alert("Please fill in all the required fields.");
+      e.preventDefault();
       return;
     } else if (existingDocId != null) {
       const accRef = doc(collection(db, "accommodations"), existingDocId);
@@ -173,7 +178,62 @@ const Pg2 = () => {
       photos: updatedPhotos,
     });
   };
+  
 
+  const handleFileEvent = async (e) => {
+    const chosenFiles = Array.from(e.target.files);
+    const fileURLs = [];
+    const updatedUploadedFiles = [];
+
+    if (chosenFiles.length + uploadedFiles.length > MAX_COUNT) {
+      setFileLimit(true);
+      return;
+    } else {
+      setFileLimit(false);
+    }
+
+    for (const file of chosenFiles) {
+      const storageRef = ref(
+        getStorage(),
+        `room_photos/${file.name}`
+      );
+      const snapshot = await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      console.log("download link to your file: ", downloadURL);
+      fileURLs.push(downloadURL);
+      updatedUploadedFiles.push(file);
+    }
+
+    setUploadedFiles((prevUploadedFiles) => [
+      ...prevUploadedFiles,
+      ...updatedUploadedFiles,
+    ]);
+
+    const currentUser = auth.currentUser;
+    const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+    await updateDoc(accRef, {
+      photos: fileURLs,
+    });
+  };
+
+  // Issue: Will refresh the whole page when the 1st uploaded photo is
+  const handleDeletePhoto = (index) => {
+    const updatedUploadedFiles = [...uploadedFiles];
+    updatedUploadedFiles.splice(index, 1);
+    setUploadedFiles(updatedUploadedFiles);
+  
+    // Update the photos array in Firebase Firestore
+    const currentUser = auth.currentUser;
+    const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+    const updatedPhotos = updatedUploadedFiles
+      .filter((_, i) => i !== index)
+      .map((file) => fileURLs[file]);
+  
+    updateDoc(accRef, {
+      photos: updatedPhotos,
+    });
+  };
+  
   return (
     <>
       <div className="wrapper container">
@@ -195,7 +255,7 @@ const Pg2 = () => {
           </div>
           <div>
             <br />
-            <label htmlFor="room-dimension">Room Dimension</label>
+            <label htmlFor="room-dimension">ROOM DIMENSION*</label>
             <input
               type="text"
               id="dimensions"
