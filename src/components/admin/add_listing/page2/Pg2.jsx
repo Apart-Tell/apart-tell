@@ -17,6 +17,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const MAX_COUNT = 4;
 
 const Pg2 = () => {
+  const navigate = useNavigate();
   // handles occupants data
   const [formData, setFormData] = useState({
     occupants: "",
@@ -24,7 +25,6 @@ const Pg2 = () => {
     crType: "",
   });
   const [isFormValid, setIsFormValid] = useState(false);
-
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileLimit, setFileLimit] = useState(false);
 
@@ -86,18 +86,19 @@ const Pg2 = () => {
       alert("Please fill in all the required fields.");
       e.preventDefault();
       return;
-    } else if (existingDocId != null) {
-      const accRef = doc(collection(db, "accommodations"), existingDocId);
-      await setDoc(
-        accRef,
-        {
-          ...formData,
-          progress: 2,
-        },
-        { merge: true }
-      );
-      console.log("document updated: ", accRef.id);
-      window.location.href = "/page3";
+    }
+    try {
+      const currentUser = auth.currentUser;
+      const accRef = doc(collection(db, "accommodations"), currentUser.uid);
+      await updateDoc(accRef, {
+        ...formData,
+        progress: 2,
+        createdAt: serverTimestamp(),
+      });
+      console.log("Document written with ID: ", accRef.id);
+      navigate("/page3");
+    } catch (error) {
+      console.error("Error adding document: ", error);
     }
   };
 
@@ -210,47 +211,38 @@ const Pg2 = () => {
           </div>
           <br></br>
           <div>
-            <label>UPLOAD PHOTOS</label>
-            <br />
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleFileEvent}
-            ></input>
-            <br />
-            {fileLimit && (
-              <p>
-                Only a maximum of {MAX_COUNT} photos can be uploaded. Reupload
-                files!
-              </p>
-            )}
-            {uploadedFiles.length > 0 && (
-              <div>
-                <br />
-                <br />
-                <label>UPLOADED PHOTOS</label>
-                <ul>
-                  {uploadedFiles.map((file, index) => (
-                    <li key={index}>
-                      <img
-                        src={URL.createObjectURL(file)}
-                        alt={`photo-${index}`}
-                      />
-                      <button onClick={() => handleDeletePhoto(index)}>
-                        <a>Delete</a>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+          <label>UPLOAD PHOTOS (Maximum of 4 photos only)</label>
+          <br/>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleFileEvent}
+          ></input>
+          <br/>
+           {fileLimit && (
+            <p>Only a maximum of {MAX_COUNT} photos can be uploaded. Reupload files!</p>
+          )}
+          {uploadedFiles.length > 0 && (
+            <div>
+              <br/><br/>
+              <label>UPLOADED PHOTOS</label>
+              <ul>
+                {uploadedFiles.map((file, index) => (
+                  <li key={index}>
+                    <img src={URL.createObjectURL(file)} alt={`photo-${index}`} />
+                    <button type="button" onClick={() => handleDeletePhoto(index)}><a>Delete</a></button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           </div>
-          <button type="button" className="prev-btn">
+          <button type="button" className="prev-btn"  onClick={() => navigate("/page1")}>
             <a href="/page1">Prev</a>
           </button>
           <button type="button" className="next-btn" onClick={handleNextClick}>
-            <a>Next</a>
+            <a href="/page3">Next</a>
           </button>
         </form>
       </div>

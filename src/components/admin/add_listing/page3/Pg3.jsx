@@ -198,7 +198,7 @@ const Pg3 = () => {
                 {formData.depositChecked && (
                   <input
                     type="text"
-                    placeholder="Enter deposit fee (per month)"
+                    placeholder="Enter deposit fee"
                     pattern="^\d+(?:\.\d{1,2})?$"
                     title="Please enter a valid numerical currency amount"
                     id="depositFee"
