@@ -16,7 +16,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const MAX_COUNT = 4;
 
 const Pg2 = () => {
-  // const {docUid}=navigate.getState().state;
+  const navigate = useNavigate();
   // handles occupants data
   const [formData, setFormData] = useState({
     occupants: "",
@@ -24,7 +24,6 @@ const Pg2 = () => {
     crType: "",
   });
   const [isFormValid, setIsFormValid] = useState(false);
-
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileLimit, setFileLimit] = useState(false);
   //const [fileURL, setFileURL]=useState([]);
@@ -74,7 +73,7 @@ const Pg2 = () => {
         createdAt: serverTimestamp(),
       });
       console.log("Document written with ID: ", accRef.id);
-      window.location.href = "/page3";
+      navigate("/page3");
     } catch (error) {
       console.error("Error adding document: ", error);
     }
@@ -178,7 +177,7 @@ const Pg2 = () => {
           </div>
           <br></br>
           <div>
-          <label>UPLOAD PHOTOS</label>
+          <label>UPLOAD PHOTOS (Maximum of 4 photos only)</label>
           <br/>
           <input
             type="file"
@@ -205,11 +204,11 @@ const Pg2 = () => {
             </div>
           )}
           </div>
-          <button type="button" className="prev-btn">
+          <button type="button" className="prev-btn"  onClick={() => navigate("/page1")}>
             <a href="/page1">Prev</a>
           </button>
           <button type="button" className="next-btn" onClick={handleNextClick}>
-            <a>Next</a>
+            <a href="/page3">Next</a>
           </button>
         </form>
       </div>

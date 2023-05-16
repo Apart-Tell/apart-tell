@@ -29,13 +29,14 @@ const CRUD = () => {
     console.log("View clicked:", accommodation);
   };
 
-  //  // when view is clicked from a specific listing/accommodation, it will delete the listing (and its details) in the table and in the firebase
+  // when delete is clicked from a specific listing/accommodation, it will delete the listing (and its details) in the table and in the firebase
   const handleDeleteClick = async (accommodationId) => {
     await deleteDoc(doc(db, "accommodations", accommodationId));
     setAccommodations((prevAccommodations) =>
       prevAccommodations.filter((item) => item.id !== accommodationId)
     );
     console.log("Delete clicked:", accommodationId);
+    alert("Listing successfully deleted!");
   };
 
   return (
