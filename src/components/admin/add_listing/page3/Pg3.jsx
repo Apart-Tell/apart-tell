@@ -1,8 +1,16 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./pg3.scss";
-import { updateDoc, doc, collection } from "firebase/firestore";
-import { db , auth} from "../../../../firebase";
+import {
+  doc,
+  collection,
+  getDocs,
+  setDoc,
+  where,
+  query,
+  limit,
+} from "firebase/firestore";
+import { db, auth } from "../../../../firebase";
 
 const Pg3 = () => {
   // handles rental fee/room data
@@ -19,6 +27,31 @@ const Pg3 = () => {
 
   const [isFormValid, setIsFormValid] = useState(false);
 
+  const currentUser = auth.currentUser;
+  const [existingDocId, setExistingDocId] = useState(null);
+
+  useEffect(() => {
+    const checkExistingDoc = async () => {
+      const q = query(
+        collection(db, "accommodations"),
+        where("progress", "==", 2),
+        limit(1)
+      );
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.size > 0) {
+        const firstDoc = querySnapshot.docs[0].id;
+        setExistingDocId(firstDoc);
+        console.log("exists");
+      } else {
+        setExistingDocId(null);
+        console.log("doesNot");
+      }
+    };
+    checkExistingDoc();
+    console.log("checking");
+    console.log(existingDocId);
+  });
+
   const handleInputChange = (event) => {
     const { id, type, value, checked } = event.target;
     setFormData((prevState) => ({
@@ -29,7 +62,7 @@ const Pg3 = () => {
   };
 
   // form validation: checks whether all input fields are filled out before letting the user be redirected to the next page
-  const handleNextClick = async(event) => {
+  const handleNextClick = async (event) => {
     event.preventDefault();
     if (!formData.roomFee || !formData.headFee) {
       alert("Please fill in all the required fields.");
@@ -47,18 +80,30 @@ const Pg3 = () => {
       alert("Please fill in the deposit fee.");
       return;
     }
-    const currentUser=auth.currentUser;
-    const accRef=doc(collection(db, "accommodations"), currentUser.uid);
-    await updateDoc(accRef, {
-      ...formData,
-      progress: 3,
-    })
-      .then(() => {
-        window.location.href = "/page4";
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
+    if (existingDocId != null) {
+      const accRef = doc(collection(db, "accommodations"), existingDocId);
+      await setDoc(
+        accRef,
+        {
+          ...formData,
+          progress: 3,
+        },
+        { merge: true }
+      );
+      console.log("document updated: ", accRef.id);
+    }
+    //  const currentUser=auth.currentUser;
+    //  const accRef=doc(collection(db, "accommodations"), currentUser.uid);
+    //  await updateDoc(accRef, {
+    //    ...formData,
+    //    progress: 3,
+    //  })
+    //   .then(() => {
+    window.location.href = "/page4";
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error adding document: ", error);
+    //   });
   };
 
   return (
@@ -66,9 +111,11 @@ const Pg3 = () => {
       <div className="wrapper container">
         <h2>Add New Listing</h2>
         <form className="bdetails-wrapper">
-          <h3>Billing Details</h3><hr className="hr-style-pg3"/>
+          <h3>Billing Details</h3>
+          <hr className="hr-style-pg3" />
           <div>
-            <br/><br/>
+            <br />
+            <br />
             <label htmlFor="rental-fee-room">RENTAL FEE (per room)*</label>
             <input
               type="text"

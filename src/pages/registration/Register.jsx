@@ -23,7 +23,7 @@ const Register = () => {
           lastName: lastname,
           userName: username,
           email: email,
-           role: "pending"
+          role: "pending"
         }).catch((error) => {
           console.log(
             "Something went wrong with adding user to Firestore: ",
@@ -31,13 +31,13 @@ const Register = () => {
           );
         });
         const requestDocRef = doc(db, "requests", userCredential.user.uid);
-        setDoc(requestDocRef,{
+        setDoc(requestDocRef, {
           firstName: firstname,
           lastName: lastname,
-          userName:username,
+          userName: username,
           email: email,
-          createdAt:serverTimestamp(),
-          status:"pending"
+          createdAt: serverTimestamp(),
+          status: "pending"
         })
 
       })
@@ -54,57 +54,57 @@ const Register = () => {
         </a>
       </div>
       <div className="registration">
-          <div className="register-container">
-            <form onSubmit={signUp}>
+        <div className="register-container">
+          <form onSubmit={signUp}>
 
-              <div className="register-title">
-                <h1>Register</h1>
-              </div>
+            <div className="register-title">
+              <h1>Register</h1>
+            </div>
 
-              <div className="register-input-container">
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    value={firstname}
-                    className="text-input"
-                    onChange={(e) => setFname(e.target.value)}
-                  ></input>
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    value={lastname}
-                    className="text-input"
-                    onChange={(e) => setLname(e.target.value)}
-                  ></input>
-                  <input
-                    type="text"
-                    placeholder="Enter a username"
-                    value={username}
-                    className="text-input"
-                    onChange={(e) => setUsername(e.target.value)}
-                  ></input>
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    className="email-input"
-                    onChange={(e) => setEmail(e.target.value)}
-                  ></input>
-                  <input
-                    type="password"
-                    placeholder="Enter your password"
-                    value={password}
-                    className="password-input"
-                    onChange={(e) => setPassword(e.target.value)}
-                  ></input>
-              </div>
+            <div className="register-input-container">
+              <input
+                type="text"
+                placeholder="First Name"
+                value={firstname}
+                className="text-input"
+                onChange={(e) => setFname(e.target.value)}
+              ></input>
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={lastname}
+                className="text-input"
+                onChange={(e) => setLname(e.target.value)}
+              ></input>
+              <input
+                type="text"
+                placeholder="Enter a username"
+                value={username}
+                className="text-input"
+                onChange={(e) => setUsername(e.target.value)}
+              ></input>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                className="email-input"
+                onChange={(e) => setEmail(e.target.value)}
+              ></input>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                className="password-input"
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
+            </div>
 
-              <div className="register-button">
-                <button type="submit">
-                  Register
-                </button>
-              </div>
-            </form>
+            <div className="register-button">
+              <button type="submit">
+                Register
+              </button>
+            </div>
+          </form>
         </div>
       </div>
 

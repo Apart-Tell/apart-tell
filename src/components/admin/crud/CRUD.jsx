@@ -1,7 +1,16 @@
 import React, { useEffect } from "react";
 import "./crud.scss";
-import { collection, getDocs, deleteDoc, doc} from "firebase/firestore";
-import { db } from "../../../firebase";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  updateDoc,
+  query,
+  where,
+  orderBy,
+} from "firebase/firestore";
+import { db, auth } from "../../../firebase";
 import { useState } from "react";
 
 const CRUD = () => {
@@ -9,7 +18,12 @@ const CRUD = () => {
 
   const getAllAccommodations = async () => {
     const accommodationsCollectionRef = collection(db, "accommodations");
-    const accommodationsSnapshot = await getDocs(accommodationsCollectionRef);
+    const q = query(
+      accommodationsCollectionRef,
+      where("progress", "==", 4),
+      orderBy("editedAt", "desc"),
+    );
+    const accommodationsSnapshot = await getDocs(q);
     const accommodationsData = accommodationsSnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -31,9 +45,8 @@ const CRUD = () => {
 
   // when delete is clicked from a specific listing/accommodation, it will delete the listing (and its details) in the table and in the firebase
   const handleDeleteClick = async (accommodationId) => {
-    await deleteDoc(doc(db, "accommodations", accommodationId));
-    setAccommodations((prevAccommodations) =>
-      prevAccommodations.filter((item) => item.id !== accommodationId)
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this listing?"
     );
     console.log("Delete clicked:", accommodationId);
     alert("Listing successfully deleted!");
@@ -67,12 +80,22 @@ const CRUD = () => {
                   <td>{accommodation.accName}</td>
                   <td>{accommodation.accAddress}</td>
                   <td>
-                    <button onClick={() => handleViewClick(accommodation.id)} className="view-btn">
+                    <button
+                      onClick={() => handleViewClick(accommodation.id)}
+                      className="view-btn"
+                    >
                       <a>View</a>
                     </button>
-                    <button className="edit-btn"><a>Edit</a>
+                    <button
+                      onClick={() => handleUpdateClick(accommodation.id)}
+                      className="edit-btn"
+                    >
+                      <a>Edit</a>
                     </button>
-                    <button  onClick={() => handleDeleteClick(accommodation.id)} className="delete-btn">
+                    <button
+                      onClick={() => handleDeleteClick(accommodation.id)}
+                      className="delete-btn"
+                    >
                       <a>Delete</a>
                     </button>
                   </td>
