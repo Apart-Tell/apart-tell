@@ -37,7 +37,7 @@ const Account = () => {
   const [personalInfo, setPersonalInfo] = useState({
     firstName: '',
     lastName: '',
-    phoneNumber: '',
+    // phoneNumber: '',
   });
 
   // New email
@@ -66,7 +66,7 @@ const Account = () => {
         await updateDoc(userRef, {
           firstName: personalInfo.firstName,
           lastName: personalInfo.lastName,
-          phoneNumber: personalInfo.phoneNumber,
+          // phoneNumber: personalInfo.phoneNumber,
         });
         setPersonalInfoError(null);
         alert('Personal information updated!');
