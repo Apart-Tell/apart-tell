@@ -26,7 +26,7 @@ const Account = () => {
   async function updateUserPassword(user, currentPassword, newPassword) {
     const credential = EmailAuthProvider.credential(
       user.email,
-      currentPassword
+      currentPassword,
     );
     await reauthenticateWithCredential(user, credential);
     await updatePassword(user, newPassword);
