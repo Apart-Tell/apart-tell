@@ -38,11 +38,9 @@ function Login() {
         const uid = user.uid;
         const userRef = doc(collection(db, "users"), uid);
         const userDoc = await getDoc(userRef);
-        const userReq = doc(collection(db, "requests"), uid);
-        const userReqDoc = await getDoc(userReq);
+        const userDocData = userDoc.data();
         if (userDoc.exists()) {
-          const userReqData = userReqDoc.data();
-          if (userReqData.status !== "approved") {
+          if (userDocData.role !== "admin") {
             alert(
               "Your account is awaiting approval from an admin. Please check back later."
             );
