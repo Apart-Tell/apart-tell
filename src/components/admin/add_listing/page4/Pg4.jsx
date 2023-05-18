@@ -52,15 +52,25 @@ const Pg4 = () => {
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [id]: value,
-      };
-    });
+  
+    // Check if the entered value is numerical
+    const isNumerical = /^\d*$/.test(value);
+
+    // Update the inputErrors state for phone number fields
+    if ((id === "ownerPhone" || id === "caretakerPhone") && !isNumerical && value !== "") {
+      e.target.value = ""; // Clear the input field
+      alert("Please enter only numerical digits for the phone number.");
+      return; // Exit early if the input is not a numerical digit
+    }
+  
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [id]: value,
+    }));
     console.log(id, value);
     validateForm();
   };
+  
 
   const validateForm = () => {
     const inputs = document.querySelectorAll(
@@ -74,13 +84,12 @@ const Pg4 = () => {
     });
     setIsFormValid(isValid);
   };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    validateForm();
     if (!isFormValid) {
       alert("Please fill in all the required fields.");
-    }
-    if (existingDocId != null) {
+      e.preventDefault();
+    } else if (existingDocId != null) {
       const accRef = doc(collection(db, "accommodations"), existingDocId);
       await setDoc(
         accRef,
@@ -90,14 +99,15 @@ const Pg4 = () => {
         },
         { merge: true }
       );
+      console.log("success");
+      alert("Success! Your information on this page has been saved. Redirecting you to My Directory page.");
+      window.location.href = "/user/directory";
     }
     // const accRef = doc(collection(db, "accommodations"), currentUser.uid);
     // await updateDoc(accRef, {
     //  ...formData,
     //  progress: 4,
 
-    console.log("success");
-    window.location.href = "/user/directory";
   };
 
   return (
@@ -124,45 +134,42 @@ const Pg4 = () => {
             <input
               type="tel"
               id="ownerPhone"
-              pattern="[0-9]{11}"
-              title="Please enter a valid phone number (ex. 091234568900)"
+              pattern="\d{11}"
+              title="Please enter a valid Philippine phone number (11 digits, starting with '09')"
               onChange={handleInputChange}
               required
             ></input>
           </div>
           <br />
           <div>
-            <label htmlFor="owner-email">OWNER'S E-MAIL*</label>
+            <label htmlFor="owner-email">OWNER'S E-MAIL</label>
             <input
-              type="text"
+              type="email"
               id="ownerEmail"
               title="Please enter a valid e-mail"
               onChange={handleInputChange}
-              required
             ></input>
           </div>
           <br />
           <div>
-            <label htmlFor="caretaker-name">CARETAKER'S NAME*</label>
+            <label htmlFor="caretaker-name">CARETAKER'S NAME</label>
             <input
               type="text"
               id="caretakerName"
               onChange={handleInputChange}
-              required
             ></input>
           </div>
           <br />
           <div>
             <label htmlFor="caretaker-phonenum">
-              CARETAKER'S PHONE NUMBER*
+              CARETAKER'S PHONE NUMBER
             </label>
             <input
               type="tel"
               id="caretakerPhone"
-              pattern="[0-9]{11}"
-              title="Please enter a valid phone number"
+              pattern="\d{11}"
+              title="Please enter a valid Philippine phone number (11 digits, starting with '09')"
               onChange={handleInputChange}
-              required
             ></input>
           </div>
           <button type="button" className="prev-btn">
