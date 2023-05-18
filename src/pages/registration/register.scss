@@ -116,13 +116,9 @@ input:focus {
     box-shadow: 0 0 0 2px var(--wildblueyonder);
   }
 
-
-.register-button {
-    margin-top: 30px;
-}
-
 .register-button,
 .login-button {
+    margin-top: 1em;
     button {
         background-color: var(--martinique);
         color: var(--white);
@@ -146,5 +142,5 @@ input:focus {
 // }
 
 .footer {
-    margin-top: 200px;
+    margin-top: 20vh;
 }
