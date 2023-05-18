@@ -79,8 +79,7 @@ const Pg3 = () => {
     if (formData.depositChecked && !formData.depositFee) {
       alert("Please fill in the deposit fee.");
       return;
-    }
-    if (existingDocId != null) {
+    } else if (existingDocId != null) {
       const accRef = doc(collection(db, "accommodations"), existingDocId);
       await setDoc(
         accRef,
@@ -91,6 +90,8 @@ const Pg3 = () => {
         { merge: true }
       );
       console.log("document updated: ", accRef.id);
+      alert("Success! Your information on this page has been saved.");
+      window.location.href = "/page4";
     }
     //  const currentUser=auth.currentUser;
     //  const accRef=doc(collection(db, "accommodations"), currentUser.uid);
@@ -99,7 +100,6 @@ const Pg3 = () => {
     //    progress: 3,
     //  })
     //   .then(() => {
-    window.location.href = "/page4";
     //   })
     //   .catch((error) => {
     //     console.error("Error adding document: ", error);
@@ -118,11 +118,13 @@ const Pg3 = () => {
             <br />
             <label htmlFor="rental-fee-room">RENTAL FEE (per room)*</label>
             <input
-              type="text"
+              type="number"
               id="roomFee"
-              pattern="^\d+(?:\.\d{1,2})?$"
-              placeholder="ex. 1000.00"
               title="Please enter a valid numerical currency amount"
+              step="0.01"
+              min="0"
+              max="9999999.99"
+              placeholder="ex. 1000.00"
               onChange={handleInputChange}
               required
             ></input>
@@ -131,11 +133,12 @@ const Pg3 = () => {
           <div>
             <label htmlFor="rental-fee-head">RENTAL FEE (per head)*</label>
             <input
-              type="text"
+              type="number"
               id="headFee"
-              pattern="^\d+(?:\.\d{1,2})?$"
+              step="0.01"
+              min="0"
+              max="9999999.99"
               placeholder="ex. 1000.00"
-              title="Please enter a valid numerical currency amount"
               onChange={handleInputChange}
               required
             ></input>
@@ -157,9 +160,11 @@ const Pg3 = () => {
                 </label>
                 {formData.electricityChecked && (
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Enter electricity fee (per month)"
-                    pattern="^\d+(?:\.\d{1,2})?$"
+                    step="0.01"
+                    min="0"
+                    max="9999999.99"
                     title="Please enter a valid numerical currency amount"
                     id="electricityFee"
                     onChange={handleInputChange}
@@ -177,9 +182,11 @@ const Pg3 = () => {
                 </label>
                 {formData.waterChecked && (
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Enter water fee (per month)"
-                    pattern="^\d+(?:\.\d{1,2})?$"
+                    step="0.01"
+                    min="0"
+                    max="9999999.99"
                     title="Please enter a valid numerical currency amount"
                     id="waterFee"
                     onChange={handleInputChange}
@@ -197,9 +204,11 @@ const Pg3 = () => {
                 </label>
                 {formData.depositChecked && (
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Enter deposit fee"
-                    pattern="^\d+(?:\.\d{1,2})?$"
+                    step="0.01"
+                    min="0"
+                    max="9999999.99"
                     title="Please enter a valid numerical currency amount"
                     id="depositFee"
                     onChange={handleInputChange}

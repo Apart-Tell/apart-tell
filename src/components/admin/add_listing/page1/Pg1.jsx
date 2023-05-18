@@ -115,6 +115,8 @@ const Pg1 = () => {
         { merge: true }
       );
       console.log("document created: ", accRef.id);
+      window.location.href = "/page2";
+      alert("Success! Your information on this page has been saved.");
     } else {
       const docRef = collection(db, "accommodations");
       await setDoc(doc(docRef), {
@@ -122,9 +124,11 @@ const Pg1 = () => {
         editedBy: currentUser.uid,
         editedAt: serverTimestamp(),
         createdBy: currentUser.uid,
-        createdAt: serverTimestamp(),
         progress: 1,
       });
+      console.log("document successfully written");
+      window.location.href = "/page2";
+      alert("Success! Your information on this page has been saved.");
     }
     //      const currentUser = auth.currentUser;
     //      const accRef = doc(collection(db, "accommodations"), currentUser.uid);
@@ -136,7 +140,6 @@ const Pg1 = () => {
     //          console.log("document successfully written");
     // console.log("props history", history);
     //navigate("/page2", {state: {docUid}});
-    window.location.href = "/page2";
     //        })
     //        .catch((error) => {
     //          console.error("error writing document: ", error);
