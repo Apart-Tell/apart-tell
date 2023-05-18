@@ -80,12 +80,11 @@ const Pg2 = () => {
   };
 
   // checks whether all input fields are filled out
-  const handleNextClick = async () => {
+  const handleNextClick = async (e) => {
     // Perform any additional validation if needed
     if (!isFormValid) {
-      alert("Please fill in all the required fields.");
       e.preventDefault();
-      return;
+      alert("Please fill in all the required fields.");
     } else if(existingDocId!=null){
       const accRef=doc(collection(db, "accommodations"), existingDocId);
       await setDoc(
@@ -97,9 +96,8 @@ const Pg2 = () => {
       );
       console.log("document edited: ", accRef.id);
       window.location.href="/page3";
-    } else{
-      console.log("hui badi check mo ang code");
-    };
+      alert("Success! Your information on this page has been saved.");
+    } 
  //   try {
    //   const accRef = doc(collection(db, "accommodations"), currentUser.uid);
    //   await updateDoc(accRef, {
@@ -135,6 +133,8 @@ const Pg2 = () => {
       updatedUploadedFiles.push(file);
     }
 
+    alert("Uploading files.. this might take some time.");
+    
     setUploadedFiles((prevUploadedFiles) => [
       ...prevUploadedFiles,
       ...updatedUploadedFiles,
@@ -193,12 +193,12 @@ const Pg2 = () => {
           </div>
           <div>
             <br />
-            <label htmlFor="room-dimension">ROOM DIMENSION*</label>
+            <label htmlFor="room-dimension">ROOM DIMENSION</label>
             <input
               type="text"
               id="dimensions"
+              placeholder='ex. 10" x 10"'
               onChange={handleInputChange}
-              required
             ></input>
           </div>
           <br />
