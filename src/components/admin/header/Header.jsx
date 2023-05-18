@@ -68,13 +68,18 @@ export default function Header() {
   }, []);
 
   const handleLogOut = () =>{
-    signOut(auth)
+    const confirmed = window.confirm("Are you sure you want to log out?");
+    if (confirmed){
+      signOut(auth)
     .then(() => {
       alert("Logging out..");
       navigate("/login");
       console.log("Log out successful!");
     })
       .catch((error) => console.log(error));
+    } else {
+      console.log("Cancelled");
+    }
   }
 
   return (
