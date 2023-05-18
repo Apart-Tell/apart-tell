@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../firebase";
+import PasswordVisibilityToggle from '../../components/admin/account/PasswordVisibilityToggle';
 
 const Register = () => {
   const [firstname, setFname] = useState("");
@@ -52,6 +53,13 @@ const Register = () => {
       });
   };
 
+  const [showConfirmationPassword, setShowConfirmationPassword] = useState(false);
+  
+  const toggleConfirmationPasswordVisibility = () => {
+    setShowConfirmationPassword(!showConfirmationPassword);
+  };
+
+
   return (
     <>
       <div className="logo-reg">
@@ -95,13 +103,16 @@ const Register = () => {
                 className="email-input"
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                className="password-input"
-                onChange={(e) => setPassword(e.target.value)}
-              ></input>
+              <div className="pass-input-field">
+                <input
+                  type={showConfirmationPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  className="password-input"
+                  onChange={(e) => setPassword(e.target.value)}
+                ></input>
+                <PasswordVisibilityToggle onToggle={toggleConfirmationPasswordVisibility}/>
+              </div>
             </div>
 
             <div className="register-button">
