@@ -6,6 +6,7 @@ import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import "./login.scss";
 import Footer from "../../components/footer/Footer";
+import PasswordVisibilityToggle from '../../components/admin/account/PasswordVisibilityToggle';
 
 function Login() {
   const navigate = useNavigate();
@@ -22,7 +23,10 @@ function Login() {
       .catch((error) => {
         if (error.code === "auth/user-not-found") {
           alert("User not found. Please create an account.");
-        } else {
+        } else if (error.code === "auth/wrong-password") {
+          alert("Wrong password. Please try again.");
+        }
+        else {
           console.log(error);
         }
       });
@@ -44,7 +48,7 @@ function Login() {
             );
             await signOut(auth);
           } else {
-            const userData = userDoc.data();
+            // const userData = userDoc.data();
             alert("Redirecting you to home page..");
             navigate("/admin-home");
           }
@@ -57,6 +61,12 @@ function Login() {
       listen();
     };
   }, []);
+
+  const [showConfirmationPassword, setShowConfirmationPassword] = useState(false);
+  
+  const toggleConfirmationPasswordVisibility = () => {
+    setShowConfirmationPassword(!showConfirmationPassword);
+  };
 
   return (
     <>
@@ -80,13 +90,17 @@ function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="email-input"
               />
-              <input
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="password-input"
-              />
+              <div className="pass-input-field">
+                <input
+                  type={showConfirmationPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="password-input"
+                />
+                <PasswordVisibilityToggle onToggle={toggleConfirmationPasswordVisibility}/>
+              </div>
+              
             </div>
 
             <div className="login-button">
