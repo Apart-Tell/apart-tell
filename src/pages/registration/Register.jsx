@@ -24,22 +24,28 @@ const Register = () => {
           userName: username,
           email: email,
           role: "pending"
-        }).catch((error) => {
-          console.log(
-            "Something went wrong with adding user to Firestore: ",
-            error
-          );
-        });
-        const requestDocRef = doc(db, "requests", userCredential.user.uid);
-        setDoc(requestDocRef, {
-          firstName: firstname,
-          lastName: lastname,
-          userName: username,
-          email: email,
-          createdAt: serverTimestamp(),
-          status: "pending"
         })
-
+          .then(() => {
+            const requestDocRef = doc(db, "requests", userCredential.user.uid);
+            setDoc(requestDocRef, {
+              firstName: firstname,
+              lastName: lastname,
+              userName: username,
+              email: email,
+              createdAt: serverTimestamp(),
+              status: "pending"
+            })
+              .then(() => {
+                const message = "You have been registered. Your account is awaiting approval from the superadmin.";
+                alert(message); // Display the alert message
+              })
+              .catch((error) => {
+                console.log("Something went wrong with adding user to 'requests' collection: ", error);
+              });
+          })
+          .catch((error) => {
+            console.log("Something went wrong with adding user to 'users' collection: ", error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -56,7 +62,6 @@ const Register = () => {
       <div className="registration">
         <div className="register-container">
           <form onSubmit={signUp}>
-
             <div className="register-title">
               <h1>Register</h1>
             </div>
@@ -100,9 +105,7 @@ const Register = () => {
             </div>
 
             <div className="register-button">
-              <button type="submit">
-                Register
-              </button>
+              <button type="submit">Register</button>
             </div>
           </form>
         </div>
