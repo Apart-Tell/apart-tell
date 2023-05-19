@@ -189,6 +189,7 @@ const Account = () => {
                   <input
                     type="text"
                     id='fname'
+                    required
                     value={personalInfo.firstName}
                     onChange={(e) =>
                       setPersonalInfo({
@@ -205,6 +206,7 @@ const Account = () => {
                     type="text"
                     id='lname'
                     value={personalInfo.lastName}
+                    required
                     onChange={(e) =>
                       setPersonalInfo({
                         ...personalInfo,
@@ -234,6 +236,7 @@ const Account = () => {
                   type="email"
                   id='email'
                   value={email}
+                  required
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -243,6 +246,7 @@ const Account = () => {
                 <input
                   type={showConfirmationPassword ? "text" : "password"}
                   id="confirmationpass"
+                  required
                   value={password.currentConfirmationPassword}
                   onChange={(e) => setPassword({ ...password, currentConfirmationPassword: e.target.value })}
                 />
@@ -267,6 +271,7 @@ const Account = () => {
                 <input
                   type={showCurrentPassword ? "text" : "password"}
                   id="currpass"
+                  required
                   value={password.currentPassword}
                   onChange={(e) =>
                     setPassword({
@@ -283,6 +288,7 @@ const Account = () => {
                 <input
                   type={showNewPassword ? "text" : "password"}
                   id="newpass"
+                  required
                   value={password.newPassword}
                   onChange={handleNewPasswordChange}
                 />
@@ -296,6 +302,7 @@ const Account = () => {
                   id="confirmnewpass"
                   value={password.newConfirmationPassword}
                   onChange={handleNewConfirmationPasswordChange}
+                  required
                 />
                 <PasswordVisibilityToggle onToggle={toggleNewConfirmationPasswordVisibility} />
                 <div className='password-matching'>
