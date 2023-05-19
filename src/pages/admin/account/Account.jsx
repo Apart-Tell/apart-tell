@@ -26,7 +26,7 @@ const Account = () => {
   async function updateUserPassword(user, currentPassword, newPassword) {
     const credential = EmailAuthProvider.credential(
       user.email,
-      currentPassword,
+      password.currentConfirmationPassword
     );
     await reauthenticateWithCredential(user, credential);
     await updatePassword(user, newPassword);
@@ -82,9 +82,14 @@ const Account = () => {
     try {
       const user = auth.currentUser;
       if (user) {
-        const credential = EmailAuthProvider.credential(user.email, password);
+        const credential = EmailAuthProvider.credential(user.email, password.currentConfirmationPassword);
         await reauthenticateWithCredential(user, credential);
         await updateEmail(user, email);
+  
+        // Update the email in Firestore
+        const uid = user.uid;
+        await updateUserInfo(uid, { email });
+  
         setEmailError(null);
         alert('Email address updated!');
       }
@@ -93,6 +98,7 @@ const Account = () => {
       setEmailError('An error occurred while updating your email address.');
     }
   };
+  
 
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
