@@ -95,6 +95,9 @@ const Account = () => {
       }
     } catch (err) {
       console.log(err);
+      if (err.code === "auth/wrong-password") {
+        alert("Wrong password. Please try again.");
+      }
       setEmailError('An error occurred while updating your email address.');
     }
   };
@@ -122,8 +125,11 @@ const Account = () => {
         alert('Password updated!');
       }
     } catch (err) {
-      console.log(err);
-      setPasswordError('An error occurred while updating your password.');
+        if (err.code === "auth/wrong-password") {
+          alert("Wrong password. Please try again.");
+        }
+        console.log(err);
+        setPasswordError('An error occurred while updating your password.');
     }
   };
 
