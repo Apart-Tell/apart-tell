@@ -61,6 +61,18 @@ const Pg3 = () => {
     console.log(id, value);
   };
 
+  // handles "prev" button
+  const handlePrevClick = () => {
+    const confirmation = window.confirm(
+      "Are you sure you want to go back? Any unsaved changes on this page will be lost."
+    );
+
+    if (confirmation) {
+      sessionStorage.setItem("formData", JSON.stringify(formData));
+      window.location.href = "/page2";
+    }
+  };
+
   // form validation: checks whether all input fields are filled out before letting the user be redirected to the next page
   const handleNextClick = async (event) => {
     event.preventDefault();
@@ -90,8 +102,10 @@ const Pg3 = () => {
         { merge: true }
       );
       console.log("document updated: ", accRef.id);
-      alert("Success! Your information on this page has been saved.");
+      // Save form data to local storage
+      localStorage.setItem("formData", JSON.stringify(formData));
       window.location.href = "/page4";
+      alert("Success! Your information on this page has been saved.");
     }
     //  const currentUser=auth.currentUser;
     //  const accRef=doc(collection(db, "accommodations"), currentUser.uid);
@@ -217,8 +231,8 @@ const Pg3 = () => {
               </div>
             </div>
           </div>
-          <button type="button" className="prev-btn">
-            <a href="/page2">Prev</a>
+          <button type="button" className="prev-btn" onClick={handlePrevClick}>
+            <a>Prev</a>
           </button>
           <button type="button" className="next-btn" onClick={handleNextClick}>
             <a>Next</a>

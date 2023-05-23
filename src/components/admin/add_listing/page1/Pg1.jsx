@@ -115,6 +115,8 @@ const Pg1 = () => {
         { merge: true }
       );
       console.log("document created: ", accRef.id);
+      // Save form data to local storage
+      localStorage.setItem("formData", JSON.stringify(formData));
       window.location.href = "/page2";
       alert("Success! Your information on this page has been saved.");
     } else {
@@ -127,6 +129,8 @@ const Pg1 = () => {
         progress: 1,
       });
       console.log("document successfully written");
+      // Save form data to local storage
+      localStorage.setItem("formData", JSON.stringify(formData));
       window.location.href = "/page2";
       alert("Success! Your information on this page has been saved.");
     }
@@ -207,6 +211,7 @@ const Pg1 = () => {
                 className="description-style"
                 required
                 onChange={handleInputChange}
+                style={{ fontSize: 'medium' }}
               ></textarea>
             </div>
             <br />
@@ -217,6 +222,7 @@ const Pg1 = () => {
                 className="rules-style"
                 required
                 onChange={handleInputChange}
+                style={{ fontSize: 'medium' }}
               ></textarea>
             </div>
             <br />

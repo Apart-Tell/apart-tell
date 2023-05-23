@@ -1,43 +1,27 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import "./pg2.scss";
-import {
-  collection,
-  updateDoc,
-  doc,
-  query,
-  limit,
-  where,
-  getDocs,
-  setDoc,
-} from "firebase/firestore";
-import { auth, db } from "../../../../firebase";
+import React, { useState, useEffect } from "react";
+import { collection, updateDoc, doc, query, limit, where, getDocs, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db } from "../../../../firebase";
+import "./pg2.scss";
 
 const MAX_COUNT = 4;
 
 const Pg2 = () => {
- // const navigate = useNavigate();
-  // handles occupants data
   const [formData, setFormData] = useState({
     occupants: "",
-    dimensions: "",
+    length: "",
+    width: "",
+    metric: "",
     crType: "",
   });
   const [isFormValid, setIsFormValid] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileLimit, setFileLimit] = useState(false);
-
-  // handles input change for OCCUPANTS
-  // const currentUser = auth.currentUser;
   const [existingDocId, setExistingDocId] = useState(null);
+
   useEffect(() => {
     const checkExistingDoc = async () => {
-      const q = query(
-        collection(db, "accommodations"),
-        where("progress", "==", 1),
-        limit(1)
-      );
+      const q = query(collection(db, "accommodations"), where("progress", "==", 1), limit(1));
       const querySnapshot = await getDocs(q);
       if (querySnapshot.size > 0) {
         const firstDoc = querySnapshot.docs[0].id;
@@ -51,25 +35,20 @@ const Pg2 = () => {
     checkExistingDoc();
     console.log("checking");
     console.log(existingDocId);
-  });
+  }, []);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
 
-    setFormData((prevFormdata) => {
-      return {
-        ...prevFormdata,
-        [id]: value,
-      };
-    });
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [id]: value,
+    }));
     validateForm();
-    // console.log(name, value);
   };
 
   const validateForm = () => {
-    const inputs = document.querySelectorAll(
-      "input[required], select[required]"
-    );
+    const inputs = document.querySelectorAll("input[required], select[required]");
     let isValid = true;
     inputs.forEach((input) => {
       if (!input.value) {
@@ -79,43 +58,42 @@ const Pg2 = () => {
     setIsFormValid(isValid);
   };
 
-  // checks whether all input fields are filled out
+  const handlePrevClick = () => {
+    const confirmation = window.confirm(
+      "Are you sure you want to go back? Any unsaved changes on this page will be lost."
+    );
+
+    if (confirmation) {
+      sessionStorage.setItem("formData", JSON.stringify(formData));
+      window.location.href = "/page1";
+    }
+  };
+
   const handleNextClick = async (e) => {
-    // Perform any additional validation if needed
     if (!isFormValid) {
       e.preventDefault();
       alert("Please fill in all the required fields.");
-    } else if(existingDocId!=null){
-      const accRef=doc(collection(db, "accommodations"), existingDocId);
-      await setDoc(
-        accRef, 
-        {
-          ...formData,
-          progress:2,
-        }, {merge: true}
+    } else if (existingDocId !== null) {
+      const accRef = doc(collection(db, "accommodations"), existingDocId);
+      await setDoc(accRef, {
+        ...formData,
+        progress: 2,
+      },
+      { merge: true }
       );
       console.log("document edited: ", accRef.id);
-      window.location.href="/page3";
+      localStorage.setItem("formData", JSON.stringify(formData));
+      window.location.href = "/page3";
       alert("Success! Your information on this page has been saved.");
-    } 
- //   try {
-   //   const accRef = doc(collection(db, "accommodations"), currentUser.uid);
-   //   await updateDoc(accRef, {
-   //     ...formData,
-    //    progress: 2,
-     //   createdAt: serverTimestamp(),
-    //  });
-    //  console.log("Document written with ID: ", accRef.id);
-      
-   // } catch (error) {
-   //   console.error("Error adding document: ", error);
-   // }
+    }
   };
 
   const handleFileEvent = async (e) => {
     const chosenFiles = Array.from(e.target.files);
     const fileURLs = [];
     const updatedUploadedFiles = [];
+
+    alert("Uploading files... This might take some time.");
 
     if (chosenFiles.length + uploadedFiles.length > MAX_COUNT) {
       setFileLimit(true);
@@ -133,35 +111,27 @@ const Pg2 = () => {
       updatedUploadedFiles.push(file);
     }
 
-    alert("Uploading files.. this might take some time.");
-    
     setUploadedFiles((prevUploadedFiles) => [
       ...prevUploadedFiles,
       ...updatedUploadedFiles,
     ]);
 
-    if (existingDocId != null) {
+    if (existingDocId !== null) {
       const accRef = doc(collection(db, "accommodations"), existingDocId);
-      await setDoc(
-        accRef,
-        {
-          photos: fileURLs,
-        },
-        { merge: true }
-      );
+      await updateDoc(accRef, {
+        photos: fileURLs,
+      });
       console.log("document updated: ", accRef.id);
     } else {
-      console.log("may namali lol: ");
+      console.log("may namali lol");
     }
   };
 
-  // Issue: Will refresh the whole page when the 1st uploaded photo is
   const handleDeletePhoto = (index) => {
     const updatedUploadedFiles = [...uploadedFiles];
     updatedUploadedFiles.splice(index, 1);
     setUploadedFiles(updatedUploadedFiles);
 
-    // Update the photos array in Firebase Firestore
     const accRef = doc(collection(db, "accommodations"), existingDocId);
     const updatedPhotos = updatedUploadedFiles
       .filter((_, i) => i !== index)
@@ -173,92 +143,118 @@ const Pg2 = () => {
   };
 
   return (
-    <>
-      <div className="wrapper container">
-        <h2>Add New Listing</h2>
-        <h3>Room Details</h3>
-        <hr />
-        <form>
-          <div>
-            <label htmlFor="occupants-room">
-              NUMBER OF OCCUPANTS (per room)*
-            </label>
-            <input
-              type="number"
-              id="occupants"
-              min={1}
-              onChange={handleInputChange}
-              required
-            ></input>
-          </div>
-          <div>
-            <br />
-            <label htmlFor="room-dimension">ROOM DIMENSION</label>
-            <input
-              type="text"
-              id="dimensions"
-              placeholder='ex. 10" x 10"'
-              onChange={handleInputChange}
-            ></input>
-          </div>
+    <div className="wrapper container">
+      <h2>Add New Listing</h2>
+      <h3>Room Details</h3>
+      <hr />
+      <form>
+        <div>
+          <label htmlFor="occupants-room">NUMBER OF OCCUPANTS (per room)*</label>
+          <input
+            type="number"
+            id="occupants"
+            min={1}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="room-dimension">
           <br />
-          <div>
-            <label htmlFor="crType">COMFORT ROOM TYPE*</label>
-            <select
-              id="crType"
-              required
-              onChange={handleInputChange}
-              className="select-type"
-            >
-              <option value="" className="select-type">
-                Select a type
-              </option>
-              <option value="communal" className="select-type">
-                Communal/Shared
-              </option>
-              <option value="private" className="select-type">
-                Private
-              </option>
-            </select>
-          </div>
-          <br></br>
-          <div>
+          <label htmlFor="room-dimension">ROOM DIMENSION</label>
+          <div className="room-dimension-inputs">
+          <input
+            type="number"
+            id="length"
+            min={1}
+            className="length-style"
+            placeholder="Length"
+            onChange={handleInputChange}
+          />
+          <span style={{ margin: "0 5px" }}>x</span>
+          <input
+            type="number"
+            id="width"
+            min={1}
+            className="width-style"
+            placeholder="Width"
+            onChange={handleInputChange}
+          />
+        </div>
+        <select
+          id="metric"
+          className="metric-style"
+          onChange={handleInputChange}
+        >
+          <option value="">Select</option>
+          <option value="feet">Feet</option>
+          <option value="inches">Inches</option>
+          <option value="meters">Meters</option>
+        </select>
+      </div>
+        <br />
+        <div>
+          <label htmlFor="crType">COMFORT ROOM TYPE*</label>
+          <select
+            id="crType"
+            required
+            onChange={handleInputChange}
+            className="select-type"
+          >
+            <option value="" className="select-type">
+              Select a type
+            </option>
+            <option value="communal" className="select-type">
+              Communal/Shared
+            </option>
+            <option value="private" className="select-type">
+              Private
+            </option>
+          </select>
+        </div>
+        <br />
+        <div>
           <label>UPLOAD PHOTOS (Maximum of 4 photos only)</label>
-          <br/>
+          <br />
           <input
             type="file"
             accept="image/*"
             multiple
             onChange={handleFileEvent}
-          ></input>
-          <br/>
-           {fileLimit && (
-            <p>Only a maximum of {MAX_COUNT} photos can be uploaded. Reupload files!</p>
+          />
+          <br />
+          {fileLimit && (
+            <p>
+              Only a maximum of {MAX_COUNT} photos can be uploaded. Reupload files!
+            </p>
           )}
           {uploadedFiles.length > 0 && (
             <div>
-              <br/><br/>
+              <br />
               <label>UPLOADED PHOTOS</label>
               <ul>
                 {uploadedFiles.map((file, index) => (
                   <li key={index}>
-                    <img src={URL.createObjectURL(file)} alt={`photo-${index}`} />
-                    <button type="button" onClick={() => handleDeletePhoto(index)}><a>Delete</a></button>
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt={`photo-${index}`}
+                    />
+                    <button type="button" onClick={() => handleDeletePhoto(index)}>
+                      <a>Delete</a>
+                    </button>
                   </li>
                 ))}
               </ul>
             </div>
           )}
-          </div>
-          <button type="button" className="prev-btn"  onClick={() => navigate("/page1")}>
-            <a href="/page1">Prev</a>
-          </button>
-          <button type="button" className="next-btn" onClick={handleNextClick}>
-            <a href="/page3">Next</a>
-          </button>
-        </form>
-      </div>
-    </>
+        </div>
+        <button type="button" className="prev-btn" onClick={handlePrevClick}>
+          <a>Prev</a>
+        </button>
+        <button type="button" className="next-btn" onClick={handleNextClick}>
+          <a>Next</a>
+        </button>
+      </form>
+    </div>
   );
 };
 

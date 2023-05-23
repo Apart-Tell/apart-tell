@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./pg4.scss";
 import {
   doc,
@@ -13,8 +12,6 @@ import {
 import { db, auth } from "../../../../firebase";
 
 const Pg4 = () => {
-  // handles owner name data
-
   const [formData, setFormData] = useState({
     ownerName: "",
     ownerPhone: "",
@@ -22,8 +19,10 @@ const Pg4 = () => {
     caretakerName: "",
     caretakerPhone: "",
   });
+
+  const [emailError, setEmailError] = useState("");
+
   const [isFormValid, setIsFormValid] = useState(false);
-  // handles submit button
 
   const currentuser = auth.currentUser;
   const [existingDocId, setExistingDocId] = useState(null);
@@ -48,48 +47,54 @@ const Pg4 = () => {
     checkExistingDoc();
     console.log("checking");
     console.log(existingDocId);
-  });
+  }, []);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-  
-    // Check if the entered value is numerical
-    const isNumerical = /^\d*$/.test(value);
 
-    // Update the inputErrors state for phone number fields
-    if ((id === "ownerPhone" || id === "caretakerPhone") && !isNumerical && value !== "") {
-      e.target.value = ""; // Clear the input field
-      alert("Please enter only numerical digits for the phone number.");
-      return; // Exit early if the input is not a numerical digit
+    if (id === "ownerPhone" || id === "caretakerPhone") {
+      const phoneNumber = value.replace(/\D/g, "");
+      if (phoneNumber.length > 11) {
+        e.target.value = phoneNumber.slice(0, 11);
+      }
     }
-  
+
+    if (id === "ownerEmail") {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(value)) {
+        setEmailError("Please enter a valid email address!");
+      } else {
+        setEmailError("");
+      }
+    }
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       [id]: value,
     }));
-    console.log(id, value);
+
     validateForm();
   };
-  
 
-  const validateForm = () => {
-    const inputs = document.querySelectorAll(
-      "input[required], select[required], textarea[required]"
+  const handlePrevClick = () => {
+    const confirmation = window.confirm(
+      "Are you sure you want to go back? Any unsaved changes on this page will be lost."
     );
-    let isValid = true;
-    inputs.forEach((input) => {
-      if (!input.value) {
-        isValid = false;
-      }
-    });
-    setIsFormValid(isValid);
+    if (confirmation) {
+      sessionStorage.setItem("formData", JSON.stringify(formData));
+      window.location.href = "/page3";
+    }
   };
 
   const handleSubmit = async (e) => {
-    if (!isFormValid) {
+    e.preventDefault();
+
+    if (!formData.ownerName || !formData.ownerPhone) {
       alert("Please fill in all the required fields.");
-      e.preventDefault();
-    } else if (existingDocId != null) {
+      return;
+    }
+
+    if (existingDocId != null) {
       const accRef = doc(collection(db, "accommodations"), existingDocId);
       await setDoc(
         accRef,
@@ -100,14 +105,12 @@ const Pg4 = () => {
         { merge: true }
       );
       console.log("success");
-      alert("Success! Your information on this page has been saved. Redirecting you to My Directory page.");
+      localStorage.setItem("formData", JSON.stringify(formData));
+      alert(
+        "Success! Your information on this page has been saved. Redirecting you to My Directory page."
+      );
       window.location.href = "/user/directory";
     }
-    // const accRef = doc(collection(db, "accommodations"), currentUser.uid);
-    // await updateDoc(accRef, {
-    //  ...formData,
-    //  progress: 4,
-
   };
 
   return (
@@ -128,9 +131,7 @@ const Pg4 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="owner-phonenum" required>
-              OWNER'S PHONE NUMBER*
-            </label>
+            <label htmlFor="owner-phonenum">OWNER'S PHONE NUMBER*</label>
             <input
               type="tel"
               id="ownerPhone"
@@ -148,7 +149,9 @@ const Pg4 = () => {
               id="ownerEmail"
               title="Please enter a valid e-mail"
               onChange={handleInputChange}
+              value={formData.ownerEmail}
             ></input>
+            {emailError && <span className="error-message">{emailError}</span>}
           </div>
           <br />
           <div>
@@ -161,9 +164,7 @@ const Pg4 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="caretaker-phonenum">
-              CARETAKER'S PHONE NUMBER
-            </label>
+            <label htmlFor="caretaker-phonenum">CARETAKER'S PHONE NUMBER</label>
             <input
               type="tel"
               id="caretakerPhone"
@@ -172,10 +173,10 @@ const Pg4 = () => {
               onChange={handleInputChange}
             ></input>
           </div>
-          <button type="button" className="prev-btn">
-            <a href="/page3">Prev</a>
+          <button type="button" className="prev-btn" onClick={handlePrevClick}>
+            <a>Prev</a>
           </button>
-          <button type="button" onClick={handleSubmit}>
+          <button type="submit" onClick={handleSubmit}>
             <a>Submit</a>
           </button>
         </form>
