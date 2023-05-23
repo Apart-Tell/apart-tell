@@ -38,6 +38,17 @@
         }
     }
 
+    .delete-btn {
+        background-color: red;
+        border: 1px solid red;
+        &:hover{
+            background-color: white;
+            a {
+                color: red;
+            }
+        }
+    }
+
     .view-btn, .edit-btn, .delete-btn{
         padding: 9px;
         cursor: pointer;

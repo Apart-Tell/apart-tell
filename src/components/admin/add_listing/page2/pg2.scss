@@ -1,56 +1,73 @@
 .wrapper {
     h2 {
-        margin-bottom: 3rem;
+      margin-bottom: 3rem;
     }
+  
     form {
-        p{
-            margin-top: 10px;
+      p {
+        margin-top: 10px;
+        text-align: left;
+      }
+  
+      margin-top: 2rem;
+  
+      input[type="number"],
+      input[type="radio"],
+      select {
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: 1px solid var(--martinique);
+        font-size: medium;
+        color: var(--martinique);
+        margin-top: 0.5rem;
+        text-align: left;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+      }
+
+    .room-dimension {
+        display: flex;
+        text-align: left;
+  
+        .room-dimension-inputs {
+            display: flex
+        }   
+        select, option {
             text-align: left;
+            width: 10rem;
         }
-        margin-top: 2rem;
-        input[type="number"], 
-        input[type="radio"],
-        select {
-            padding: 0.5rem;
+    }
+  
+      input[type="file"] {
+        border: none;
+      }
+  
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+  
+        li {
+          display: flex;
+          align-items: center;
+          margin-right: 1rem;
+          margin-bottom: 1rem;
+  
+          img {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
             border-radius: 5px;
-            border: 1px solid var(--martinique);
-            font-size: medium;
-            color: var(--martinique);
-            margin-top: 0.5rem;
-            text-align: left;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
+            margin-right: 0.5rem;
+          }
         }
-        span {
-            text-align: left;
-        }
-        input[type="file"]{
-            border: none;
-        }
-
-
-            ul{
-                display: flex;
-                flex-wrap: wrap;
-                padding: 0;
-                margin: 0;
-                list-style: none;
-                li {
-                    display: flex;
-                    align-items: center;
-                    margin-right: 1rem;
-                    margin-bottom: 1rem;
-                    img {
-                        max-width: 200px;
-                        max-height: 200px;
-                        object-fit: cover;
-                        border-radius: 5px;
-                        margin-right: 0.5rem;
-                    }
-                }
-            }
+      }
     }
-    .prev-btn{
-        margin-right: 1rem;
+  
+    .prev-btn {
+      margin-right: 1rem;
     }
-}
+  }
+  
