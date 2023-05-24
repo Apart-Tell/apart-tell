@@ -41,6 +41,9 @@ const CRUD = () => {
       (item) => item.id === accommodationId
     );
     console.log("View clicked:", accommodation);
+    
+    // Redirect to the page displaying the specific listing
+    window.location.href = `/display-listing/${accommodationId}`;
   };
 
   // when delete is clicked from a specific listing/accommodation, it will delete the listing (and its details) in the table and in the firebase
@@ -73,7 +76,7 @@ const CRUD = () => {
   return (
     <>
       <div className="crud-wrapper container">
-        <h2 className="directory-text">My Directory</h2>
+        <h2 className="directory-text">Directory</h2>
         <div className="search-add">
           <input type="text" placeholder="Search"></input>
           <button className="search-btn button">

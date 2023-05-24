@@ -61,7 +61,7 @@ const Pg4 = () => {
 
     if (id === "ownerEmail") {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(value)) {
+      if (value && !emailPattern.test(value)) {
         setEmailError("Please enter a valid email address!");
       } else {
         setEmailError("");
@@ -107,7 +107,7 @@ const Pg4 = () => {
       console.log("success");
       localStorage.setItem("formData", JSON.stringify(formData));
       alert(
-        "Success! Your information on this page has been saved. Redirecting you to My Directory page."
+        "Success! Your information on this page has been saved. Redirecting you to Directory page."
       );
       window.location.href = "/user/directory";
     }
