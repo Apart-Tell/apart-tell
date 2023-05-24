@@ -18,6 +18,7 @@ import Page3 from "./pages/admin/add_listing/page3/Page3";
 import Page4 from "./pages/admin/add_listing/page4/Page4";
 import AdminExplore from "./pages/admin/explore/AdminExplore";
 import AdminAbout from "./pages/admin/about/AdminAbout";
+import ViewListing from "./pages/admin/view_listing/ViewListing";
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/page2" element={<Page2/>}/>
         <Route path="/page3" element={<Page3/>}/>
         <Route path="/page4" element={<Page4/>}/>
+        <Route path="/display-listing/:id" element={<ViewListing/>}/>
       </Routes>
     </Router>
   </div>
