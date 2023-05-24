@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../../../firebase';
-import { useParams } from 'react-router-dom';
-import './general.scss';
+import React, { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../../firebase";
+import { useParams } from "react-router-dom";
+import "./general.scss";
 
 const General = () => {
   const [accommodation, setAccommodations] = useState({});
@@ -18,10 +18,10 @@ const General = () => {
         if (docSnap.exists()) {
           setAccommodations(docSnap.data());
         } else {
-          console.log('No such document!');
+          console.log("No such document!");
         }
       } catch (error) {
-        console.error('Error fetching document:', error);
+        console.error("Error fetching document:", error);
       }
     };
 
@@ -30,19 +30,31 @@ const General = () => {
 
   return (
     <>
-      <div className='display-style container'>
-      <h2>Listing Information</h2>
-      <hr/>
-      <br/><br/>
-      <h2>General Accommodation Details</h2>
-      <br/>
-      <p>Name: {accommodation.accName}</p>
-      <p>Address: {accommodation.accAddress}</p>
-      <p>Type: {accommodation.accType}</p>
-      <p>Description: {accommodation.accDescription}</p>
-      <p>Rules: {accommodation.accRules}</p>
-      <p>Amenities: {accommodation.amenities}</p>
-      <p>Nearby: {accommodation.nearby}</p>
+      <div className="display-style container">
+        <h2>Listing Information</h2>
+        <hr />
+        <br />
+        <br />
+        <h2>General Accommodation Details</h2>
+        <br />
+        {accommodation.accName && <p> Name: {accommodation.accName}</p>}
+        {accommodation.accAddress && <p>Address: {accommodation.accAddress}</p>}
+        {accommodation.accType && <p>Type: {accommodation.accType}</p>}
+        {accommodation.accDescription && (
+          <p>Description: {accommodation.accDescription}</p>
+        )}
+        {accommodation.accRules && <p>Rules: {accommodation.accRules}</p>}
+        {accommodation.amenities && (
+          <p>
+            Amenities:{" "}
+            {accommodation.amenities && accommodation.amenities.join(", ")}
+          </p>
+        )}
+        {accommodation.accAddress && (
+          <p>
+            Nearby: {accommodation.nearby && accommodation.nearby.join(", ")}
+          </p>
+        )}
       </div>
     </>
   );

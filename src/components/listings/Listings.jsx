@@ -31,7 +31,7 @@ export default function Option() {
                     </div>
                     <div className="card-text">
                         <h4 className='accommodation-name'>Silva</h4>
-                        <h4 className='accommodation-price'>7,000 PHP</h4>
+                        <h4 className='accommodation-price'>5,000 PHP</h4>
                     </div>
                     <div className="card-text">
                         <h5 className='accommodation-occupants'>2 persons per room</h5>
