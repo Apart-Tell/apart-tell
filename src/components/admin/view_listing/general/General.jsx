@@ -41,8 +41,8 @@ const General = () => {
       <p>Type: {accommodation.accType}</p>
       <p>Description: {accommodation.accDescription}</p>
       <p>Rules: {accommodation.accRules}</p>
-      <p>Amenities: {accommodation.amenities}</p>
-      <p>Nearby: {accommodation.nearby}</p>
+      <p>Amenities: {accommodation.amenities && accommodation.amenities.join(', ')}</p>
+      <p>Nearby: {accommodation.nearby && accommodation.nearby.join(', ')}</p>
       </div>
     </>
   );
