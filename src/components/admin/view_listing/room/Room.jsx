@@ -7,6 +7,7 @@ import "./room.scss";
 const Room = () => {
   const [accommodation, setAccommodations] = useState({});
   const [uploadedPhotos, setUploadedPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
 
@@ -20,7 +21,6 @@ const Room = () => {
           const data = docSnap.data();
           setAccommodations(data);
           if (data.photos) {
-            console.log("Uploaded Photos:", data.photos);
             setUploadedPhotos(data.photos);
           }
         } else {
@@ -28,11 +28,17 @@ const Room = () => {
         }
       } catch (error) {
         console.error("Error fetching document:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, [id]);
+
+  if (loading) {
+    return <div>Loading...</div>; // Render a loading indicator while fetching data
+  }
 
   return (
     <div className="display-style container">
@@ -44,16 +50,16 @@ const Room = () => {
       )}
 
       {accommodation.length && accommodation.width && accommodation.metric && (
-        <p>
-          Room Dimension:
+        <div>
+          <p>Room Dimension:</p>
           <p>length: {accommodation.length}</p>
           <p>width: {accommodation.width}</p>
           <p>metric: {accommodation.metric}</p>
-        </p>
+        </div>
       )}
 
       {accommodation.crType && <p>Comfort Room Type: {accommodation.crType}</p>}
-      {uploadedPhotos && uploadedPhotos.length > 0 && (
+      {uploadedPhotos.length > 0 && (
         <div className="photo-list-wrapper">
           <p>Uploaded Photos: </p>
           <ul className="photo-list">
