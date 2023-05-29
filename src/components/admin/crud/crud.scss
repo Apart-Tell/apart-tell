@@ -9,19 +9,23 @@
         display: flex;
         margin: 2rem;
     }
+    .no-result-style {
+        margin-top: 5rem;
+    }
     input {
         height: 2rem;
-        width: 15rem;
+        width: 20rem;
         margin-right: 1rem;
         border: 1px solid var(--martinique);
         border-radius: 5px;
         text-align: left;
-        text-indent: 15px;
+        text-indent: 10px;
         min-width: 200px;
     }
     button {
         // TOP - RIGHT - BOTTOM -LEFT
         min-width: 100px;
+        font-weight: bold;
         padding: 0px 10px 0px 10px;
         background-color: var(--martinique);
         margin-right: 20px;
@@ -58,6 +62,7 @@
     .search-btn{
         margin-left: -7.3rem;
         &:hover {
+            cursor: pointer;
             border-right: none;
         }
     }
@@ -77,6 +82,10 @@
               padding: 8px;
               text-align: center;
             }
+            .address-cell {
+                max-width: 20rem; /* Adjust the value as needed */
+                word-wrap: break-word;
+              }
         
             th {
               background-color: #f2f2f2;

@@ -2,6 +2,10 @@ import React from 'react';
 import './listings.scss';
 
 export default function Option() {
+    const handleExploreClick = () => {
+        window.location.href = '/explore';
+    };
+
     return (
         <div className='listing container'>
 
@@ -56,7 +60,9 @@ export default function Option() {
             </div>
 
             <div className='explore-btn'>
-                <button><a href='/explore'></a>Explore</button>
+                <button onClick={handleExploreClick}>
+                    Explore
+                </button>
             </div>
 
         </div>

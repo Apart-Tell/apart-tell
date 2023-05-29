@@ -76,7 +76,7 @@ const Pg3 = () => {
   // form validation: checks whether all input fields are filled out before letting the user be redirected to the next page
   const handleNextClick = async (event) => {
     event.preventDefault();
-    if (!formData.roomFee || !formData.headFee) {
+    if (!formData.roomFee) {
       alert("Please fill in all the required fields.");
       return;
     }
@@ -145,7 +145,7 @@ const Pg3 = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="rental-fee-head">RENTAL FEE (per head)*</label>
+            <label htmlFor="rental-fee-head">RENTAL FEE (per head)</label>
             <input
               type="number"
               id="headFee"
@@ -154,7 +154,6 @@ const Pg3 = () => {
               max="9999999.99"
               placeholder="ex. 1000.00"
               onChange={handleInputChange}
-              required
             ></input>
           </div>
           <div>

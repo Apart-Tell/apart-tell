@@ -203,7 +203,7 @@ const Pg1 = () => {
                 </option>
               </select>
             </div>
-            <br />
+            <br/>
             <div>
               <label htmlFor="accDescription">DESCRIPTION*</label>
               <textarea

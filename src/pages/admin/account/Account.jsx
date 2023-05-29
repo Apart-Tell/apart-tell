@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './account.scss';
 import Header from '../../../components/admin/header/Header';
-import Footer from '../../../components/footer/Footer';
+import Footer from '../../../components/admin/footer/Footer';
 import PasswordVisibilityToggle from '../../../components/admin/account/PasswordVisibilityToggle';
 
 // Firebase import section

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./adminabout.scss";
 import Header from '../../../components/admin/header/Header';
-import Footer from '../../../components/footer/Footer';
+import Footer from '../../../components/admin/footer/Footer';
 
 const AdminAbout = () => {
   return (

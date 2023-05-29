@@ -1,0 +1,114 @@
+.view-explore-wrapper{
+    max-width:1440px;
+    // T R B L
+    margin-top: -5rem;
+    padding: 2rem 10rem 3rem 10rem;
+    @media (max-width: 767px) {
+        padding: 2rem;
+    }
+
+    .search-bar-container {
+        display: flex;
+        justify-content: right;
+        margin-bottom: 10px;
+    }
+
+  .search-bar-style {
+    display: flex;
+    align-items: center;
+
+    input[type='text'] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+        font-size: 16px;
+        text-align: left;
+        text-indent: 5px;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: var(--martinique);
+      color: #fff;
+      border: 1px solid var(--martinique);
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: medium;
+      &:hover {
+        border: 1px solid var(--martinique);
+        background-color: white;
+        color: var(--martinique);
+      }
+    }
+  }
+   
+    .view-explore {
+        display: flex;
+        padding: 20px;
+        
+        h2 {
+            text-align: left;
+        }
+        p {
+            text-align: justify;
+        }
+    
+        hr{
+            height: 1px;
+            background-color: var(--loblolly);
+            border: none;
+        }
+        
+        .filtering-system {
+          width: 20%;
+          
+          .checkbox-label {
+            display: flex;
+            text-align: justify;
+          
+            input[type='checkbox'] {
+              margin-right: 5px;
+            }
+          }
+          
+          h2 {
+            margin-bottom: 10px;
+          }
+          label {
+            padding-top: 10px;
+            text-align: left;
+            display: block;
+            font-weight: 500;
+          }
+          select {
+            border: 1px solid var(--martinique);
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 100%;
+            padding: 5px;
+            font-size: small;
+            option {
+              text-align: left;
+            }
+          }
+        }
+        
+        .listings {
+        padding-left: 3rem;
+        width: 80%;
+          
+          .listing {
+            margin-bottom: 20px;
+            
+            h3 {
+              margin-bottom: 5px;
+              font-size: 18px;
+              font-weight: bold;
+            }
+            
+            /* Additional styling for listing details */
+          }
+        }
+      }
+}   

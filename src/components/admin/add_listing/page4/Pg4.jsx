@@ -56,6 +56,8 @@ const Pg4 = () => {
       const phoneNumber = value.replace(/\D/g, "");
       if (phoneNumber.length > 11) {
         e.target.value = phoneNumber.slice(0, 11);
+      } else {
+        e.target.value = phoneNumber;
       }
     }
 
