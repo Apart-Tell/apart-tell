@@ -97,7 +97,7 @@
 .listing-section {
 
     width: 100%;
-    height: 20vh;
+    height: 10em;
 
     background-color: var(--dirtywhite);
     box-shadow: 6px 7px 10px rgba(111, 144, 175, 0.2);
@@ -117,8 +117,6 @@
 
 
     .listing-img {
-        height: 100%;
-
         img {
             width: 100%;
             height: 100%;
@@ -128,7 +126,7 @@
 
     .listing-left {
         width: 50%;
-        margin-left: 3%;
+        // margin-left: 3%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -181,7 +179,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        padding: 5% 0% 2%;
+        padding: 4% 0% 1%;
         // margin: 5% 0% 3%;
 
         .fee-section {
