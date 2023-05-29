@@ -33,6 +33,7 @@
             color:var(--white);
             border-radius: 25px;
             border: none;
+            cursor: pointer;
         }
     }
 }
@@ -93,12 +94,14 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    cursor: pointer;
      // Increase the scale of the image
-     transition: transform 0.3s, filter 0.3s; // Add smooth transition effect
+    transition: transform 0.3s, filter 0.3s; // Add smooth transition effect
         &:hover {
             transform: scale(1.02);
             transition: transform 0.3s, filter 0.3s; // Add smooth transition effect
         }
+
 
     .listing-img {
         height: 100%;
