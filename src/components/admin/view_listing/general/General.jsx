@@ -56,6 +56,7 @@ const General = () => {
         <br/>
 
         <h3>Description</h3>
+        <hr/>
         {accommodation.accDescription && (
           <p>{accommodation.accDescription}</p>
         )}
@@ -133,20 +134,6 @@ const General = () => {
             <p>Deposit: {accommodation.deposit}</p>
           </p>
         )}
-      
-        {uploadedPhotos && uploadedPhotos.length > 0 && (
-          <>
-            <br/>
-            <h3>Gallery</h3>
-            <ul className="photo-list">
-              {uploadedPhotos.map((photoUrl, index) => (
-                <li key={index}>
-                  <img src={photoUrl} alt={`photo-${index}`} />
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
 
         <br/>
         <h3>Contact</h3>
@@ -169,6 +156,20 @@ const General = () => {
          {accommodation.caretakerPhone && (
           <>
             <p>Caretaker's phone number: {accommodation.caretakerPhone}</p>  
+          </>
+        )}
+
+        {uploadedPhotos && uploadedPhotos.length > 0 && (
+          <>
+            <br/>
+            <h3>Gallery</h3>
+            <ul className="photo-list">
+              {uploadedPhotos.map((photoUrl, index) => (
+                <li key={index}>
+                  <img src={photoUrl} alt={`photo-${index}`} />
+                </li>
+              ))}
+            </ul>
           </>
         )}
       </div>
