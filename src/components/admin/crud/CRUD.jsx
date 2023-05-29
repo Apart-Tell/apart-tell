@@ -17,6 +17,7 @@ const CRUD = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
+  const currentUser = auth.currentUser;
 
   const getAllAccommodations = async () => {
     const accommodationsCollectionRef = collection(db, "accommodations");
@@ -81,7 +82,6 @@ const CRUD = () => {
   };
 
   const handleUpdateClick = async (accommodationId) => {
-    const currentUser = auth.currentUser;
     const accommodationRef = doc(db, "accommodations", accommodationId);
     await updateDoc(accommodationRef, {
       editedBy: currentUser.uid,
@@ -89,6 +89,10 @@ const CRUD = () => {
     });
     console.log("update clicked: ", accommodationId);
     window.location.href = "/page1";
+  };
+
+  const isUserAuthorized = (accommodation) => {
+    return accommodation.editedBy === currentUser.uid;
   };
 
   return (
@@ -111,7 +115,9 @@ const CRUD = () => {
         </form>
         <div className="crud-table">
           {noResults ? (
-            <p className="no-result-style">We couldn't find any listings that match your search.</p>
+            <p className="no-result-style">
+              We couldn't find any listings that match your search.
+            </p>
           ) : (
             <table>
               <thead>
@@ -126,7 +132,9 @@ const CRUD = () => {
                   ? searchResults.map((accommodation) => (
                       <tr key={accommodation.id}>
                         <td>{accommodation.accName}</td>
-                        <td className="address-cell">{accommodation.accAddress}</td>
+                        <td className="address-cell">
+                          {accommodation.accAddress}
+                        </td>
                         <td>
                           <button
                             onClick={() => handleViewClick(accommodation.id)}
@@ -134,25 +142,35 @@ const CRUD = () => {
                           >
                             <a>View</a>
                           </button>
-                          <button
-                            onClick={() => handleUpdateClick(accommodation.id)}
-                            className="edit-btn"
-                          >
-                            <a>Edit</a>
-                          </button>
-                          <button
-                            onClick={() => handleDeleteClick(accommodation.id)}
-                            className="delete-btn"
-                          >
-                            <a>Delete</a>
-                          </button>
+                          {isUserAuthorized(accommodation) && (
+                            <>
+                              <button
+                                onClick={() =>
+                                  handleUpdateClick(accommodation.id)
+                                }
+                                className="edit-btn"
+                              >
+                                <a>Edit</a>
+                              </button>
+                              <button
+                                onClick={() =>
+                                  handleDeleteClick(accommodation.id)
+                                }
+                                className="delete-btn"
+                              >
+                                <a>Delete</a>
+                              </button>
+                            </>
+                          )}
                         </td>
                       </tr>
                     ))
                   : accommodations.map((accommodation) => (
                       <tr key={accommodation.id}>
                         <td>{accommodation.accName}</td>
-                        <td className="address-cell">{accommodation.accAddress}</td>
+                        <td className="address-cell">
+                          {accommodation.accAddress}
+                        </td>
                         <td>
                           <button
                             onClick={() => handleViewClick(accommodation.id)}
@@ -160,18 +178,26 @@ const CRUD = () => {
                           >
                             <a>View</a>
                           </button>
-                          <button
-                            onClick={() => handleUpdateClick(accommodation.id)}
-                            className="edit-btn"
-                          >
-                            <a>Edit</a>
-                          </button>
-                          <button
-                            onClick={() => handleDeleteClick(accommodation.id)}
-                            className="delete-btn"
-                          >
-                            <a>Delete</a>
-                          </button>
+                          {isUserAuthorized(accommodation) && (
+                            <>
+                              <button
+                                onClick={() =>
+                                  handleUpdateClick(accommodation.id)
+                                }
+                                className="edit-btn"
+                              >
+                                <a>Edit</a>
+                              </button>
+                              <button
+                                onClick={() =>
+                                  handleDeleteClick(accommodation.id)
+                                }
+                                className="delete-btn"
+                              >
+                                <a>Delete</a>
+                              </button>
+                            </>
+                          )}
                         </td>
                       </tr>
                     ))}
