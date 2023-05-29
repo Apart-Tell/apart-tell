@@ -2,19 +2,16 @@ import React from 'react'
 import './explore.scss';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
-import Search from '../../components/explore/search/Search';
-import Checklist from '../../components/explore/checklist/Checklist';
-
+import Container from '../../components/explore/container/Container';
 
 const Explore = () => {
   return (
     <>
       <Header/>
-      <Search/>
-      <Checklist/>
+      <Container/>
       <Footer/>
     </>
-  )
+  );
 }
 
 export default Explore;
