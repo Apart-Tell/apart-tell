@@ -7,7 +7,6 @@ import "./general.scss";
 const General = () => {
   const [accommodation, setAccommodations] = useState({});
   const [uploadedPhotos, setUploadedPhotos] = useState([]);
-  const [hoveredPhoto, setHoveredPhoto] = useState(null);
   const [roomDimension, setRoomDimension] = useState("");
 
   const { id } = useParams();

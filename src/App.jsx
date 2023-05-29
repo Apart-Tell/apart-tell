@@ -19,6 +19,8 @@ import Page4 from "./pages/admin/add_listing/page4/Page4";
 import AdminExplore from "./pages/admin/explore/AdminExplore";
 import AdminAbout from "./pages/admin/about/AdminAbout";
 import ViewListing from "./pages/admin/view_listing/ViewListing";
+import Search_Result_Page from "./pages/admin/search_result/Search_Result_Page";
+import Search_Result from "./pages/search_result/Search_Result";
 
 export default function App() {
   return (
@@ -40,6 +42,8 @@ export default function App() {
         <Route path="/page3" element={<Page3/>}/>
         <Route path="/page4" element={<Page4/>}/>
         <Route path="/display-listing/:id" element={<ViewListing/>}/>
+        <Route path="/results" element={<Search_Result_Page/>}></Route>
+        <Route path="/search-results" element={<Search_Result/>}></Route>
       </Routes>
     </Router>
   </div>
