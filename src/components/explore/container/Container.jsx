@@ -30,7 +30,7 @@ const Container = () => {
                                 <h2>Where to stay in Mintal?</h2>
                             </div>
 
-                            <div className="sort-dropdown-container">
+                            {/* <div className="sort-dropdown-container">
                                 <div className="sort-dropdown">
                                     <select>
                                     <option>Sort</option>
@@ -39,7 +39,7 @@ const Container = () => {
                                     <option>Apartment</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> */}
                     </div>
 
                     {/* Listing component */}

@@ -39,11 +39,11 @@
             border: none;
             cursor: pointer;
             transition: transform 0.3s, filter 0.3s; // Add smooth transition effect
-                &:hover {
-                    background-color: var(--white);
-                    color: var(--martinique);
-                    border: 1px solid var(--martinique);
-                }
+            &:hover {
+                background-color: var(--white);
+                color: var(--martinique);
+                border: 1px solid var(--martinique);
+            }
         }
     }
 }
@@ -75,22 +75,22 @@
         // background-color: beige;
     }
 
-    .sort-dropdown-container {
-        height: 70%;
-        .sort-dropdown {
-            display: flex;
-            align-items: center;
+    // .sort-dropdown-container {
+    //     height: 70%;
+    //     .sort-dropdown {
+    //         display: flex;
+    //         align-items: center;
 
-            height: 100%;
-            select {
-                height: 80%;
-                color:var(--martinique);
-                border-radius: 25px;
-                border: none;
-                padding: 1%;
-            }
-        }
-    }
+    //         height: 100%;
+    //         select {
+    //             height: 80%;
+    //             color:var(--martinique);
+    //             border-radius: 25px;
+    //             border: none;
+    //             padding: 1%;
+    //         }
+    //     }
+    // }
 
 }
 
