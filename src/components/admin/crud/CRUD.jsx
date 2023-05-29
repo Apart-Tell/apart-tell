@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./crud.scss";
 import {
   collection,
@@ -11,17 +11,19 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db, auth } from "../../../firebase";
-import { useState } from "react";
 
 const CRUD = () => {
   const [accommodations, setAccommodations] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [noResults, setNoResults] = useState(false);
 
   const getAllAccommodations = async () => {
     const accommodationsCollectionRef = collection(db, "accommodations");
     const q = query(
       accommodationsCollectionRef,
       where("progress", "==", 4),
-      orderBy("editedAt", "desc"),
+      orderBy("editedAt", "desc")
     );
     const accommodationsSnapshot = await getDocs(q);
     const accommodationsData = accommodationsSnapshot.docs.map((doc) => ({
@@ -35,18 +37,34 @@ const CRUD = () => {
     getAllAccommodations();
   }, []);
 
-  // when view is clicked from a specific listing/accommodation, it will show the details of the listing in the console log
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const query = searchQuery.toLowerCase().trim();
+    if (query === "") {
+      setSearchResults([]);
+      setNoResults(false);
+      return;
+    }
+    const filteredAccommodations = accommodations.filter((accommodation) =>
+      accommodation.accName.toLowerCase().includes(query)
+    );
+    setSearchResults(filteredAccommodations);
+    setNoResults(filteredAccommodations.length === 0);
+  };
+
   const handleViewClick = (accommodationId) => {
     const accommodation = accommodations.find(
       (item) => item.id === accommodationId
     );
     console.log("View clicked:", accommodation);
-    
     // Redirect to the page displaying the specific listing
     window.location.href = `/display-listing/${accommodationId}`;
   };
 
-  // when delete is clicked from a specific listing/accommodation, it will delete the listing (and its details) in the table and in the firebase
   const handleDeleteClick = async (accommodationId) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this listing?"
@@ -62,68 +80,104 @@ const CRUD = () => {
     }
   };
 
-  const handleUpdateClick = async(accommodationId)=>{
-    const currentUser=auth.currentUser;
-    const accommodationRef=doc(db, "accommodations", accommodationId);
+  const handleUpdateClick = async (accommodationId) => {
+    const currentUser = auth.currentUser;
+    const accommodationRef = doc(db, "accommodations", accommodationId);
     await updateDoc(accommodationRef, {
       editedBy: currentUser.uid,
-      progress:1,
+      progress: 1,
     });
     console.log("update clicked: ", accommodationId);
-    window.location.href="/page1";
-  }
+    window.location.href = "/page1";
+  };
 
   return (
     <>
       <div className="crud-wrapper container">
         <h2 className="directory-text">Directory</h2>
-        <div className="search-add">
-          <input type="text" placeholder="Search"></input>
-          <button className="search-btn button">
-            <a href="/">Search</a>
+        <form className="search-add" onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={handleSearchInputChange}
+          />
+          <button type="submit" className="search-btn button">
+            <a>Search</a>
           </button>
           <button className="add-btn button">
             <a href="/page1"> + Add New Listing</a>
           </button>
-        </div>
+        </form>
         <div className="crud-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {accommodations.map((accommodation) => (
-                <tr key={accommodation.id}>
-                  <td>{accommodation.accName}</td>
-                  <td>{accommodation.accAddress}</td>
-                  <td>
-                    <button
-                      onClick={() => handleViewClick(accommodation.id)}
-                      className="view-btn"
-                    >
-                      <a>View</a>
-                    </button>
-                    <button
-                      onClick={() => handleUpdateClick(accommodation.id)}
-                      className="edit-btn"
-                    >
-                      <a>Edit</a>
-                    </button>
-                    <button
-                      onClick={() => handleDeleteClick(accommodation.id)}
-                      className="delete-btn"
-                    >
-                      <a>Delete</a>
-                    </button>
-                  </td>
+          {noResults ? (
+            <p className="no-result-style">We couldn't find any listings that match your search.</p>
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {searchResults.length > 0
+                  ? searchResults.map((accommodation) => (
+                      <tr key={accommodation.id}>
+                        <td>{accommodation.accName}</td>
+                        <td className="address-cell">{accommodation.accAddress}</td>
+                        <td>
+                          <button
+                            onClick={() => handleViewClick(accommodation.id)}
+                            className="view-btn"
+                          >
+                            <a>View</a>
+                          </button>
+                          <button
+                            onClick={() => handleUpdateClick(accommodation.id)}
+                            className="edit-btn"
+                          >
+                            <a>Edit</a>
+                          </button>
+                          <button
+                            onClick={() => handleDeleteClick(accommodation.id)}
+                            className="delete-btn"
+                          >
+                            <a>Delete</a>
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  : accommodations.map((accommodation) => (
+                      <tr key={accommodation.id}>
+                        <td>{accommodation.accName}</td>
+                        <td className="address-cell">{accommodation.accAddress}</td>
+                        <td>
+                          <button
+                            onClick={() => handleViewClick(accommodation.id)}
+                            className="view-btn"
+                          >
+                            <a>View</a>
+                          </button>
+                          <button
+                            onClick={() => handleUpdateClick(accommodation.id)}
+                            className="edit-btn"
+                          >
+                            <a>Edit</a>
+                          </button>
+                          <button
+                            onClick={() => handleDeleteClick(accommodation.id)}
+                            className="delete-btn"
+                          >
+                            <a>Delete</a>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </>

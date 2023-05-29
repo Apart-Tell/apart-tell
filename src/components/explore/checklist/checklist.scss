@@ -1,0 +1,277 @@
+.main-checklist {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    hr {
+        /* Line 1 */
+
+        width: 160px;
+        height: 0.67px;
+
+        /* Loblolly */
+        border: 1px solid #BDCBCF;
+
+        /* Inside auto layout */
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }
+}
+
+.checklist-section {
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 25px;
+    gap: 10px;
+
+    width: 212px;
+    height: 808.7px;
+
+    /* Dirty White */
+    background: #FDFDFD;
+    border-radius: 10px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.one {
+    /* 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+width: 160px;
+height: 73.67px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+.rental-fee {
+    /* Rental fee (per room) */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 10px;
+
+    width: 160px;
+    height: 63px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.fee-boxes {
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 11px;
+
+    width: 160px;
+    height: 38px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.min {
+    width: 66px;
+    height: 38px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.max {
+    width: 66px;
+    height: 38px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.min, .max {
+
+    input {
+        width: 66px;
+        height: 19px;
+        left: 0px;
+        top: 0px;
+
+        /* Dirty White */
+        background: #FDFDFD;
+
+        /* Martinique */
+        border: 1px solid #313357;
+        border-radius: 5px;
+    }
+
+    label {
+        width: 21px;
+        height: 15px;
+        left: 20px;
+        top: 23px;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+
+        /* identical to box height */
+
+        /* Martinique */
+        color: #313357;
+    }
+}
+
+.two, .three {
+    /* 2 */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    gap: 10px;
+
+    width: 160px;
+    height: 86.67px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    h5 {
+        text-align: left;
+    }
+
+    .checklist {
+        /* checklist */
+
+        /* Auto layout */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 3px;
+
+        width: 106px;
+        height: 51px;
+
+
+        /* Inside auto layout */
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+
+        .checklist-child {
+            /* Auto layout */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 5px;
+
+            width: 200px;
+            height: 15px;
+
+            &:nth-child(1) {
+                flex: none;
+                order: 0;
+                flex-grow: 0;
+              }
+
+              &:nth-child(2) {
+                flex: none;
+                order: 1;
+                width: 106px;
+                flex-grow: 0;
+              }
+
+              &:nth-child(3) {
+                flex: none;
+                order: 2;
+                flex-grow: 0;
+              }
+
+              // Add more nth-child selectors for additional items in the array
+
+            input {
+                /* Rectangle 43 */
+
+                width: 10px;
+                height: 10px;
+
+                /* Dirty White */
+                background: #FDFDFD;
+
+                /* Martinique */
+                border: 1px solid #313357;
+                border-radius: 2px;
+
+                /* Inside auto layout */
+                flex: none;
+                order: 0;
+                flex-grow: 0;
+            }
+
+            label {
+                text-align: left;
+                width: 10em;
+                height: 15px;
+
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 15px;
+
+                /* identical to box height */
+
+                /* Martinique */
+                color: #313357;
+
+
+                /* Inside auto layout */
+                flex: none;
+                order: 1;
+                flex-grow: 0;
+            }
+        }
+    }
+}
+
+
+
+

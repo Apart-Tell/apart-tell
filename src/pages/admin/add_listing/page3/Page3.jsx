@@ -1,7 +1,7 @@
 import React from 'react';
 import "./page3.scss";
 import Header from '../../../../components/admin/header/Header';
-import Footer from '../../../../components/footer/Footer';
+import Footer from '../../../../components/admin/footer/Footer';
 import Pg3 from '../../../../components/admin/add_listing/page3/Pg3';
 
 const Page3 = () => {

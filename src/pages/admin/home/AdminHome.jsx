@@ -1,17 +1,18 @@
 import React from 'react';
 import "./adminhome.scss";
 import Search from '../../../components/search/Search';
-import Option from '../../../components/option/Option';
-import Footer from '../../../components/footer/Footer';
+import Footer from '../../../components/admin/footer/Footer';
 import Header from '../../../components/admin/header/Header';
-import Listings from "../../../components/listings/Listings";
+import Options from '../../../components/admin/options/Options';
+import Listings from '../../../components/admin/listings/Listings';
 
 const AdminHome = () => {
   return (
     <>
     <Header/>
+    {/*Must be updated for Search component (admin view)*/}
     <Search/>
-    <Option/>
+    <Options/>
     <Listings/>
     <Footer/>
     </>
