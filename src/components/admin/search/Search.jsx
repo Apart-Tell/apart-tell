@@ -1,6 +1,21 @@
 import React from 'react';
+import { useState } from 'react';
 
 export const Search = () => {
+  const [searchValue, setSearchValue] = useState('');
+
+   const handleSearchClick = () => {
+    if (searchValue.trim() !== '') {
+      window.location.href = "/results";
+    } else {
+      alert("Please enter a search query.");
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+
   return (
     <>
     <section>
@@ -12,11 +27,11 @@ export const Search = () => {
           <div className='search-box-container'>
             {/**enclose search bar inside div */}
             <div className='search-bar-container'>
-              <input type='text'></input><br></br>
+              <input type='text' value={searchValue} onChange={handleInputChange}></input><br></br>
             </div>
             {/**enclose search button inside div */}
             <div className='submit-btn-container'>
-              <button>Search</button>
+              <button type="button" onClick={handleSearchClick}>Search</button>
             </div>
           </div>
         </div>
