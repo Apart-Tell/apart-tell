@@ -1,4 +1,5 @@
 import React from 'react';
+import Container from '../../explore/container/Container';
 import { useEffect, useState } from 'react';
 import { collection,doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
@@ -27,7 +28,7 @@ const Explore = () => {
 
   return (
     <>
-    <p>Explore page (admin view) goes here!</p>
+    <Container/>
     </>
   )
 }
