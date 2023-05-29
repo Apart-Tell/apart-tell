@@ -63,7 +63,7 @@
     width: 100%;
     height: 3em;
     // background-color: rebeccapurple;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
     display: flex;
     align-items: center;
     .headline-text {
@@ -95,19 +95,15 @@
 }
 
 .listing-section {
-
     width: 100%;
-    height: 10em;
-
+    height: 25vh;
     background-color: var(--dirtywhite);
     box-shadow: 6px 7px 10px rgba(111, 144, 175, 0.2);
     border-radius: 10px;
     margin-bottom: 3%;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
     cursor: pointer;
      // Increase the scale of the image
     transition: transform 0.3s, filter 0.3s; // Add smooth transition effect
@@ -117,6 +113,8 @@
 
 
     .listing-img {
+        height: 100%;
+
         img {
             width: 100%;
             height: 100%;
@@ -125,8 +123,7 @@
     }
 
     .listing-left {
-        width: 50%;
-        // margin-left: 3%;
+        width: 52%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -178,27 +175,23 @@
         width: 10vw;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
-        padding: 4% 0% 1%;
-        // margin: 5% 0% 3%;
+        justify-content: space-between;
+        margin: 5% 0% 2%;
 
         .fee-section {
             display: flex;
             flex-direction: row;
             justify-content: center;
-            align-items: start;
-            gap: 1%;
+            align-items: center;
         }
 
         .view-button {
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            width: 100%;
-            height: 100%;
+            align-items: end;
             button {
-                width: 7em;
-                height: 3em;
+                width: 6vw;
+                height: 6vh;
                 background-color: var(--martinique);
                 color:var(--white);
                 border-radius: 5px;
@@ -210,7 +203,7 @@
                     color: var(--martinique);
                     border: 1px solid var(--martinique);
                 }
-
+        
             }
         }
     }
