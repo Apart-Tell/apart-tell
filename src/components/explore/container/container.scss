@@ -63,7 +63,7 @@
     width: 100%;
     height: 3em;
     // background-color: rebeccapurple;
-    margin-bottom: 1%;
+    margin-bottom: 5%;
     display: flex;
     align-items: center;
     .headline-text {
@@ -95,15 +95,19 @@
 }
 
 .listing-section {
+
     width: 100%;
-    height: 25vh;
+    height: 20vh;
+
     background-color: var(--dirtywhite);
     box-shadow: 6px 7px 10px rgba(111, 144, 175, 0.2);
     border-radius: 10px;
     margin-bottom: 3%;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
     cursor: pointer;
      // Increase the scale of the image
     transition: transform 0.3s, filter 0.3s; // Add smooth transition effect
@@ -123,7 +127,8 @@
     }
 
     .listing-left {
-        width: 52%;
+        width: 50%;
+        margin-left: 3%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -175,8 +180,9 @@
         width: 10vw;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        margin: 5% 0% 2%;
+        justify-content: space-evenly;
+        padding: 5% 0% 2%;
+        // margin: 5% 0% 3%;
 
         .fee-section {
             display: flex;
@@ -189,10 +195,12 @@
         .view-button {
             display: flex;
             justify-content: center;
-            align-items: end;
+            align-items: flex-end;
+            width: 100%;
+            height: 100%;
             button {
-                width: 6vw;
-                height: 6vh;
+                width: 7em;
+                height: 3em;
                 background-color: var(--martinique);
                 color:var(--white);
                 border-radius: 5px;
@@ -204,7 +212,7 @@
                     color: var(--martinique);
                     border: 1px solid var(--martinique);
                 }
-        
+
             }
         }
     }
