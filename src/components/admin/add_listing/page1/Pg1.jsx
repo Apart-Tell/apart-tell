@@ -192,13 +192,13 @@ const Pg1 = () => {
                 <option value="" className="select-type">
                   Select a type
                 </option>
-                <option value="apartment" className="select-type">
+                <option value="Apartment" className="select-type">
                   Apartment
                 </option>
-                <option value="boarding-house" className="select-type">
+                <option value="Boarding house" className="select-type">
                   Boarding House
                 </option>
-                <option value="dormitory" className="select-type">
+                <option value="Dormitory" className="select-type">
                   Dormitory
                 </option>
               </select>
