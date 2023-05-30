@@ -8,7 +8,7 @@ import './container.scss';
 const Container = () => {
     return (
       <>
-        <div className="explore-page container">
+        <div className="explore-page-container">
             <Search/>
             <div className="main-container">
                 <Checklist/>
