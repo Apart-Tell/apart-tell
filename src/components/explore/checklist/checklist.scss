@@ -6,9 +6,31 @@
     border-radius: 5px;
     padding: 5%;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    .filter-icon {
+      display: none; /* Initially hide the filter icon */
+      cursor: pointer;
+      text-align: center;
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .checklist-items {
+      display: block; /* Initially hide the checklist items */
+    }
+
+    @media (max-width: 1000px) {
+      /* Apply styles for screens up to 1000px width */
+      .filter-icon {
+        display: block; /* Show the filter icon */
+      }
+
+      .checklist-items {
+        display: none; /* Hide the checklist items */
+      }
+    }
 
     .checklist-item {
         // background-color: aqua;
@@ -35,6 +57,5 @@
             font-weight: bold;
             text-align: left;
         }
-
     }
 }
