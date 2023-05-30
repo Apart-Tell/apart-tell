@@ -203,10 +203,10 @@ const Pg2 = () => {
             <option value="" className="select-type">
               Select a type
             </option>
-            <option value="communal" className="select-type">
+            <option value="Communal" className="select-type">
               Communal/Shared
             </option>
-            <option value="private" className="select-type">
+            <option value="Private" className="select-type">
               Private
             </option>
           </select>
