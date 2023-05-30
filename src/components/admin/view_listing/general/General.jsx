@@ -46,7 +46,7 @@ const General = () => {
             <div className="main-photo-container">
               <img
                 className="main-photo"
-                src={uploadedPhotos[3]}
+                src={uploadedPhotos[0]}
                 alt={`photo-0`}
               />
             </div>
@@ -64,6 +64,7 @@ const General = () => {
         <br/>
 
         <h3>Amenities</h3>
+        <hr/>
         {accommodation.amenities && (
           <p>{accommodation.amenities && accommodation.amenities.join(", ")}</p>
         )}
@@ -71,6 +72,7 @@ const General = () => {
         <br/>
 
         <h3>Nearby</h3>
+        <hr/>
         {accommodation.accAddress && (
           <p>{accommodation.nearby && accommodation.nearby.join(", ")}</p>
         )}
@@ -78,6 +80,7 @@ const General = () => {
         <br/>
 
         <h3>Rules</h3>
+        <hr/>
         {accommodation.accRules && (
           <ul className="rules-list">
             {accommodation.accRules.split('\n').map((rule, index) => (
@@ -89,6 +92,7 @@ const General = () => {
         <br/>
 
         <h3>Number of occupants (per room)</h3>
+        <hr/>
         {accommodation.occupants && (
          <p>Only {accommodation.occupants} occupants are allowed per room.</p>
         )}
@@ -97,6 +101,7 @@ const General = () => {
           <>
           <br/>
           <h3>Room dimension</h3>
+          <hr/>
           {accommodation.length && accommodation.width && accommodation.metric && (
             <p>
               Each room is approximately {accommodation.length} x {accommodation.width} {accommodation.metric}
@@ -107,12 +112,14 @@ const General = () => {
 
         <br/>
         <h3>Comfort room type</h3>
+        <hr/>
         {accommodation.crType && (
           <p>This accommodation have comfort rooms of {accommodation.crType} type.</p>
         )}
         <br/>
 
         <h3>Rental fee (per room)</h3>
+        <hr/>
           {accommodation.roomFee && (
             <p>Each room has a rental fee of PHP {accommodation.roomFee}.</p>
           )}
@@ -121,6 +128,7 @@ const General = () => {
             <>
               <br/>
               <h3>Rental fee (per head)</h3>
+              <hr/>
               <p>Each room has a rental fee of PHP {accommodation.headFee} per head.</p>
             </>
           )}
@@ -137,6 +145,7 @@ const General = () => {
 
         <br/>
         <h3>Contact</h3>
+        <hr/>
         {accommodation.ownerName && (
             <p>Owner's name: {accommodation.ownerName}</p>   
         )}
@@ -163,6 +172,7 @@ const General = () => {
           <>
             <br/>
             <h3>Gallery</h3>
+            <hr/>
             <ul className="photo-list">
               {uploadedPhotos.map((photoUrl, index) => (
                 <li key={index}>

@@ -21,6 +21,7 @@ import AdminAbout from "./pages/admin/about/AdminAbout";
 import ViewListing from "./pages/admin/view_listing/ViewListing";
 import Search_Result_Page from "./pages/admin/search_result/Search_Result_Page";
 import Search_Result from "./pages/search_result/Search_Result";
+import Edit_Listing from "./pages/admin/edit_listing/Edit_Listing";
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/admin-about" element={<AdminAbout/>}/>
         <Route path="/user/account" element={<Account/>}/>
         <Route path="/user/directory" element={<Directory/>}/>
+        <Route path="/user/edit-listing" element={<Edit_Listing/>}></Route>
         <Route path="/page1" element={<Page1/>}/>
         <Route path="/page2" element={<Page2/>}/>
         <Route path="/page3" element={<Page3/>}/>
