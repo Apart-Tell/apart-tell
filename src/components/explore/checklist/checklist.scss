@@ -1,0 +1,40 @@
+.checklist-section {
+    height: 70vh;
+    width: 100%;
+    background-color: var(--dirtywhite);
+    border: 1px solid var(--loblolly);
+    border-radius: 5px;
+    padding: 5%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .checklist-item {
+        // background-color: aqua;
+        width: 90%;
+        height: 9%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+
+        hr {
+            width: 100%;
+            border: solid 1px var(--loblolly);
+        }
+
+        input, select {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid var(--wildblueyonder);
+        }
+
+        label {
+            font-size: small;
+            font-weight: bold;
+            text-align: left;
+        }
+
+    }
+}
