@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Checklist from '../checklist/Checklist';
-import Headline from '../headline/Headline';
 import Listing from '../listing/Listing';
 import './container.scss';
 
 const Container = () => {
-    return (
-      <>
-        <div className="explore-page container">
-            <div className="main-container">
-                <Checklist/>
-                <div className="headline-listing-section">
-                    <Listing/>
-                </div>
-            </div>
-        </div>
-      </>
-    );
-  }
+  const [containerClass, setContainerClass] = useState('main-container');
 
-  export default Container;
+  const updateContainerClass = (isDropdownVisible) => {
+    const newContainerClass = isDropdownVisible && window.innerWidth <= 1000 ? 'main-container filtered' : 'main-container';
+    setContainerClass(newContainerClass);
+  };
+
+  return (
+    <>
+      <div className="explore-page container">
+        <div className={containerClass}>
+          <Checklist updateContainerClass={updateContainerClass} />
+          <div className="headline-listing-section">
+            <Listing />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Container;

@@ -1,61 +1,71 @@
 .checklist-section {
-    height: 70vh;
-    width: 100%;
-    background-color: var(--dirtywhite);
-    border: 1px solid var(--loblolly);
-    border-radius: 5px;
-    padding: 5%;
 
-    .filter-icon {
-      display: none; /* Initially hide the filter icon */
-      cursor: pointer;
-      text-align: center;
+    position: relative;
 
-      img {
-        width: 24px;
-        height: 24px;
-      }
-    }
+        .filter-icon {
+            display: none;
+            cursor: pointer;
+            text-align: center;
 
-    .checklist-items {
-      display: block; /* Initially hide the checklist items */
-    }
-
-    @media (max-width: 1000px) {
-      /* Apply styles for screens up to 1000px width */
-      .filter-icon {
-        display: block; /* Show the filter icon */
-      }
-
-      .checklist-items {
-        display: none; /* Hide the checklist items */
-      }
-    }
-
-    .checklist-item {
-        // background-color: aqua;
-        width: 90%;
-        height: 9%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: start;
-
-        hr {
-            width: 100%;
-            border: solid 1px var(--loblolly);
+            img {
+                width: 2.5em;
+                height: 2.5em;
+            }
         }
 
-        input, select {
+        .checklist-container {
+            display: none;
+            height: 70vh;
             width: 100%;
+            background-color: var(--dirtywhite);
+            border: 1px solid var(--loblolly);
             border-radius: 5px;
-            border: 1px solid var(--wildblueyonder);
+            padding: 5%;
+
+        .checklist-item {
+            width: 90%;
+            height: 9%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: start;
+
+            hr {
+                width: 100%;
+                border: solid 1px var(--loblolly);
+            }
+
+            input, select {
+                width: 100%;
+                border-radius: 5px;
+                border: 1px solid var(--wildblueyonder);
+            }
+
+            label {
+                font-size: small;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+    }
+
+        @media (max-width: 1000px) {
+            .filter-icon {
+                display: block;
+            }
+
+            .checklist-container {
+                display: block;
+            }
+
+            .checklist-container.visible {
+                display: none;
+            }
         }
 
-        label {
-            font-size: small;
-            font-weight: bold;
-            text-align: left;
+        @media (min-width: 1000px) {
+        .checklist-container {
+            display: block;
         }
     }
 }

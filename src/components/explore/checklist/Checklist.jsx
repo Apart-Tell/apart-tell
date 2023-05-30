@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './checklist.scss';
 
-const Checklist = () => {
+const Checklist = ({ updateContainerClass }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownVisible((prevState) => !prevState);
+    updateContainerClass(isDropdownVisible);
   };
 
   return (
@@ -15,7 +16,11 @@ const Checklist = () => {
           <img src="src/assets/svg/filter.svg" alt="Filter Icon" />
         </div>
 
-        {isDropdownVisible && (
+        <div
+          className={`checklist-container ${
+            isDropdownVisible ? 'visible' : ''
+          }`}
+        >
           <div className="checklist-items">
             <div className="type-selection checklist-item">
               <label>Type</label>
@@ -37,7 +42,7 @@ const Checklist = () => {
               <input type="text" />
             </form>
           </div>
-        )}
+        </div>
       </div>
     </>
   );
