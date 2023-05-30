@@ -8,13 +8,14 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../../firebase';
 import Searchbar from '../searchbar/Searchbar';
+import Headline from '../headline/Headline';
 
 import './listing.scss';
 
 const Listing = () => {
     const [accommodations, setAccommodations] = useState([]);
     const [filteredAccommodations, setFilteredAccommodations] = useState([]);
-  
+
     const getAllAccommodations = async () => {
       const accommodationsCollectionRef = collection(db, 'accommodations');
       const q = query(
@@ -30,7 +31,7 @@ const Listing = () => {
       setAccommodations(accommodationsData);
       setFilteredAccommodations(accommodationsData);
     };
-  
+
     useEffect(() => {
       getAllAccommodations();
     }, []);
@@ -53,7 +54,7 @@ const Listing = () => {
             setFilteredAccommodations={handleFilteredAccommodations}
             accommodations={accommodations}
         />
-
+         <Headline/>
         {filteredAccommodations.length === 0 ? (
             <p>No results found. Please try a different search query.</p>
         ) : (
