@@ -1,5 +1,4 @@
 import React from 'react';
-import Search from '../searchbar/Searchbar';
 import Checklist from '../checklist/Checklist';
 import Headline from '../headline/Headline';
 import Listing from '../listing/Listing';
@@ -12,7 +11,6 @@ const Container = () => {
             <div className="main-container">
                 <Checklist/>
                 <div className="headline-listing-section">
-                    <Headline/>
                     <Listing/>
                 </div>
             </div>
