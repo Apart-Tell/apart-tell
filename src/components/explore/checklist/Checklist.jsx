@@ -118,7 +118,7 @@ const Checklist = ({ updateContainerClass }) => {
                 <h5>Additional fees</h5>
                 <div className="item">
                   <input type="checkbox" name="electricityFee" value="electricityFee"></input>
-                  <label htmlor="additional-fee">Electricity rate</label>
+                  <label htmlFor="additional-fee">Electricity rate</label>
                 </div>
                 <div className="item">
                   <input type="checkbox" name="waterFee" value="waterFee"></input>
