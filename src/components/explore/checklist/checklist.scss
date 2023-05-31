@@ -4,18 +4,11 @@
 
         .filter-icon {
             display: none;
-            cursor: pointer;
-            text-align: center;
-
-            img {
-                width: 2.5em;
-                height: 2.5em;
-            }
         }
 
         .checklist-container {
             display: none;
-            height: 70vh;
+            height: auto;
             width: 100%;
             background-color: var(--dirtywhite);
             border: 1px solid var(--loblolly);
@@ -23,22 +16,24 @@
             padding: 5%;
 
         .checklist-item {
-            width: 90%;
-            height: 9%;
+            width: 100%;
+            height: 100%;
+            margin: 5% 0 5% 0;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: start;
 
-            hr {
-                width: 100%;
-                border: solid 1px var(--loblolly);
-            }
 
             input, select {
+                margin-top: 0.2em;
                 width: 100%;
-                border-radius: 5px;
+                border-radius: 3px;
                 border: 1px solid var(--wildblueyonder);
+            }
+
+            h5 {
+                margin-bottom: 0.8em;
             }
 
             label {
@@ -46,12 +41,45 @@
                 font-weight: bold;
                 text-align: left;
             }
+
+            
+            hr {
+                width: 100%;
+                margin-top: 0.5em;
+                border: solid 1px rgb(224, 224, 224);
+            }
+
+            .item {
+                width: 100%;
+                height: auto;
+                margin-top: 0.3em;
+
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-items: end;
+    
+                input {
+                    height: 1em;
+                    width: 1em;
+                    margin-right: 0.5em;
+                }
+
+                label {
+                    font-weight: normal;
+                }
+            }
         }
     }
 
         @media (max-width: 1000px) {
             .filter-icon {
+                width: 3em;
+                height: 3em;
                 display: block;
+                cursor: pointer;
+                text-align: center;
+                margin-right: 10em;
             }
 
             .checklist-container {
