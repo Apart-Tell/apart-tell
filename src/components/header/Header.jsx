@@ -26,7 +26,7 @@ export default function Header() {
     <header>
       <nav className="navbar container">
         <div className="logo">
-          <a href="/"><img src="src/assets/brand/logo-transparent-small.png" alt="apart-tell logo" /></a>
+          <a href="/"><img src="/logo-transparent-small.png" alt="apart-tell logo" /></a>
         </div>
         <div className="nav-container">
           <button className="menu-button" onClick={toggleMenu}>

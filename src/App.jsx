@@ -22,6 +22,7 @@ import ViewListing from "./pages/admin/view_listing/ViewListing";
 import Search_Result_Page from "./pages/admin/search_result/Search_Result_Page";
 import Search_Result from "./pages/search_result/Search_Result";
 import Edit_Listing from "./pages/admin/edit_listing/Edit_Listing";
+import Display_Listing from "./pages/display_listing/Display_Listing";
 
 export default function App() {
   return (
@@ -43,6 +44,7 @@ export default function App() {
         <Route path="/page2" element={<Page2/>}/>
         <Route path="/page3" element={<Page3/>}/>
         <Route path="/page4" element={<Page4/>}/>
+        <Route path="/user-display-listing/:id" element={<Display_Listing/>}/>
         <Route path="/display-listing/:id" element={<ViewListing/>}/>
         <Route path="/results" element={<Search_Result_Page/>}></Route>
         <Route path="/search-results" element={<Search_Result/>}></Route>
