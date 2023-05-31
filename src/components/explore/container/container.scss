@@ -1,21 +1,21 @@
 .main-container {
     grid-column: 1 / -1;
-    grid-gap: 8%;
+    grid-gap: 6%;
     display: grid;
 
     &.filtered {
-      grid-template-columns: 30% auto;
+      grid-template-columns: 40% auto;
+      grid-gap: 10%;
 
         .checklist-container {
             display: block;
         }
     }
 
-    // align-items: flex-start;
-    // flex-direction: column;
+    /* Apply styles for screens up to 1000px width */
     @media (max-width: 1000px) {
-        /* Apply styles for screens up to 1000px width */
         grid-template-columns: 0 auto;
+        grid-gap: 0;
 
         .checklist-container {
             display: none;
@@ -23,7 +23,7 @@
     }
 
     @media (min-width: 1000px) {
-        grid-template-columns: 15% auto;
+        grid-template-columns: 17% auto;
     }
 }
 
