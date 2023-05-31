@@ -5,6 +5,7 @@ import Footer from "../../components/footer/Footer";
 import './home.scss';
 import Search from "../../components/search/Search";
 import Listings from "../../components/listings/Listings";
+
 // import AppRouter from "../../AppRouter";
 
 export default function Home(){

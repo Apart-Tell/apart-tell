@@ -45,7 +45,7 @@ const Listing = () => {
         );
         console.log("View clicked:", accommodation);
         // Redirect to the page displaying the specific listing
-        window.location.href = `/display-listing/${accommodationId}`;
+        window.location.href = `/user-display-listing/${accommodationId}`;
       };
 
   return (
