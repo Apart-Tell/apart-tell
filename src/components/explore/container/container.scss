@@ -1,11 +1,14 @@
 .main-container {
     grid-column: 1 / -1;
-    grid-gap: 5%;
+    grid-gap: 8%;
     display: grid;
-    grid-template-columns: 14% auto;
 
     &.filtered {
-      grid-template-columns: 50% auto;
+      grid-template-columns: 30% auto;
+
+        .checklist-container {
+            display: block;
+        }
     }
 
     // align-items: flex-start;
@@ -13,6 +16,14 @@
     @media (max-width: 1000px) {
         /* Apply styles for screens up to 1000px width */
         grid-template-columns: 0 auto;
+
+        .checklist-container {
+            display: none;
+        }
+    }
+
+    @media (min-width: 1000px) {
+        grid-template-columns: 15% auto;
     }
 }
 
