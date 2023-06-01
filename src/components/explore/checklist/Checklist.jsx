@@ -67,6 +67,14 @@ const Checklist = ({ updateContainerClass }) => {
               <div className="item">
                 <input 
                   type="checkbox" 
+                  name="laundryarea" 
+                  value="Laundry Area"
+                />
+                <label htmlFor="laundry">Laundry Area</label>
+              </div>
+              <div className="item">
+                <input 
+                  type="checkbox" 
                   name="kitchen" 
                   value="Kitchen"
                 />
