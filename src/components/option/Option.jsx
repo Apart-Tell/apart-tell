@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './option.scss';
 
 export default function Option() {
@@ -8,24 +9,24 @@ export default function Option() {
       <div className='option-row'>
 
         <div className='option-column'>
-          <a href='/'>
+          <Link to='/apartment'>
             <h4>Apartment</h4>
-            <img src='src/assets/images/apartment-img.png' alt='apartment-img'></img>
-          </a>
+            <img src='src/assets/images/apartment-img.png' alt='apartment-img' />
+          </Link>
         </div>
 
         <div className='option-column'>
-          <a href='/'>
+          <Link to='/boarding'>
             <h4>Boarding House</h4>
-            <img src='src/assets/images/bh-img.png' alt='bh-img'></img>
-          </a>
+            <img src='src/assets/images/bh-img.png' alt='bh-img' />
+          </Link>
         </div>
 
         <div className='option-column'>
-          <a href='/'>
+          <Link to='/dormitory'>
             <h4>Dormitory</h4>
-            <img src='src/assets/images/dorm-img.png' alt='dorm-img'></img>
-          </a>
+            <img src='src/assets/images/dorm-img.png' alt='dorm-img' />
+          </Link>
         </div>
 
       </div>

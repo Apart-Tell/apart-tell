@@ -12,7 +12,7 @@ import Headline from '../headline/Headline';
 
 import './listing.scss';
 
-const Listing = () => {
+const Listing = ({ isLoaded, type }) => {
     const [accommodations, setAccommodations] = useState([]);
     const [filteredAccommodations, setFilteredAccommodations] = useState([]);
 
@@ -50,11 +50,17 @@ const Listing = () => {
 
   return (
     <>
-        <Searchbar className="searchbar-component"
+        <Searchbar 
+            className="searchbar-component"
             setFilteredAccommodations={handleFilteredAccommodations}
             accommodations={accommodations}
         />
-         <Headline/>
+        
+        <Headline 
+            isLoaded={isLoaded} 
+            type={type}
+        />
+
         {filteredAccommodations.length === 0 ? (
             <p>No results found. Please try a different search query.</p>
         ) : (
