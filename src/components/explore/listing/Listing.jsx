@@ -108,8 +108,7 @@ const Listing = ({ isLoaded, type }) => {
                     </div>
                 </div>
             </div>
-        ))
-      )}
+        )))}
     </>
   );
 };

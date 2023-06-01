@@ -29,7 +29,7 @@ const Checklist = ({ updateContainerClass }) => {
                 <option>Select a type</option>
                 <option>Apartment</option>
                 <option>Boarding House</option>
-                <option>Apartment</option>
+                <option>Dormitory</option>
               </select>
               <hr />
             </div>
@@ -49,15 +49,27 @@ const Checklist = ({ updateContainerClass }) => {
             <form className="amenities checklist-item">
               <h5>Amenities</h5>
               <div className="item">
-                <input type="checkbox" name="wifi" value="Wifi"/>
+                <input 
+                  type="checkbox" 
+                  name="wifi" 
+                  value="Wifi"
+                />
                 <label htmlFor="wifi">Wifi</label>
               </div>
               <div className="item">
-                <input type="checkbox" name="aircon" value="Aircon"/>
+                <input 
+                  type="checkbox" 
+                  name="aircon" 
+                  value="Aircon"
+                />
                 <label htmlFor="aircon">Air Conditioning</label>
               </div>
               <div className="item">
-                <input type="checkbox" name="kitchen" value="Kitchen"/>
+                <input 
+                  type="checkbox" 
+                  name="kitchen" 
+                  value="Kitchen"
+                />
                 <label htmlFor="kitchen">Kitchen</label>
               </div>
               <hr />
@@ -66,11 +78,19 @@ const Checklist = ({ updateContainerClass }) => {
             <form className="cr-type checklist-item">
               <h5>Comfort room type</h5>
               <div className="item">
-                <input type="checkbox" name="private" value="Private"></input>
+                <input 
+                  type="checkbox" 
+                  name="private" 
+                  value="Private"
+                />
                 <label htmlFor="cr-type">Private</label>
               </div>
               <div className="item">
-                <input type="checkbox" name="communal" value="Communal"></input>
+                <input 
+                  type="checkbox" 
+                  name="communal" 
+                  value="Communal"
+                />
                 <label htmlFor="cr-type">Communal/Shared</label>
               </div>
               <hr />
@@ -78,30 +98,49 @@ const Checklist = ({ updateContainerClass }) => {
 
             <form className="occupants checklist-item">
               <h5>Occupants (per room)</h5>
-                <input type="number"></input>
+                <input type="number"/>
               <hr />
             </form>
 
             <form className="nearby checklist-item">
               <h5>Nearby</h5>
               <div className="item">
-                <input type="checkbox" name="Eatery" value="Eatery"></input>
+                <input 
+                  type="checkbox" 
+                  name="Eatery" 
+                  value="Eatery"
+                />
                 <label htmlFor="nearby">Eatery/restaurants</label>
               </div>
               <div className="item">
-                <input type="checkbox" name="Laundry" value="Laundry"></input>
+                <input 
+                  type="checkbox" 
+                  name="Laundry" 
+                  value="Laundry"
+                />
                 <label htmlFor="nearby">Laundry shops</label>
               </div>
               <div className="item">
-                <input type="checkbox" name="Retail" value="Retail"></input>
+                <input 
+                  type="checkbox" 
+                  name="Retail" 
+                  value="Retail"
+                />
                 <label htmlFor="nearby">Retail stores</label>
               </div>
               <div className="item">
-                <input type="checkbox" name="Water" value="Water"></input>
+                <input 
+                  type="checkbox" 
+                  name="Water" 
+                  value="Water"
+                />                
                 <label htmlFor="nearby">Water refilling stations</label>
               </div>
               <div className="item">
-                <input type="checkbox" name="Pharmacy" value="Pharmacy"></input>
+                <input 
+                  type="checkbox" 
+                  name="Pharmacy" 
+                  value="Pharmacy"/>
                 <label htmlFor="nearby">Pharmacy</label>
               </div>
               <hr />
@@ -110,15 +149,27 @@ const Checklist = ({ updateContainerClass }) => {
             <form className="additional-fees checklist-item">
               <h5>Additional fees</h5>
               <div className="item">
-                <input type="checkbox" name="electricityFee" value="electricityFee"></input>
+                <input 
+                  type="checkbox" 
+                  name="electricityFee" 
+                  value="electricityFee"
+                />
                 <label htmlFor="additional-fee">Electricity rate</label>
               </div>
               <div className="item">
-                <input type="checkbox" name="waterFee" value="waterFee"></input>
+                <input 
+                  type="checkbox" 
+                  name="waterFee" 
+                  value="waterFee"
+                />
                 <label htmlFor="additional-fee">Water rate</label>
               </div>
               <div className="item">
-                <input type="checkbox" name="depositFee" value="depositFee"></input>
+                <input 
+                  type="checkbox"
+                  name="depositFee" 
+                  value="depositFee"
+                />
                 <label htmlFor="additional-fee">Deposit</label>
               </div>
             </form>
