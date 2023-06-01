@@ -9,7 +9,6 @@ import {
 import { db } from '../../../firebase';
 import Searchbar from '../searchbar/Searchbar';
 import Headline from '../headline/Headline';
-
 import './listing.scss';
 
 const Listing = ({ isLoaded, type }) => {
@@ -55,12 +54,14 @@ const Listing = ({ isLoaded, type }) => {
     }
   }, [accommodations, searchQuery]);
 
-  const handleViewClick = (accommodationId) => {
-    const accommodation = accommodations.find((item) => item.id === accommodationId);
-    console.log('View clicked:', accommodation);
-    // Redirect to the page displaying the specific listing
-    window.location.href = `/user-display-listing/${accommodationId}`;
-  };
+    const handleViewClick = (accommodationId) => {
+        const accommodation = accommodations.find(
+            (item) => item.id === accommodationId
+        );
+        console.log("View clicked:", accommodation);
+        // Redirect to the page displaying the specific listing
+        window.location.href = `/user-display-listing/${accommodationId}`;
+    };
 
   return (
     <>
