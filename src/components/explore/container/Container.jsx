@@ -3,11 +3,14 @@ import Checklist from '../checklist/Checklist';
 import Listing from '../listing/Listing';
 import './container.scss';
 
-const Container = () => {
+const Container = ({ isLoaded, type }) => {
   const [containerClass, setContainerClass] = useState('main-container');
 
   const updateContainerClass = (isDropdownVisible) => {
-    const newContainerClass = isDropdownVisible && window.innerWidth <= 1000 ? 'main-container filtered' : 'main-container';
+    const newContainerClass =
+      isDropdownVisible && window.innerWidth <= 1000
+        ? 'main-container filtered'
+        : 'main-container';
     setContainerClass(newContainerClass);
   };
 
@@ -17,7 +20,7 @@ const Container = () => {
         <div className={containerClass}>
           <Checklist updateContainerClass={updateContainerClass} />
           <div className="headline-listing-section">
-            <Listing />
+            <Listing isLoaded={isLoaded} type={type}/>
           </div>
         </div>
       </div>
