@@ -9,7 +9,6 @@ import {
 import { db } from '../../../firebase';
 import Searchbar from '../searchbar/Searchbar';
 import Headline from '../headline/Headline';
-
 import './listing.scss';
 
 const Listing = ({ isLoaded, type }) => {
