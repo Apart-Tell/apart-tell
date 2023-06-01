@@ -49,7 +49,7 @@ export default function App() {
         <Route path="/page4" element={<Page4/>}/>
         <Route path="/user-display-listing/:id" element={<Display_Listing/>}/>
         <Route path="/display-listing/:id" element={<ViewListing/>}/>
-        <Route path="/results" element={<Search_Result_Page/>}></Route>
+        <Route path="/admin-search-results" element={<Search_Result_Page/>}></Route>
         <Route path="/search-results" element={<Search_Result/>}></Route>
         <Route path="/apartment" element={<Apartment/>}></Route>
         <Route path="/boarding" element={<Boarding/>}></Route>

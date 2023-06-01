@@ -6,7 +6,8 @@ export const Search = () => {
 
    const handleSearchClick = () => {
     if (searchValue.trim() !== '') {
-      window.location.href = "/results";
+      const encodedQuery = encodeURIComponent(searchValue);
+      window.location.href = `/admin-search-results?q=${encodedQuery}`;
     } else {
       alert("Please enter a search query.");
     }
