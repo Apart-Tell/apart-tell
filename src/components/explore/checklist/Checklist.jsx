@@ -9,15 +9,6 @@ const Checklist = ({ updateContainerClass }) => {
     updateContainerClass(isDropdownVisible);
   };
 
-  const handleFilterChange = (event) => {
-    const { name, value, checked } = event.target;
-    setFilters((prevState) => ({
-      ...prevState,
-      [name]: checked ? value : null,
-    }));
-    onFilterChange(filters);
-  };
-
   return (
     <>
       <div className="checklist-section">
@@ -56,15 +47,15 @@ const Checklist = ({ updateContainerClass }) => {
               <form className="amenities checklist-item">
                 <h5>Amenities</h5>
                 <div className="item">
-                  <input type="checkbox" name="wifi" value="Wifi" onChange={handleFilterChange} />
+                  <input type="checkbox" name="wifi" value="Wifi"/>
                   <label htmlFor="wifi">Wifi</label>
                 </div>
                 <div className="item">
-                  <input type="checkbox" name="aircon" value="Aircon" onChange={handleFilterChange} />
+                  <input type="checkbox" name="aircon" value="Aircon"/>
                   <label htmlFor="aircon">Air Conditioning</label>
                 </div>
                 <div className="item">
-                  <input type="checkbox" name="kitchen" value="Kitchen" onChange={handleFilterChange} />
+                  <input type="checkbox" name="kitchen" value="Kitchen"/>
                   <label htmlFor="kitchen">Kitchen</label>
                 </div>
                 <hr />
