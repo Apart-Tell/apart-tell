@@ -23,7 +23,7 @@ const Checklist = ({ updateContainerClass }) => {
         >
           
           <div className="checklist-items">
-            <div className="type-selection checklist-item">
+            <form className="type-selection checklist-item">
               <h5>Type</h5>
               <select>
                 <option>Select a type</option>
@@ -32,7 +32,7 @@ const Checklist = ({ updateContainerClass }) => {
                 <option>Dormitory</option>
               </select>
               <hr />
-            </div>
+            </form>
             
             <form className="rental-fee-room checklist-item">
               <h5>Rental Fee (per room)</h5>
