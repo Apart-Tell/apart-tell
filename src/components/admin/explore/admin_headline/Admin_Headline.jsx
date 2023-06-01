@@ -1,7 +1,7 @@
 import React from 'react';
-import './headline.scss';
+import "./admin_headline.scss";
 
-const Headline = ({ isLoaded, type }) => {
+const Admin_Headline = ({ isLoaded, type }) => {
 
     let headlineText = '';
 
@@ -36,4 +36,4 @@ const Headline = ({ isLoaded, type }) => {
 
 }
 
-export default Headline;
+export default Admin_Headline;

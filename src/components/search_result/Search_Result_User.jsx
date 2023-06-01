@@ -1,9 +1,10 @@
 import React from 'react';
+import Container from '../explore/container/Container';
 
 const Search_Result_User = () => {
   return (
     <>
-    <p>Search result (user view) goes here!</p>
+    <Container/>
     </>
   )
 }
