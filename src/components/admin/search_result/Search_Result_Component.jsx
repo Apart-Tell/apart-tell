@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Admin_Container from '../explore/admin_container/Admin_Container';
 
 const Search_Result_Component = () => {
   return (
     <>
-    <p>Search result goes here!</p>
+    <Admin_Container/>
     </>
   )
 }
