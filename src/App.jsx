@@ -23,6 +23,9 @@ import Search_Result_Page from "./pages/admin/search_result/Search_Result_Page";
 import Search_Result from "./pages/search_result/Search_Result";
 import Edit_Listing from "./pages/admin/edit_listing/Edit_Listing";
 import Display_Listing from "./pages/display_listing/Display_Listing";
+import Apartment from "./pages/apartment/Apartment";
+import Boarding from "./pages/boarding/Boarding";
+import Dormitory from "./pages/dormitory/Dormitory";
 
 export default function App() {
   return (
@@ -48,6 +51,9 @@ export default function App() {
         <Route path="/display-listing/:id" element={<ViewListing/>}/>
         <Route path="/results" element={<Search_Result_Page/>}></Route>
         <Route path="/search-results" element={<Search_Result/>}></Route>
+        <Route path="/apartment" element={<Apartment/>}></Route>
+        <Route path="/boarding" element={<Boarding/>}></Route>
+        <Route path="/dormitory" element={<Dormitory/>}></Route>
       </Routes>
     </Router>
   </div>
