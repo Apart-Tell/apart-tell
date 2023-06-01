@@ -35,18 +35,19 @@ const Listing = ({ isLoaded, type }) => {
     useEffect(() => {
       getAllAccommodations();
     }, []);
+    
     const handleFilteredAccommodations = (filteredAccommodations) => {
         setFilteredAccommodations(filteredAccommodations);
       };
 
-      const handleViewClick = (accommodationId) => {
-        const accommodation = accommodations.find(
-          (item) => item.id === accommodationId
-        );
-        console.log("View clicked:", accommodation);
-        // Redirect to the page displaying the specific listing
-        window.location.href = `/user-display-listing/${accommodationId}`;
-      };
+    const handleViewClick = (accommodationId) => {
+    const accommodation = accommodations.find(
+        (item) => item.id === accommodationId
+    );
+    console.log("View clicked:", accommodation);
+    // Redirect to the page displaying the specific listing
+    window.location.href = `/user-display-listing/${accommodationId}`;
+    };
 
   return (
     <>

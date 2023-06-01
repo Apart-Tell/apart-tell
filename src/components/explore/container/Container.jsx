@@ -18,9 +18,14 @@ const Container = ({ isLoaded, type }) => {
     <>
       <div className="explore-page container">
         <div className={containerClass}>
-          <Checklist updateContainerClass={updateContainerClass} />
+          <Checklist 
+            updateContainerClass={updateContainerClass} 
+          />
           <div className="headline-listing-section">
-            <Listing isLoaded={isLoaded} type={type}/>
+            <Listing 
+              isLoaded={isLoaded} 
+              type={type}
+            />
           </div>
         </div>
       </div>
