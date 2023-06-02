@@ -76,6 +76,7 @@
                 height: 100%;
                 display: flex;
                 align-items: center;
+                margin-right: 10px;
 
                 h6 {
                     text-align: left;
@@ -107,6 +108,7 @@
                 background-color: var(--martinique);
                 color:var(--white);
                 border-radius: 5px;
+                font-weight: bold;
                 border: none;
                 cursor: pointer;
                 transition: transform 0.3s, filter 0.3s; // Add smooth transition effect

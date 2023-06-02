@@ -29,7 +29,7 @@
   
     .main-photo-container {
       margin-top: 1rem;
-      width: 100%; /* Adjust the width as needed */
+      max-width: 100%; /* Adjust the width as needed */
       height: 400px; /* Adjust the height as needed */
       overflow: hidden;
     }
@@ -37,7 +37,7 @@
     .main-photo {
       height: 100%; /* Set height to 100% */
       max-width: 100%; /* Add max-width to ensure it doesn't exceed the container */
-      object-fit:cover; /* Use contain to fit the image without cropping */
+      object-fit:contain;/* Use contain to fit the image without cropping */
       transition: transform 0.3s;
       border-radius: 5px;
     }
