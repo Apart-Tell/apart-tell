@@ -16,6 +16,13 @@ const Register = () => {
 
   const signUp = (e) => {
     e.preventDefault();
+    
+    // Check if any of the required fields are empty
+    if (!firstname || !lastname || !username || !email || !password) {
+      alert("Please fill in all the required information.");
+      return;
+    }
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const docRef = doc(db, "users", userCredential.user.uid);
@@ -58,7 +65,6 @@ const Register = () => {
   const toggleConfirmationPasswordVisibility = () => {
     setShowConfirmationPassword(!showConfirmationPassword);
   };
-
 
   return (
     <>

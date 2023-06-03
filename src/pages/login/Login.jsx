@@ -13,9 +13,16 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const login = (e) => {
     e.preventDefault();
+    
+    if (!email || !password) {
+      setErrorMessage("Please fill in the fields");
+      return;
+    }
+    
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
@@ -98,8 +105,9 @@ function Login() {
                 />
                 <PasswordVisibilityToggle onToggle={toggleConfirmationPasswordVisibility}/>
               </div>
-              
             </div>
+            
+            {errorMessage && <p>{errorMessage}</p>}
 
             <div className="login-button">
               <button type="submit">Log In</button>
