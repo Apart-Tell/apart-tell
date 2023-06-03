@@ -3,22 +3,8 @@ import './checklist.scss';
 
 const Checklist = ({ updateContainerClass, updateFilters }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [checkboxValues, setCheckboxValues] = useState({
-    wifi: false,
-    aircon: false,
-    laundryarea: false,
-    kitchen: false,
-    privateCR: false,
-    communalCR: false,
-    eatery: false,
-    laundry: false,
-    retail: false,
-    water: false,
-    pharmacy: false,
-    electricityFee: false,
-    waterFee: false,
-    depositFee: false
-  });
+  
+  const [selectedOption, setSelectedOption] = useState('Select a type');
 
   const [rentalFeeRoomInput, setRentalFeeRoomInput] = useState({
     rentalFeeRoom: 0
@@ -28,7 +14,35 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
     rentalFeeHead: 0
   });
 
-  const [selectedOption, setSelectedOption] = useState('Select a type');
+  const [amenityValues, setAmenityValues] = useState({
+    Wifi: false,
+    "Air Conditioning": false,
+    "Laundry Area": false,
+    Kitchen: false
+  });
+
+  const [crTypeValues, setCRTypeValues] = useState({
+    Private: false,
+    Communal: false
+  });
+
+  const [numOfOccupantsInput, setNumOfOccupantsInput] = useState({
+    occupants: 0
+  });
+
+  const [nearbyValues, setNearbyValues] = useState({
+    Eatery: false,
+    "Laundry Shop": false,
+    "Retail Shop": false,
+    "Water Refill Station": false,
+    Pharmacy: false
+  })
+
+  const [additionalValues, setAdditionalValues] = useState({
+    electricityFee: false,
+    waterFee: false,
+    depositFee: false
+  })
 
   const toggleDropdown = () => {
     setIsDropdownVisible((prevState) => !prevState);
@@ -40,16 +54,18 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
       selectedOption: selectedOption,
       rentalFeeRoom: rentalFeeRoomInput,
       rentalFeeHead: rentalFeeHeadInput,
-      checkboxes: checkboxValues,
+      amenities: amenityValues,
+      crType: crTypeValues,
+      occupants: numOfOccupantsInput,
+      nearby: nearbyValues,
+      additional: additionalValues
     });
-  }, [selectedOption, rentalFeeRoomInput, rentalFeeHeadInput, checkboxValues]);
+  }, [selectedOption, rentalFeeRoomInput, rentalFeeHeadInput, amenityValues, 
+      crTypeValues, numOfOccupantsInput, nearbyValues, additionalValues]);
 
-  const handleCheckboxChange = (e) => {
-    const { name, checked } = e.target;
-    setCheckboxValues((prevState) => ({
-      ...prevState,
-      [name]: checked
-    }));
+
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target.value);
   };
 
   const handleRentalFeeRoomInput = (e) => {
@@ -68,13 +84,45 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
     }));
   };
 
-  const handleSelectChange = (e) => {
-    setSelectedOption(e.target.value);
+  const handleAmenitiesChange = (e) => {
+    const { name, checked } = e.target;
+    setAmenityValues((prevState) => ({
+      ...prevState,
+      [name]: checked
+    }));
   };
 
-  console.log('Selected option:', selectedOption);
-  console.log('Rental fee (room):', rentalFeeRoomInput);
-  console.log('Rental fee (head):', rentalFeeHeadInput);
+  const handleCRTypeChange = (e) => {
+    const { name, checked } = e.target;
+    setCRTypeValues((prevState) => ({
+      ...prevState,
+      [name]: checked
+    }));
+  };
+
+  const handleOccupantsChange = (e) => {
+    const { name, value } = e.target;
+    setNumOfOccupantsInput((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleNearbyChange = (e) => {
+    const { name, checked } = e.target;
+    setNearbyValues((prevState) => ({
+      ...prevState,
+      [name]: checked
+    }));
+  };
+
+  const handleAdditionalFeesChange = (e) => {
+    const { name, checked } = e.target;
+    setAdditionalValues((prevState) => ({
+      ...prevState,
+      [name]: checked
+    }));
+  };
 
   return (
     <>
@@ -130,36 +178,36 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
               <div className="item">
                 <input
                   type="checkbox"
-                  name="wifi"
-                  checked={checkboxValues.wifi}
-                  onChange={handleCheckboxChange}
+                  name="Wifi"
+                  checked={amenityValues.Wifi}
+                  onChange={handleAmenitiesChange}
                 />
                 <label htmlFor="wifi">Wifi</label>
               </div>
               <div className="item">
                 <input
                   type="checkbox"
-                  name="aircon"
-                  checked={checkboxValues.aircon}
-                  onChange={handleCheckboxChange}
+                  name="Air Conditioning"
+                  checked={amenityValues['Air Conditioning']}
+                  onChange={handleAmenitiesChange}
                 />
                 <label htmlFor="aircon">Air Conditioning</label>
               </div>
               <div className="item">
                 <input
                   type="checkbox"
-                  name="laundryarea"
-                  checked={checkboxValues.laundryarea}
-                  onChange={handleCheckboxChange}
+                  name="Laundry Area"
+                  checked={amenityValues['Laundry Area']}
+                  onChange={handleAmenitiesChange}
                 />
                 <label htmlFor="laundry">Laundry Area</label>
               </div>
               <div className="item">
                 <input
                   type="checkbox"
-                  name="kitchen"
-                  checked={checkboxValues.kitchen}
-                  onChange={handleCheckboxChange}
+                  name="Kitchen"
+                  checked={amenityValues.Kitchen}
+                  onChange={handleAmenitiesChange}
                 />
                 <label htmlFor="kitchen">Kitchen</label>
               </div>
@@ -171,18 +219,18 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
               <div className="item">
                 <input
                   type="checkbox"
-                  name="privateCR"
-                  checked={checkboxValues.privateCR}
-                  onChange={handleCheckboxChange}
+                  name="Private"
+                  checked={crTypeValues.Private}
+                  onChange={handleCRTypeChange}
                 />
                 <label htmlFor="cr-type">Private</label>
               </div>
               <div className="item">
                 <input
                   type="checkbox"
-                  name="communalCR"
-                  checked={checkboxValues.communalCR}
-                  onChange={handleCheckboxChange}
+                  name="Communal"
+                  checked={crTypeValues.Communal}
+                  onChange={handleCRTypeChange}
                 />
                 <label htmlFor="cr-type">Communal/Shared</label>
               </div>
@@ -194,7 +242,8 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
               <input
                 type="number"
                 name="occupants"
-                value="occupants"
+                value={numOfOccupantsInput.occupants}
+                onChange={handleOccupantsChange}
               />
               <hr />
             </form>
@@ -204,44 +253,45 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
               <div className="item">
                 <input
                   type="checkbox"
-                  name="eatery"
-                  checked={checkboxValues.eatery}
+                  name="Eatery"
+                  checked={nearbyValues.Eatery}
+                  onChange={handleNearbyChange}
                 />
                 <label htmlFor="nearby">Eatery/restaurants</label>
               </div>
               <div className="item">
                 <input
                   type="checkbox"
-                  name="laundry"
-                  checked={checkboxValues.laundry}
-                  onChange={handleCheckboxChange}
+                  name="Laundry Shop"
+                  checked={nearbyValues['Laundry Shop']}
+                  onChange={handleNearbyChange}
                 />
                 <label htmlFor="nearby">Laundry shops</label>
               </div>
               <div className="item">
                 <input
                   type="checkbox"
-                  name="retail"
-                  checked={checkboxValues.retail}
-                  onChange={handleCheckboxChange}
+                  name="Retail Store"
+                  checked={nearbyValues.Retail}
+                  onChange={handleNearbyChange}
                 />
                 <label htmlFor="nearby">Retail stores</label>
               </div>
               <div className="item">
                 <input
                   type="checkbox"
-                  name="water"
-                  checked={checkboxValues.water}
-                  onChange={handleCheckboxChange}
+                  name="Water Refill Station"
+                  checked={nearbyValues.waterRefillStation}
+                  onChange={handleNearbyChange}
                 />
-                <label htmlFor="nearby">Water refilling stations</label>
+                <label htmlFor="nearby">Water refill stations</label>
               </div>
               <div className="item">
                 <input
                   type="checkbox"
                   name="pharmacy"
-                  checked={checkboxValues.pharmacy}
-                  onChange={handleCheckboxChange}
+                  checked={nearbyValues.pharmacy}
+                  onChange={handleNearbyChange}
                 />
                 <label htmlFor="nearby">Pharmacy</label>
               </div>
@@ -249,13 +299,13 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
             </form>
 
             <form className="additional-fees checklist-item">
-              <h5>Additional fees</h5>
+              <h5>Exclude additional fees</h5>
               <div className="item">
                 <input
                   type="checkbox"
                   name="electricityFee"
-                  checked={checkboxValues.electricityFee}
-                  onChange={handleCheckboxChange}
+                  checked={additionalValues.electricityFee}
+                  onChange={handleAdditionalFeesChange}
                 />
                 <label htmlFor="additional-fee">Electricity rate</label>
               </div>
@@ -263,8 +313,8 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
                 <input
                   type="checkbox"
                   name="waterFee"
-                  checked={checkboxValues.waterFee}
-                  onChange={handleCheckboxChange}
+                  checked={additionalValues.waterFee}
+                  onChange={handleAdditionalFeesChange}
                 />
                 <label htmlFor="additional-fee">Water rate</label>
               </div>
@@ -272,8 +322,8 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
                 <input
                   type="checkbox"
                   name="depositFee"
-                  checked={checkboxValues.depositFee}
-                  onChange={handleCheckboxChange}
+                  checked={additionalValues.depositFee}
+                  onChange={handleAdditionalFeesChange}
                 />
                 <label htmlFor="additional-fee">Deposit</label>
               </div>
