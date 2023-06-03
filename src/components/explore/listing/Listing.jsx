@@ -60,7 +60,7 @@ const Listing = ({ isLoaded, type, filterValues }) => {
   }, [accommodations, searchQuery]);
 
 
-  // Applies the filters based on the selected checkboxes,
+  // Applies the filters based on the checkbox selections, type,
   // and inputted numbers
   useEffect(() => {
     const applyFilters = () => {
@@ -110,7 +110,7 @@ const Listing = ({ isLoaded, type, filterValues }) => {
         });
       }
 
-      // Apply amenities filters
+      // Apply cr type filters
       const { crType } = filterValues || {};
       if (crType) {
         Object.entries(crType).forEach(([key, value]) => {
