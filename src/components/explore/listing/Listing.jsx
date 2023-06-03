@@ -32,6 +32,8 @@ const Listing = ({ isLoaded, type }) => {
     setFilteredAccommodations(accommodationsData);
   };
 
+  // Fetches the accommodations data during initial render
+  // using the getAllAccommodations() function
   useEffect(() => {
     getAllAccommodations();
   }, []);
@@ -43,6 +45,9 @@ const Listing = ({ isLoaded, type }) => {
     setSearchQuery(q);
   }, []);
 
+  // Triggered whenever accommodations or searchQuery changes
+  // It filters the accommodations based on the search query
+  // and updates the filteredAccommodations state variable
   useEffect(() => {
     if (searchQuery) {
       const filtered = accommodations.filter((accommodation) =>
