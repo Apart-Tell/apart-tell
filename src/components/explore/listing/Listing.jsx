@@ -11,7 +11,7 @@ import Searchbar from '../searchbar/Searchbar';
 import Headline from '../headline/Headline';
 import './listing.scss';
 
-const Listing = ({ isLoaded, type }) => {
+const Listing = ({ isLoaded, type, filterValues }) => {
   const [accommodations, setAccommodations] = useState([]);
   const [filteredAccommodations, setFilteredAccommodations] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -58,6 +58,67 @@ const Listing = ({ isLoaded, type }) => {
       setFilteredAccommodations(accommodations);
     }
   }, [accommodations, searchQuery]);
+
+
+  // Applies the filters based on the selected checkboxes,
+  // and inputted numbers
+  useEffect(() => {
+    const applyFilters = () => {
+      let updatedAccommodations = accommodations;
+
+      // Apply checkbox filters
+    const { checkboxes } = filterValues || {}; // Add null check here
+    if (checkboxes) {
+      Object.entries(checkboxes).forEach(([key, value]) => {
+        if (value) {
+          updatedAccommodations = updatedAccommodations.filter(
+            (accommodation) => accommodation[key] === value
+          );
+        }
+      });
+    }
+
+    // Apply fee (per room) filter
+    const { rentalFeeRoom } = filterValues || {}; // Add null check here
+    if (rentalFeeRoom) {
+      Object.entries(rentalFeeRoom).forEach(([key, value]) => {
+        if (parseInt(value) > 0) {
+          updatedAccommodations = updatedAccommodations.filter(
+            (accommodation) => parseInt(accommodation.roomFee) <= parseInt(value)
+          );
+        }
+        console.log("Key is: " + key);
+        console.log("Value is: " + value);
+      });
+    }
+
+    // Apply fee (per head) filter
+    const { rentalFeeHead } = filterValues || {}; // Add null check here
+    if (rentalFeeHead) {
+      Object.entries(rentalFeeHead).forEach(([key, value]) => {
+        if (parseInt(value) > 0) {
+          updatedAccommodations = updatedAccommodations.filter(
+            (accommodation) => parseInt(accommodation.headFee) <= parseInt(value)
+          );
+        }
+        console.log("Key is: " + key);
+        console.log("Value is: " + value);
+      });
+    }
+
+    // Apply accommodation type filter
+    const { selectedOption } = filterValues || {}; // Add null check here
+    if (selectedOption && selectedOption !== 'Select a type') {
+      updatedAccommodations = updatedAccommodations.filter(
+        (accommodation) => accommodation.accType === selectedOption
+      );
+    }
+      setFilteredAccommodations(updatedAccommodations);
+      console.log("Updated accommodations here: " + updatedAccommodations);
+    };
+
+    applyFilters();
+  }, [filterValues, accommodations]);
 
   const handleViewClick = (accommodationId) => {
       const accommodation = accommodations.find(

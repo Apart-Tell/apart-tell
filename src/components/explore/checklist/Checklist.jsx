@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './checklist.scss';
 
-const Checklist = ({ updateContainerClass }) => {
+const Checklist = ({ updateContainerClass, updateFilters }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [checkboxValues, setCheckboxValues] = useState({
     wifi: false,
@@ -19,17 +19,30 @@ const Checklist = ({ updateContainerClass }) => {
     waterFee: false,
     depositFee: false
   });
-  const [numberInputValues, setNumberInputValues] = useState({
-    rentalFeeRoom: 0,
-    rentalFeeHead: 0,
-    occupants: 0
+
+  const [rentalFeeRoomInput, setRentalFeeRoomInput] = useState({
+    rentalFeeRoom: 0
   });
+
+  const [rentalFeeHeadInput, setRentalFeeHeadInput] = useState({
+    rentalFeeHead: 0
+  });
+
   const [selectedOption, setSelectedOption] = useState('Select a type');
 
   const toggleDropdown = () => {
     setIsDropdownVisible((prevState) => !prevState);
     updateContainerClass(isDropdownVisible);
   };
+
+  useEffect(() => {
+    updateFilters({
+      selectedOption: selectedOption,
+      rentalFeeRoom: rentalFeeRoomInput,
+      rentalFeeHead: rentalFeeHeadInput,
+      checkboxes: checkboxValues,
+    });
+  }, [selectedOption, rentalFeeRoomInput, rentalFeeHeadInput, checkboxValues]);
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
@@ -39,9 +52,17 @@ const Checklist = ({ updateContainerClass }) => {
     }));
   };
 
-  const handleNumberInputChange = (e) => {
+  const handleRentalFeeRoomInput = (e) => {
     const { name, value } = e.target;
-    setNumberInputValues((prevState) => ({
+    setRentalFeeRoomInput((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleRentalFeeHeadInput = (e) => {
+    const { name, value } = e.target;
+    setRentalFeeHeadInput((prevState) => ({
       ...prevState,
       [name]: value
     }));
@@ -51,9 +72,9 @@ const Checklist = ({ updateContainerClass }) => {
     setSelectedOption(e.target.value);
   };
 
-  console.log('Checkbox values:', checkboxValues);
-  console.log('Number input values:', numberInputValues);
   console.log('Selected option:', selectedOption);
+  console.log('Rental fee (room):', rentalFeeRoomInput);
+  console.log('Rental fee (head):', rentalFeeHeadInput);
 
   return (
     <>
@@ -73,7 +94,7 @@ const Checklist = ({ updateContainerClass }) => {
               <select value={selectedOption} onChange={handleSelectChange}>
                 <option>Select a type</option>
                 <option>Apartment</option>
-                <option>Boarding House</option>
+                <option>Boarding house</option>
                 <option>Dormitory</option>
               </select>
               <hr />
@@ -84,8 +105,8 @@ const Checklist = ({ updateContainerClass }) => {
               <input
                 type="number"
                 name="rentalFeeRoom"
-                value={numberInputValues.rentalFeeRoom}
-                onChange={handleNumberInputChange}
+                value={rentalFeeRoomInput.rentalFeeRoom}
+                onChange={handleRentalFeeRoomInput}
               />
               <hr />
             </form>
@@ -95,8 +116,8 @@ const Checklist = ({ updateContainerClass }) => {
               <input
                 type="number"
                 name="rentalFeeHead"
-                value={numberInputValues.rentalFeeHead}
-                onChange={handleNumberInputChange}
+                value={rentalFeeHeadInput.rentalFeeHead}
+                onChange={handleRentalFeeHeadInput}
               />
               <hr />
             </form>
@@ -170,8 +191,7 @@ const Checklist = ({ updateContainerClass }) => {
               <input
                 type="number"
                 name="occupants"
-                value={numberInputValues.occupants}
-                onChange={handleNumberInputChange}
+                value="occupants"
               />
               <hr />
             </form>
@@ -183,7 +203,6 @@ const Checklist = ({ updateContainerClass }) => {
                   type="checkbox"
                   name="eatery"
                   checked={checkboxValues.eatery}
-                  onChange={handleCheckboxChange}
                 />
                 <label htmlFor="nearby">Eatery/restaurants</label>
               </div>
