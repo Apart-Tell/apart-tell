@@ -1,28 +1,32 @@
 import React from 'react';
 import './headline.scss';
 
-const Headline = ({ isLoaded, type }) => {
+const Headline = ({ isLoaded, type, accommodationsCount }) => {
 
     let headlineText = '';
 
     if (isLoaded) {
         switch (type) {
-        case "Apartment":
+          case "Apartment":
             headlineText = "Apartments";
             break;
-        case 'Boarding':
+          case 'Boarding':
             headlineText = 'Boarding House';
             break;
-        case 'Dormitory':
+          case 'Dormitory':
             headlineText = 'Dormitory';
             break;
-        default:
+          default:
             headlineText = 'Where to stay in Mintal?';
             break;
         }
-    } else {
-        headlineText = 'Where to stay in Mintal?';
-    }
+      } else if (accommodationsCount > 0) {
+        headlineText = `${accommodationsCount} accommodations found!`;
+      } else if (accommodationsCount = 0) {
+        headlineText = `No accommodations found!`;
+      } else {
+        headlineText = 'No accommodations found!';
+      }
 
     return (
         <>

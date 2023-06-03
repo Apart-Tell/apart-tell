@@ -15,6 +15,8 @@ const Listing = ({ isLoaded, type, filterValues }) => {
   const [accommodations, setAccommodations] = useState([]);
   const [filteredAccommodations, setFilteredAccommodations] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const accommodationsCount = filteredAccommodations.length;
 
   const getAllAccommodations = async () => {
     const accommodationsCollectionRef = collection(db, 'accommodations');
@@ -30,6 +32,7 @@ const Listing = ({ isLoaded, type, filterValues }) => {
     }));
     setAccommodations(accommodationsData);
     setFilteredAccommodations(accommodationsData);
+    setIsLoading(false); // Set isLoading to false once data is fetched
   };
 
   // Fetches the accommodations data during initial render
@@ -45,33 +48,25 @@ const Listing = ({ isLoaded, type, filterValues }) => {
     setSearchQuery(q);
   }, []);
 
-  // Triggered whenever accommodations or searchQuery changes
-  // It filters the accommodations based on the search query
+  // Triggered whenever accommodations, searchQuery, or filterValues change
+  // It filters the accommodations based on the search query and applied filters
   // and updates the filteredAccommodations state variable
   useEffect(() => {
+    let filtered = accommodations;
+
+    // Apply search query filter
     if (searchQuery) {
-      const filtered = accommodations.filter((accommodation) =>
+      filtered = filtered.filter((accommodation) =>
         accommodation.accName.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setFilteredAccommodations(filtered);
-    } else {
-      setFilteredAccommodations(accommodations);
     }
-  }, [accommodations, searchQuery]);
 
-
-  // Applies the filters based on the selected checkboxes,
-  // and inputted numbers
-  useEffect(() => {
-    const applyFilters = () => {
-      let updatedAccommodations = accommodations;
-
-      // Apply checkbox filters
-    const { checkboxes } = filterValues || {}; // Add null check here
+    // Apply checkbox filters
+    const { checkboxes } = filterValues || {};
     if (checkboxes) {
       Object.entries(checkboxes).forEach(([key, value]) => {
         if (value) {
-          updatedAccommodations = updatedAccommodations.filter(
+          filtered = filtered.filter(
             (accommodation) => accommodation[key] === value
           );
         }
@@ -79,54 +74,49 @@ const Listing = ({ isLoaded, type, filterValues }) => {
     }
 
     // Apply fee (per room) filter
-    const { rentalFeeRoom } = filterValues || {}; // Add null check here
+    const { rentalFeeRoom } = filterValues || {};
     if (rentalFeeRoom) {
       Object.entries(rentalFeeRoom).forEach(([key, value]) => {
         if (parseInt(value) > 0) {
-          updatedAccommodations = updatedAccommodations.filter(
-            (accommodation) => parseInt(accommodation.roomFee) <= parseInt(value)
+          filtered = filtered.filter(
+            (accommodation) =>
+              parseInt(accommodation.roomFee) <= parseInt(value)
           );
         }
-        console.log("Key is: " + key);
-        console.log("Value is: " + value);
       });
     }
 
     // Apply fee (per head) filter
-    const { rentalFeeHead } = filterValues || {}; // Add null check here
+    const { rentalFeeHead } = filterValues || {};
     if (rentalFeeHead) {
       Object.entries(rentalFeeHead).forEach(([key, value]) => {
         if (parseInt(value) > 0) {
-          updatedAccommodations = updatedAccommodations.filter(
-            (accommodation) => parseInt(accommodation.headFee) <= parseInt(value)
+          filtered = filtered.filter(
+            (accommodation) =>
+              parseInt(accommodation.headFee) <= parseInt(value)
           );
         }
-        console.log("Key is: " + key);
-        console.log("Value is: " + value);
       });
     }
 
     // Apply accommodation type filter
-    const { selectedOption } = filterValues || {}; // Add null check here
+    const { selectedOption } = filterValues || {};
     if (selectedOption && selectedOption !== 'Select a type') {
-      updatedAccommodations = updatedAccommodations.filter(
+      filtered = filtered.filter(
         (accommodation) => accommodation.accType === selectedOption
       );
     }
-      setFilteredAccommodations(updatedAccommodations);
-      console.log("Updated accommodations here: " + updatedAccommodations);
-    };
 
-    applyFilters();
-  }, [filterValues, accommodations]);
+    setFilteredAccommodations(filtered);
+  }, [accommodations, searchQuery, filterValues]);
 
   const handleViewClick = (accommodationId) => {
-      const accommodation = accommodations.find(
-          (item) => item.id === accommodationId
-      );
-      console.log("View clicked:", accommodation);
-      // Redirect to the page displaying the specific listing
-      window.location.href = `/user-display-listing/${accommodationId}`;
+    const accommodation = accommodations.find(
+      (item) => item.id === accommodationId
+    );
+    console.log("View clicked:", accommodation);
+    // Redirect to the page displaying the specific listing
+    window.location.href = `/user-display-listing/${accommodationId}`;
   };
 
   return (
@@ -137,56 +127,59 @@ const Listing = ({ isLoaded, type, filterValues }) => {
         accommodations={accommodations}
       />
 
-      <Headline isLoaded={isLoaded} type={type} />
+      <Headline isLoaded={isLoaded} type={type} accommodationsCount={accommodationsCount}/>
 
-      {/*Add codes such that while the page is loading after the user inputs their search query, "No results found. Please try a different search query." won't be displayed.*/}
-      {searchQuery && filteredAccommodations.length === 0 ? (
-        <p>No results found. Please try a different search query.</p>
-      ) : (
-        filteredAccommodations.map((accommodation) => (
-          <div key={accommodation.id} className="listing-section">
-            <div className="listing-img">
-              <img src={accommodation.photos[0]} alt={accommodation.name} />
-            </div>
-            <div className="listing-left">
-              <div className="type">
-                <h6>{accommodation.accType}</h6>
+      {!isLoading && (
+        <>
+          {searchQuery && filteredAccommodations.length === 0 ? (
+            <p>No results found. Please try a different search query.</p>
+          ) : (
+            filteredAccommodations.map((accommodation) => (
+              <div key={accommodation.id} className="listing-section">
+                <div className="listing-img">
+                  <img src={accommodation.photos[0]} alt={accommodation.name} />
+                </div>
+                <div className="listing-left">
+                  <div className="type">
+                    <h6>{accommodation.accType}</h6>
+                  </div>
+                  <div className="name-address">
+                    <div className="name">
+                      <h2>{accommodation.accName}</h2>
+                    </div>
+                    <div className="address">
+                      <h6>{accommodation.accAddress}</h6>
+                    </div>
+                  </div>
+                  <div className="more-info">
+                    <div className="no-of-occupants">
+                      <h6>{accommodation.occupants} persons per room</h6>
+                    </div>
+                    <div className="amenity">
+                      <h6>{accommodation.amenities.join(', ')}</h6>
+                    </div>
+                    <div className="establishment">
+                      <h6>{accommodation.nearby.join(', ')}</h6>
+                    </div>
+                  </div>
+                </div>
+                <div className="listing-right">
+                  <div className="fee-section">
+                    <div className="currency">
+                      <h6>PHP</h6>
+                    </div>
+                    <div className="fee">
+                      <h2>{accommodation.roomFee}</h2>
+                    </div>
+                  </div>
+                  <div className="view-button">
+                    <button onClick={() => handleViewClick(accommodation.id)}>View</button>
+                  </div>
+                </div>
               </div>
-              <div className="name-address">
-                <div className="name">
-                  <h2>{accommodation.accName}</h2>
-                </div>
-                <div className="address">
-                  <h6>{accommodation.accAddress}</h6>
-                </div>
-              </div>
-              <div className="more-info">
-                <div className="no-of-occupants">
-                  <h6>{accommodation.occupants} persons per room</h6>
-                </div>
-                <div className="amenity">
-                  <h6>{accommodation.amenities.join(', ')}</h6>
-                </div>
-                <div className="establishment">
-                  <h6>{accommodation.nearby.join(', ')}</h6>
-                </div>
-              </div>
-            </div>
-            <div className="listing-right">
-              <div className="fee-section">
-                <div className="currency">
-                  <h6>PHP</h6>
-                </div>
-                <div className="fee">
-                  <h2>{accommodation.roomFee}</h2>
-                </div>
-              </div>
-              <div className="view-button">
-                <button onClick={() => handleViewClick(accommodation.id)}>View</button>
-              </div>
-            </div>
-          </div>
-        ))
+            ))
+          )}
+        </>
       )}
     </>
   );

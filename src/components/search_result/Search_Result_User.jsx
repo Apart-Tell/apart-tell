@@ -9,4 +9,4 @@ const Search_Result_User = () => {
   )
 }
 
-export default Search_Result_User
+export default Search_Result_User;
