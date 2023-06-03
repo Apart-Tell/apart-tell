@@ -5,22 +5,16 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   
   const [selectedOption, setSelectedOption] = useState('Select a type');
-
   const [rentalFeeRoomInput, setRentalFeeRoomInput] = useState({rentalFeeRoom: 0});
-
   const [rentalFeeHeadInput, setRentalFeeHeadInput] = useState({rentalFeeHead: 0});
-
   const [amenityValues, setAmenityValues] = useState({
     Wifi: false,
     "Air Conditioning": false,
     "Laundry Area": false,
     Kitchen: false
   });
-
   const [crTypeValues, setCRTypeValues] = useState({Private: false, Communal: false});
-
   const [numOfOccupantsInput, setNumOfOccupantsInput] = useState({occupants: 0});
-
   const [nearbyValues, setNearbyValues] = useState({
     Eatery: false,
     "Laundry Shop": false,
@@ -28,7 +22,6 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
     "Water Refill Station": false,
     Pharmacy: false
   })
-
   const [additionalValues, setAdditionalValues] = useState({
     electricityFee: false,
     waterFee: false,
