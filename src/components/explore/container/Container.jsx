@@ -14,17 +14,29 @@ const Container = ({ isLoaded, type }) => {
     setContainerClass(newContainerClass);
   };
 
+  const [filterValues, setFilterValues] = useState({
+    checkboxes: {},
+    numberInputs: {},
+    selectedOption: 'Select a type',
+  });
+
+  const updateFilters = (newFilters) => {
+    setFilterValues(newFilters);
+  };
+
   return (
     <>
       <div className="explore-page container">
         <div className={containerClass}>
           <Checklist 
-            updateContainerClass={updateContainerClass} 
+            updateContainerClass={updateContainerClass}
+            updateFilters={updateFilters} 
           />
           <div className="headline-listing-section">
             <Listing 
               isLoaded={isLoaded} 
               type={type}
+              filterValues={filterValues}
             />
           </div>
         </div>
