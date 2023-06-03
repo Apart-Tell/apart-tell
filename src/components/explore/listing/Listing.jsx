@@ -66,55 +66,102 @@ const Listing = ({ isLoaded, type, filterValues }) => {
     const applyFilters = () => {
       let updatedAccommodations = accommodations;
 
-      // Apply checkbox filters
-    const { checkboxes } = filterValues || {}; // Add null check here
-    if (checkboxes) {
-      Object.entries(checkboxes).forEach(([key, value]) => {
-        if (value) {
-          updatedAccommodations = updatedAccommodations.filter(
-            (accommodation) => accommodation[key] === value
-          );
-        }
-      });
-    }
+      // Apply accommodation type filter
+      const { selectedOption } = filterValues || {}; // Null check here
+      if (selectedOption && selectedOption !== 'Select a type') {
+        updatedAccommodations = updatedAccommodations.filter(
+          (accommodation) => accommodation.accType === selectedOption
+        );
+      }
 
-    // Apply fee (per room) filter
-    const { rentalFeeRoom } = filterValues || {}; // Add null check here
-    if (rentalFeeRoom) {
-      Object.entries(rentalFeeRoom).forEach(([key, value]) => {
-        if (parseInt(value) > 0) {
-          updatedAccommodations = updatedAccommodations.filter(
-            (accommodation) => parseInt(accommodation.roomFee) <= parseInt(value)
-          );
-        }
-        console.log("Key is: " + key);
-        console.log("Value is: " + value);
-      });
-    }
+      // Apply fee (per room) filter
+      const { rentalFeeRoom } = filterValues || {};
+      if (rentalFeeRoom) {
+        Object.entries(rentalFeeRoom).forEach(([key, value]) => {
+          if (parseInt(value) > 0) {
+            updatedAccommodations = updatedAccommodations.filter(
+              (accommodation) => parseInt(accommodation.roomFee) <= parseInt(value)
+            );
+          }
+        });
+      }
 
-    // Apply fee (per head) filter
-    const { rentalFeeHead } = filterValues || {}; // Add null check here
-    if (rentalFeeHead) {
-      Object.entries(rentalFeeHead).forEach(([key, value]) => {
-        if (parseInt(value) > 0) {
-          updatedAccommodations = updatedAccommodations.filter(
-            (accommodation) => parseInt(accommodation.headFee) <= parseInt(value)
-          );
-        }
-        console.log("Key is: " + key);
-        console.log("Value is: " + value);
-      });
-    }
+      // Apply fee (per head) filter
+      const { rentalFeeHead } = filterValues || {};
+      if (rentalFeeHead) {
+        Object.entries(rentalFeeHead).forEach(([key, value]) => {
+          if (parseInt(value) > 0) {
+            updatedAccommodations = updatedAccommodations.filter(
+              (accommodation) => parseInt(accommodation.headFee) <= parseInt(value)
+            );
+          }
+        });
+      }
 
-    // Apply accommodation type filter
-    const { selectedOption } = filterValues || {}; // Add null check here
-    if (selectedOption && selectedOption !== 'Select a type') {
-      updatedAccommodations = updatedAccommodations.filter(
-        (accommodation) => accommodation.accType === selectedOption
-      );
-    }
+      // Apply amenities filters
+      const { amenities } = filterValues || {};
+      if (amenities) {
+        Object.entries(amenities).forEach(([key, value]) => {
+          if (value) {
+            updatedAccommodations = updatedAccommodations.filter(
+              (accommodation) => accommodation.amenities.includes(key)
+            );
+          }
+        });
+      }
+
+      // Apply amenities filters
+      const { crType } = filterValues || {};
+      if (crType) {
+        Object.entries(crType).forEach(([key, value]) => {
+          if (value) {
+            updatedAccommodations = updatedAccommodations.filter(
+              (accommodation) => accommodation.crType === key
+            );
+          }
+        });
+      }
+
+      // Apply num of occupants filter
+      const { occupants } = filterValues || {};
+      if (occupants) {
+        Object.entries(occupants).forEach(([key, value]) => {
+          if (parseInt(value) > 0) {
+            updatedAccommodations = updatedAccommodations.filter(
+              (accommodation) => parseInt(accommodation.occupants) == parseInt(value)
+            );
+          }
+        });
+      }
+
+      // Apply nearby filters
+      const { nearby } = filterValues || {};
+      if (nearby) {
+        Object.entries(nearby).forEach(([key, value]) => {
+          if (value) {
+            updatedAccommodations = updatedAccommodations.filter(
+              (accommodation) => accommodation.nearby.includes(key)
+            );
+          }
+        });
+      }
+
+      // Apply additional fee filters
+      const { additional } = filterValues || {};
+      if (additional) {
+        updatedAccommodations = updatedAccommodations.filter((accommodation) => {
+          if (
+            (accommodation.depositFee === null || accommodation.depositFee === '') ||
+            (accommodation.electricityFee === null || accommodation.electricityFee === '') ||
+            (accommodation.waterFee === null || accommodation.waterFee === '')
+          ) {
+            return true;
+          }
+          return false;
+        });
+      }
+
       setFilteredAccommodations(updatedAccommodations);
-      console.log("Updated accommodations here: " + updatedAccommodations);
     };
 
     applyFilters();
