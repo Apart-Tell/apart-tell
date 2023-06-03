@@ -6,13 +6,9 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
   
   const [selectedOption, setSelectedOption] = useState('Select a type');
 
-  const [rentalFeeRoomInput, setRentalFeeRoomInput] = useState({
-    rentalFeeRoom: 0
-  });
+  const [rentalFeeRoomInput, setRentalFeeRoomInput] = useState({rentalFeeRoom: 0});
 
-  const [rentalFeeHeadInput, setRentalFeeHeadInput] = useState({
-    rentalFeeHead: 0
-  });
+  const [rentalFeeHeadInput, setRentalFeeHeadInput] = useState({rentalFeeHead: 0});
 
   const [amenityValues, setAmenityValues] = useState({
     Wifi: false,
@@ -21,14 +17,9 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
     Kitchen: false
   });
 
-  const [crTypeValues, setCRTypeValues] = useState({
-    Private: false,
-    Communal: false
-  });
+  const [crTypeValues, setCRTypeValues] = useState({Private: false, Communal: false});
 
-  const [numOfOccupantsInput, setNumOfOccupantsInput] = useState({
-    occupants: 0
-  });
+  const [numOfOccupantsInput, setNumOfOccupantsInput] = useState({occupants: 0});
 
   const [nearbyValues, setNearbyValues] = useState({
     Eatery: false,
@@ -64,9 +55,7 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
       crTypeValues, numOfOccupantsInput, nearbyValues, additionalValues]);
 
 
-  const handleSelectChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
+  const handleSelectChange = (e) => {setSelectedOption(e.target.value);};
 
   const handleRentalFeeRoomInput = (e) => {
     const { name, value } = e.target;
