@@ -15,6 +15,7 @@ const Listing = ({ isLoaded, type, filterValues }) => {
   const [accommodations, setAccommodations] = useState([]);
   const [filteredAccommodations, setFilteredAccommodations] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const accommodationsCount = filteredAccommodations.length;
 
   const getAllAccommodations = async () => {
     const accommodationsCollectionRef = collection(db, 'accommodations');
@@ -65,6 +66,13 @@ const Listing = ({ isLoaded, type, filterValues }) => {
   useEffect(() => {
     const applyFilters = () => {
       let updatedAccommodations = accommodations;
+
+      // Apply search query filter
+      if (searchQuery) {
+        updatedAccommodations = updatedAccommodations.filter((accommodation) =>
+          accommodation.accName.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
 
       // Apply accommodation type filter
       const { selectedOption } = filterValues || {}; // Null check here
@@ -165,7 +173,7 @@ const Listing = ({ isLoaded, type, filterValues }) => {
     };
 
     applyFilters();
-  }, [filterValues, accommodations]);
+  }, [filterValues, accommodations, searchQuery]);
 
   const handleViewClick = (accommodationId) => {
       const accommodation = accommodations.find(
@@ -184,7 +192,7 @@ const Listing = ({ isLoaded, type, filterValues }) => {
         accommodations={accommodations}
       />
 
-      <Headline isLoaded={isLoaded} type={type} />
+      <Headline isLoaded={isLoaded} type={type} accommodationsCount={accommodationsCount}/>
 
       {/*Add codes such that while the page is loading after the user inputs their search query, "No results found. Please try a different search query." won't be displayed.*/}
       {searchQuery && filteredAccommodations.length === 0 ? (
