@@ -66,6 +66,16 @@ const Register = () => {
     setShowConfirmationPassword(!showConfirmationPassword);
   };
 
+  const handleFirstNameChange = (e) => {
+    const value = e.target.value.replace(/[^a-zA-Z]/g, "");
+    setFname(value);
+  };
+
+  const handleLastNameChange = (e) => {
+    const value = e.target.value.replace(/[^a-zA-Z]/g, "");
+    setLname(value);
+  };
+
   return (
     <>
       <div className="logo-reg">
@@ -86,14 +96,14 @@ const Register = () => {
                 placeholder="First Name"
                 value={firstname}
                 className="text-input"
-                onChange={(e) => setFname(e.target.value)}
+                onChange={handleFirstNameChange}
               ></input>
               <input
                 type="text"
                 placeholder="Last Name"
                 value={lastname}
                 className="text-input"
-                onChange={(e) => setLname(e.target.value)}
+                onChange={handleLastNameChange}
               ></input>
               <input
                 type="text"
