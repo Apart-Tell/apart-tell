@@ -21,7 +21,7 @@ const Headline = ({ isLoaded, type, accommodationsCount }) => {
             break;
         }
     } else if (accommodationsCount > 0) {
-        headlineText = `${accommodationsCount} accommodations found!`;
+        headlineText = `${accommodationsCount} accommodation${accommodationsCount > 1 ? 's': ''} found!`;
     } else {
         headlineText = 'No accommodations found!';
     }
