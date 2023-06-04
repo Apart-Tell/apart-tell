@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./crud.scss";
+import "./crud.scss"; // Importing the styling for the component
 import {
   collection,
   getDocs,
@@ -9,58 +9,58 @@ import {
   query,
   where,
   orderBy,
-} from "firebase/firestore";
-import { db, auth } from "../../../firebase";
+} from "firebase/firestore"; // Importing necessary Firestore functions for CRUD operations
+import { db, auth } from "../../../firebase"; // Importing the Firestore database and authentication
 
 const CRUD = () => {
-  const [accommodations, setAccommodations] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [noResults, setNoResults] = useState(false);
-  const currentUser = auth.currentUser;
+  const [accommodations, setAccommodations] = useState([]); // State variable for storing accommodations
+  const [searchQuery, setSearchQuery] = useState(""); // State variable for storing search query
+  const [searchResults, setSearchResults] = useState([]); // State variable for storing search results
+  const [noResults, setNoResults] = useState(false); // State variable for indicating if there are no search results
+  const currentUser = auth.currentUser; // Get the currently authenticated user
 
   const getAllAccommodations = async () => {
-    const accommodationsCollectionRef = collection(db, "accommodations");
+    const accommodationsCollectionRef = collection(db, "accommodations"); // Reference to the "accommodations" collection
     const q = query(
       accommodationsCollectionRef,
-      where("progress", "==", 4),
-      orderBy("editedAt", "desc")
+      where("progress", "==", 4), // Filtering the accommodations where progress is 4
+      orderBy("editedAt", "desc") // Sorting the accommodations by editedAt timestamp in descending order
     );
-    const accommodationsSnapshot = await getDocs(q);
+    const accommodationsSnapshot = await getDocs(q); // Get the documents from the query
     const accommodationsData = accommodationsSnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
-    }));
-    setAccommodations(accommodationsData);
+    })); // Transform the document data into an array of objects
+    setAccommodations(accommodationsData); // Set the accommodations state with the fetched data
   };
 
   useEffect(() => {
-    getAllAccommodations();
+    getAllAccommodations(); // Fetch all accommodations when the component mounts
   }, []);
 
   const handleSearchInputChange = (e) => {
-    setSearchQuery(e.target.value);
+    setSearchQuery(e.target.value); // Update the search query state on input change
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    const query = searchQuery.toLowerCase().trim();
+    const query = searchQuery.toLowerCase().trim(); // Normalize and trim the search query
     if (query === "") {
-      setSearchResults([]);
+      setSearchResults([]); // If the query is empty, reset the search results
       setNoResults(false);
       return;
     }
     const filteredAccommodations = accommodations.filter((accommodation) =>
       accommodation.accName.toLowerCase().includes(query)
-    );
-    setSearchResults(filteredAccommodations);
-    setNoResults(filteredAccommodations.length === 0);
+    ); // Filter the accommodations based on the search query
+    setSearchResults(filteredAccommodations); // Set the search results
+    setNoResults(filteredAccommodations.length === 0); // Set the noResults flag based on the search results
   };
 
   const handleViewClick = (accommodationId) => {
     const accommodation = accommodations.find(
       (item) => item.id === accommodationId
-    );
+    ); // Find the clicked accommodation by its ID
     console.log("View clicked:", accommodation);
     // Redirect to the page displaying the specific listing
     window.location.href = `/display-listing/${accommodationId}`;
@@ -69,12 +69,12 @@ const CRUD = () => {
   const handleDeleteClick = async (accommodationId) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this listing?"
-    );
+    ); // Prompt the user for confirmation
     if (confirmed) {
-      await deleteDoc(doc(db, "accommodations", accommodationId));
+      await deleteDoc(doc(db, "accommodations", accommodationId)); // Delete the accommodation document from Firestore
       setAccommodations((prevAccommodations) =>
         prevAccommodations.filter((item) => item.id !== accommodationId)
-      );
+      ); // Update the accommodations state by removing the deleted accommodation
       console.log("Delete clicked:", accommodationId);
     } else {
       console.log("cancelled");
@@ -82,17 +82,17 @@ const CRUD = () => {
   };
 
   const handleUpdateClick = async (accommodationId) => {
-    const accommodationRef = doc(db, "accommodations", accommodationId);
+    const accommodationRef = doc(db, "accommodations", accommodationId); // Reference to the accommodation document
     await updateDoc(accommodationRef, {
       editedBy: currentUser.uid,
       progress: 1,
-    });
+    }); // Update the document with the current user's ID and progress value
     console.log("update clicked: ", accommodationId);
-    window.location.href = "/page1";
+    window.location.href = "/page1"; // Redirect to page1
   };
 
   const isUserAuthorized = (accommodation) => {
-    return accommodation.editedBy === currentUser.uid;
+    return accommodation.editedBy === currentUser.uid; // Check if the current user is authorized to edit the accommodation
   };
 
   return (
@@ -128,79 +128,81 @@ const CRUD = () => {
                 </tr>
               </thead>
               <tbody>
-                {searchResults.length > 0
-                  ? searchResults.map((accommodation) => (
-                      <tr key={accommodation.id}>
-                        <td>{accommodation.accName}</td>
-                        <td className="address-cell">
-                          {accommodation.accAddress}
-                        </td>
-                        <td>
-                          <button
-                            onClick={() => handleViewClick(accommodation.id)}
-                            className="view-btn"
-                          >
-                            <a>View</a>
-                          </button>
-                          {isUserAuthorized(accommodation) && (
-                            <>
-                              <button
-                                onClick={() =>
-                                  handleUpdateClick(accommodation.id)
-                                }
-                                className="edit-btn"
-                              >
-                                <a>Edit</a>
-                              </button>
-                              <button
-                                onClick={() =>
-                                  handleDeleteClick(accommodation.id)
-                                }
-                                className="delete-btn"
-                              >
-                                <a>Delete</a>
-                              </button>
-                            </>
-                          )}
-                        </td>
-                      </tr>
-                    ))
-                  : accommodations.map((accommodation) => (
-                      <tr key={accommodation.id}>
-                        <td>{accommodation.accName}</td>
-                        <td className="address-cell">
-                          {accommodation.accAddress}
-                        </td>
-                        <td>
-                          <button
-                            onClick={() => handleViewClick(accommodation.id)}
-                            className="view-btn"
-                          >
-                            <a>View</a>
-                          </button>
-                          {isUserAuthorized(accommodation) && (
-                            <>
-                              <button
-                                onClick={() =>
-                                  handleUpdateClick(accommodation.id)
-                                }
-                                className="edit-btn"
-                              >
-                                <a>Edit</a>
-                              </button>
-                              <button
-                                onClick={() =>
-                                  handleDeleteClick(accommodation.id)
-                                }
-                                className="delete-btn"
-                              >
-                                <a>Delete</a>
-                              </button>
-                            </>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
+                {searchResults.length > 0 ? (
+                  searchResults.map((accommodation) => (
+                    <tr key={accommodation.id}>
+                      <td>{accommodation.accName}</td>
+                      <td className="address-cell">
+                        {accommodation.accAddress}
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => handleViewClick(accommodation.id)}
+                          className="view-btn"
+                        >
+                          <a>View</a>
+                        </button>
+                        {isUserAuthorized(accommodation) && (
+                          <>
+                            <button
+                              onClick={() =>
+                                handleUpdateClick(accommodation.id)
+                              }
+                              className="edit-btn"
+                            >
+                              <a>Edit</a>
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleDeleteClick(accommodation.id)
+                              }
+                              className="delete-btn"
+                            >
+                              <a>Delete</a>
+                            </button>
+                          </>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  accommodations.map((accommodation) => (
+                    <tr key={accommodation.id}>
+                      <td>{accommodation.accName}</td>
+                      <td className="address-cell">
+                        {accommodation.accAddress}
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => handleViewClick(accommodation.id)}
+                          className="view-btn"
+                        >
+                          <a>View</a>
+                        </button>
+                        {isUserAuthorized(accommodation) && (
+                          <>
+                            <button
+                              onClick={() =>
+                                handleUpdateClick(accommodation.id)
+                              }
+                              className="edit-btn"
+                            >
+                              <a>Edit</a>
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleDeleteClick(accommodation.id)
+                              }
+                              className="delete-btn"
+                            >
+                              <a>Delete</a>
+                            </button>
+                          </>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           )}
