@@ -8,14 +8,16 @@ import Listings from "../../components/listings/Listings";
 
 // import AppRouter from "../../AppRouter";
 
-export default function Home(){
+const Home = () =>{
     return(
-        <div>
-            <Header/>
-            <Search/>
-            <Option/>
-            <Listings/>
-            <Footer/>
-        </div>
+        <>
+        <Header/>
+        <Search/>
+        <Option/>
+        <Listings/>
+        <Footer/>
+        </>
     )
 }
+
+export default Home;

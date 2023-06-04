@@ -1,7 +1,7 @@
 import React from 'react';
 import './headline.scss';
 
-const Headline = ({ isLoaded, type }) => {
+const Headline = ({ isLoaded, type, accommodationsCount }) => {
 
     let headlineText = '';
 
@@ -20,10 +20,12 @@ const Headline = ({ isLoaded, type }) => {
             headlineText = 'Where to stay in Mintal?';
             break;
         }
+    } else if (accommodationsCount > 0) {
+        headlineText = `${accommodationsCount} accommodations found!`;
     } else {
-        headlineText = 'Where to stay in Mintal?';
+        headlineText = 'No accommodations found!';
     }
-
+    
     return (
         <>
             <div className="headline-section">
