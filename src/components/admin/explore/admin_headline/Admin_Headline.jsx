@@ -10,11 +10,11 @@ const Admin_Headline = ({ isLoaded, type, accommodationsCount }) => {
         case "Apartment":
             headlineText = "Apartments";
             break;
-        case 'Boarding':
-            headlineText = 'Boarding House';
+        case "Boarding House":
+            headlineText = "Boarding House";
             break;
-        case 'Dormitory':
-            headlineText = 'Dormitory';
+        case "Dormitory":
+            headlineText = "Dormitory";
             break;
         default:
             headlineText = 'Where to stay in Mintal?';
