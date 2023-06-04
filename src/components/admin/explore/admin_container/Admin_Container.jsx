@@ -1,8 +1,7 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import "./admin_container.scss";
+import React, { useState } from 'react';
 import Admin_Checklist from '../admin_checklist/Admin_Checklist';
 import Admin_Listing from '../admin_listing/Admin_Listing';
+import "./admin_container.scss";
 
 const Admin_Container = ({ isLoaded, type }) => {
   const [containerClass, setContainerClass] = useState('main-container');
@@ -29,13 +28,15 @@ const Admin_Container = ({ isLoaded, type }) => {
     <>
       <div className="explore-page container">
         <div className={containerClass}>
-          <Admin_Checklist 
+          <Admin_Checklist
             updateContainerClass={updateContainerClass}
-            updateFilters={updateFilters} 
+            updateFilters={updateFilters}
+            isLoaded={isLoaded}
+            type={type}
           />
           <div className="headline-listing-section">
-            <Admin_Listing 
-              isLoaded={isLoaded} 
+            <Admin_Listing
+              isLoaded={isLoaded}
               type={type}
               filterValues={filterValues}
             />
