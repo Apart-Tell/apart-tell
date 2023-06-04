@@ -28,13 +28,15 @@ const Container = ({ isLoaded, type }) => {
     <>
       <div className="explore-page container">
         <div className={containerClass}>
-          <Checklist 
+          <Checklist
             updateContainerClass={updateContainerClass}
-            updateFilters={updateFilters} 
+            updateFilters={updateFilters}
+            isLoaded={isLoaded}
+            type={type}
           />
           <div className="headline-listing-section">
-            <Listing 
-              isLoaded={isLoaded} 
+            <Listing
+              isLoaded={isLoaded}
               type={type}
               filterValues={filterValues}
             />

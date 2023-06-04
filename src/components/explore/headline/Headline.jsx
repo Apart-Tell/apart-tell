@@ -8,12 +8,12 @@ const Headline = ({ isLoaded, type }) => {
     if (isLoaded) {
         switch (type) {
         case "Apartment":
-            headlineText = "Apartments";
+            headlineText = "Apartment";
             break;
-        case 'Boarding':
-            headlineText = 'Boarding House';
+        case "Boarding house":
+            headlineText = "Boarding House";
             break;
-        case 'Dormitory':
+        case "Dormitory":
             headlineText = 'Dormitory';
             break;
         default:

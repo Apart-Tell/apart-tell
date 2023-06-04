@@ -8,7 +8,7 @@ export default function Boarding() {
   return (
     <>
       <Header />
-      <Container isLoaded={true} type="Boarding" />
+      <Container isLoaded={true} type="Boarding house" />
       <Footer />
     </>
   );
