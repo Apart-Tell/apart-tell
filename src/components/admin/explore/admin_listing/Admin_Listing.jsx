@@ -182,7 +182,7 @@ const Admin_Listing = ({ isLoaded, type, filterValues }) => {
       );
       console.log("View clicked:", accommodation);
       // Redirect to the page displaying the specific listing
-      window.location.href = `/user-display-listing/${accommodationId}`;
+      window.location.href = `/display-listing/${accommodationId}`;
   };
 
   return (
