@@ -10,7 +10,7 @@ const Admin_Headline = ({ isLoaded, type, accommodationsCount }) => {
         case "Apartment":
             headlineText = "Apartments";
             break;
-        case "Boarding House":
+        case "Boarding house":
             headlineText = "Boarding House";
             break;
         case "Dormitory":
