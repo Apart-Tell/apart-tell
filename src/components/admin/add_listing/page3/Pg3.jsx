@@ -13,7 +13,7 @@ import {
 import { db, auth } from "../../../../firebase";
 
 const Pg3 = () => {
-  // handles rental fee/room data
+  // State variables
   const [formData, setFormData] = useState({
     roomFee: "",
     headFee: "",
@@ -24,75 +24,113 @@ const Pg3 = () => {
     depositChecked: false,
     depositFee: "",
   });
-
   const [isFormValid, setIsFormValid] = useState(false);
-
-  const currentUser = auth.currentUser;
   const [existingDocId, setExistingDocId] = useState(null);
-
+  const currentUser = auth.currentUser;
+ 
   useEffect(() => {
+    // Define an asynchronous function to check if there is an existing document
     const checkExistingDoc = async () => {
+      // Create a query to fetch documents from the "accommodations" collection where the "progress" field is equal to 2, limited to 1 document
       const q = query(
         collection(db, "accommodations"),
         where("progress", "==", 2),
         limit(1)
       );
+      // Execute the query and retrieve the query snapshot
       const querySnapshot = await getDocs(q);
+      // Check if the query snapshot contains any documents
       if (querySnapshot.size > 0) {
+        // Get the ID of the first document in the query snapshot
         const firstDoc = querySnapshot.docs[0].id;
+        // Set the existingDocId state with the ID of the document
         setExistingDocId(firstDoc);
         console.log("exists");
       } else {
+        // If there are no documents in the query snapshot, set existingDocId state to null
         setExistingDocId(null);
         console.log("doesNot");
       }
     };
+    // Call the checkExistingDoc function
     checkExistingDoc();
+    // Log a message to indicate that the checking is being performed
     console.log("checking");
+    // Log the value of existingDocId
     console.log(existingDocId);
   });
+  
 
   const handleInputChange = (event) => {
+    // Destructure properties from the event target object
     const { id, type, value, checked } = event.target;
+    
+    // Update the form data state using the setFormData function
     setFormData((prevState) => ({
+      // Spread the previous form data state
       ...prevState,
+      // Update the specific field based on the event target's ID
       [id]: type === "checkbox" ? checked : value,
     }));
+    
+    // Output the ID and value of the input field to the console
     console.log(id, value);
-  };
+  };  
 
   // handles "prev" button
   const handlePrevClick = () => {
+    // Display a confirmation dialog box to the user
     const confirmation = window.confirm(
       "Are you sure you want to go back? Any unsaved changes on this page will be lost."
     );
-
+  
+    // If the user confirms, execute the following code
     if (confirmation) {
+      // Store the form data in the session storage as a JSON string
       sessionStorage.setItem("formData", JSON.stringify(formData));
+  
+      // Redirect the user to "/page2"
       window.location.href = "/page2";
     }
   };
+  
 
   // form validation: checks whether all input fields are filled out before letting the user be redirected to the next page
   const handleNextClick = async (event) => {
+    // Prevent the default form submission behavior
     event.preventDefault();
+  
+    // Check if the room fee is not filled
     if (!formData.roomFee) {
+      // Display an alert to prompt the user to fill in all the required fields
       alert("Please fill in all the required fields.");
       return;
     }
+  
+    // Check if electricity fee is required and not filled
     if (formData.electricityChecked && !formData.electricityFee) {
       alert("Please fill in the electricity fee.");
       return;
     }
+  
+    // Check if water fee is required and not filled
     if (formData.waterChecked && !formData.waterFee) {
       alert("Please fill in the water fee.");
       return;
     }
+  
+    // Check if deposit fee is required and not filled
     if (formData.depositChecked && !formData.depositFee) {
       alert("Please fill in the deposit fee.");
       return;
-    } else if (existingDocId != null) {
+    }
+  
+    // If all the required fields are filled and the existing document ID is not null
+    else if (existingDocId != null) {
+      // Create a reference to the existing document in the "accommodations" collection
       const accRef = doc(collection(db, "accommodations"), existingDocId);
+  
+      // Update the document with the form data and set the progress to 3
       await setDoc(
         accRef,
         {
@@ -101,25 +139,21 @@ const Pg3 = () => {
         },
         { merge: true }
       );
+  
       console.log("document updated: ", accRef.id);
-      // Save form data to local storage
+  
+      // Save the form data to local storage as a JSON string
       localStorage.setItem("formData", JSON.stringify(formData));
+  
+      // Redirect the user to "/page4"
       window.location.href = "/page4";
+  
+      // Display an alert to inform the user that the information on this page has been saved successfully
       alert("Success! Your information on this page has been saved.");
     }
-    //  const currentUser=auth.currentUser;
-    //  const accRef=doc(collection(db, "accommodations"), currentUser.uid);
-    //  await updateDoc(accRef, {
-    //    ...formData,
-    //    progress: 3,
-    //  })
-    //   .then(() => {
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error adding document: ", error);
-    //   });
-  };
+  };  
 
+  // JSX structure and elements
   return (
     <>
       <div className="wrapper container">

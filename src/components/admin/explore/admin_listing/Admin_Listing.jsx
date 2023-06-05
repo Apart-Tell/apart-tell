@@ -16,6 +16,7 @@ const Admin_Listing = ({ isLoaded, type, filterValues }) => {
   const [accommodations, setAccommodations] = useState([]);
   const [filteredAccommodations, setFilteredAccommodations] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const accommodationsCount = filteredAccommodations.length;
 
   const getAllAccommodations = async () => {
     const accommodationsCollectionRef = collection(db, 'accommodations');
@@ -66,6 +67,13 @@ const Admin_Listing = ({ isLoaded, type, filterValues }) => {
   useEffect(() => {
     const applyFilters = () => {
       let updatedAccommodations = accommodations;
+
+      // Apply search query filter
+      if (searchQuery) {
+        updatedAccommodations = updatedAccommodations.filter((accommodation) =>
+          accommodation.accName.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
 
       // Apply accommodation type filter
       const { selectedOption } = filterValues || {}; // Null check here
@@ -166,7 +174,7 @@ const Admin_Listing = ({ isLoaded, type, filterValues }) => {
     };
 
     applyFilters();
-  }, [filterValues, accommodations]);
+  }, [filterValues, accommodations, searchQuery]);
 
   const handleViewClick = (accommodationId) => {
       const accommodation = accommodations.find(
@@ -174,7 +182,7 @@ const Admin_Listing = ({ isLoaded, type, filterValues }) => {
       );
       console.log("View clicked:", accommodation);
       // Redirect to the page displaying the specific listing
-      window.location.href = `/user-display-listing/${accommodationId}`;
+      window.location.href = `/display-listing/${accommodationId}`;
   };
 
   return (
@@ -185,7 +193,7 @@ const Admin_Listing = ({ isLoaded, type, filterValues }) => {
         accommodations={accommodations}
       />
 
-      <Admin_Headline isLoaded={isLoaded} type={type} />
+      <Admin_Headline isLoaded={isLoaded} type={type} accommodationsCount={accommodationsCount} />
 
       {/*Add codes such that while the page is loading after the user inputs their search query, "No results found. Please try a different search query." won't be displayed.*/}
       {searchQuery && filteredAccommodations.length === 0 ? (

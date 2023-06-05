@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './checklist.scss';
 
-const Checklist = ({ updateContainerClass, updateFilters }) => {
+const Checklist = ({ updateContainerClass, updateFilters, isLoaded, type }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  
+
   const [selectedOption, setSelectedOption] = useState('Select a type');
   const [rentalFeeRoomInput, setRentalFeeRoomInput] = useState({rentalFeeRoom: 0});
   const [rentalFeeHeadInput, setRentalFeeHeadInput] = useState({rentalFeeHead: 0});
@@ -44,9 +44,14 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
       nearby: nearbyValues,
       additional: additionalValues
     });
-  }, [selectedOption, rentalFeeRoomInput, rentalFeeHeadInput, amenityValues, 
+  }, [selectedOption, rentalFeeRoomInput, rentalFeeHeadInput, amenityValues,
       crTypeValues, numOfOccupantsInput, nearbyValues, additionalValues]);
 
+  useEffect(() => {
+    if (isLoaded && type && type !== selectedOption) {
+      setSelectedOption(type);
+    }
+  }, [isLoaded, type, selectedOption]);
 
   const handleSelectChange = (e) => {setSelectedOption(e.target.value);};
 
@@ -110,8 +115,8 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
     <>
       <div className="checklist-section">
         <div className="filter-icon" onClick={toggleDropdown}>
-          <img src="src/assets/svg/filter.svg" 
-          alt="Filter Icon" 
+          <img src="src/assets/svg/filter.svg"
+          alt="Filter Icon"
           className="filter-icon-img"
           />
         </div>
@@ -124,7 +129,7 @@ const Checklist = ({ updateContainerClass, updateFilters }) => {
           <div className="checklist-items">
             <form className="type-selection checklist-item">
               <h5>Type</h5>
-              <select value={selectedOption} onChange={handleSelectChange}>
+              <select value={isLoaded && type === selectedOption ? type : selectedOption} onChange={handleSelectChange}>
                 <option>Select a type</option>
                 <option>Apartment</option>
                 <option>Boarding house</option>

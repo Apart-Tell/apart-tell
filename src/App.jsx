@@ -26,6 +26,9 @@ import Display_Listing from "./pages/display_listing/Display_Listing";
 import Apartment from "./pages/apartment/Apartment";
 import Boarding from "./pages/boarding/Boarding";
 import Dormitory from "./pages/dormitory/Dormitory";
+import AdminApartment from "./pages/admin/apartment/Apartment";
+import AdminBoarding from "./pages/admin/boarding/Boarding";
+import AdminDormitory from "./pages/admin/dormitory/Dormitory";
 
 export default function App() {
   return (
@@ -54,6 +57,9 @@ export default function App() {
         <Route path="/apartment" element={<Apartment/>}></Route>
         <Route path="/boarding" element={<Boarding/>}></Route>
         <Route path="/dormitory" element={<Dormitory/>}></Route>
+        <Route path="/admin-apartment" element={<AdminApartment/>}></Route>
+        <Route path="/admin-boarding" element={<AdminBoarding/>}></Route>
+        <Route path="/admin-dormitory" element={<AdminDormitory/>}></Route>
       </Routes>
     </Router>
   </div>

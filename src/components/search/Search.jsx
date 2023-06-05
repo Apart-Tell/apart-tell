@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './search.scss';
 
-export default function Search() {
+const Search = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearchClick = () => {
@@ -42,3 +42,5 @@ export default function Search() {
     </section>
   );
 }
+
+export default Search;

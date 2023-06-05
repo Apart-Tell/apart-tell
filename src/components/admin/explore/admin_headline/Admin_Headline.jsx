@@ -1,7 +1,7 @@
 import React from 'react';
 import "./admin_headline.scss";
 
-const Admin_Headline = ({ isLoaded, type }) => {
+const Admin_Headline = ({ isLoaded, type, accommodationsCount }) => {
 
     let headlineText = '';
 
@@ -10,18 +10,20 @@ const Admin_Headline = ({ isLoaded, type }) => {
         case "Apartment":
             headlineText = "Apartments";
             break;
-        case 'Boarding':
-            headlineText = 'Boarding House';
+        case "Boarding house":
+            headlineText = "Boarding House";
             break;
-        case 'Dormitory':
-            headlineText = 'Dormitory';
+        case "Dormitory":
+            headlineText = "Dormitory";
             break;
         default:
             headlineText = 'Where to stay in Mintal?';
             break;
         }
+    } else if (accommodationsCount > 0) {
+        headlineText = `${accommodationsCount} accommodations found!`;
     } else {
-        headlineText = 'Where to stay in Mintal?';
+        headlineText = 'No accommodations found!';
     }
 
     return (
