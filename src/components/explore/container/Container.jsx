@@ -26,7 +26,7 @@ const Container = ({ isLoaded, type }) => {
 
   return (
     <>
-      <div className="explore-page container">
+      <div className="explore-page-container">
         <div className={containerClass}>
           <Checklist
             updateContainerClass={updateContainerClass}
