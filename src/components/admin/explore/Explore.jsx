@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { collection } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
 import Admin_Container from "../explore/admin_container/Admin_Container";
 
