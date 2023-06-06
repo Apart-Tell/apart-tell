@@ -82,13 +82,8 @@ const CRUD = () => {
   };
 
   const handleUpdateClick = async (accommodationId) => {
-    const accommodationRef = doc(db, "accommodations", accommodationId); // Reference to the accommodation document
-    await updateDoc(accommodationRef, {
-      editedBy: currentUser.uid,
-      progress: 1,
-    }); // Update the document with the current user's ID and progress value
-    console.log("update clicked: ", accommodationId);
-    window.location.href = "/page1"; // Redirect to page1
+     // Redirect to the page where the listing data is displayed and editable
+    window.location.href = `/user/edit-listing/${accommodationId}`; // Redirect to page1
   };
 
   const isUserAuthorized = (accommodation) => {

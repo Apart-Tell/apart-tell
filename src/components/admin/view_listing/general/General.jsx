@@ -110,7 +110,7 @@ const General = () => {
          <p>Only {accommodation.occupants} occupants are allowed per room.</p>
         )}
 
-        {/* Display room dimension if available */}
+        {/* NEEDS ATTENTION: Display room dimension if available */}
         {roomDimension && (
           <>
           <br/>

@@ -45,7 +45,7 @@ export default function App() {
         <Route path="/admin-about" element={<AdminAbout/>}/>
         <Route path="/user/account" element={<Account/>}/>
         <Route path="/user/directory" element={<Directory/>}/>
-        <Route path="/user/edit-listing" element={<Edit_Listing/>}></Route>
+        <Route path="/user/edit-listing/:id" element={<Edit_Listing/>}></Route>
         <Route path="/page1" element={<Page1/>}/>
         <Route path="/page2" element={<Page2/>}/>
         <Route path="/page3" element={<Page3/>}/>
