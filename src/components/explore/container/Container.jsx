@@ -15,9 +15,14 @@ const Container = ({ isLoaded, type }) => {
   };
 
   const [filterValues, setFilterValues] = useState({
-    checkboxes: {},
-    numberInputs: {},
     selectedOption: 'Select a type',
+    rentalFeeRoom: {},
+    rentalFeeHead: {},
+    amenities: {},
+    crType: {},
+    occupants: {},
+    nearby: {},
+    additional: {}
   });
 
   const updateFilters = (newFilters) => {
