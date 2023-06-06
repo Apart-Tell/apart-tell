@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './searchbar.scss';
+import searchIcon from '../../../assets/svg/search.svg';
 
 const Searchbar = ({ setFilteredAccommodations, accommodations }) => {
   // State variable to store the search query
   const [searchQuery, setSearchQuery] = useState('');
+  // State variable to render the search icon
+  const [isMobileWidth, setIsMobileWidth] = useState(false);
 
   // Event handler for the search button click
   const handleSearch = (e) => {
@@ -33,6 +36,24 @@ const Searchbar = ({ setFilteredAccommodations, accommodations }) => {
     setSearchQuery(e.target.value);
   };
 
+  // Dynamically update the search button to show search icon if window width is 560px
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileWidth(window.innerWidth <= 560);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Initial check for mobile width on component mount
+    setIsMobileWidth(window.innerWidth <= 560);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="searchbar-section">
       <form onSubmit={handleSearch}>
@@ -42,7 +63,13 @@ const Searchbar = ({ setFilteredAccommodations, accommodations }) => {
             value={searchQuery}
             onChange={handleSearchInputChange}
           />
-          <button type="submit">Search</button>
+          <button type="submit">
+            {isMobileWidth ? (
+              <img src={searchIcon} alt="Search" />
+            ) : (
+              'Search'
+            )}
+          </button>
         </div>
       </form>
     </div>

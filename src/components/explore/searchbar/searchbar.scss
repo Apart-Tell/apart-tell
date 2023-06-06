@@ -37,4 +37,17 @@
             }
         }
     }
+
+    @media (max-width: 1200px) {
+        .searchbar {
+            button {
+                width: 25%;
+
+                img {
+                    width: 2em;
+                    height: 2em;
+                }
+            }
+        }
+    }
 }
