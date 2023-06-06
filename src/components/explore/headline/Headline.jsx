@@ -25,7 +25,7 @@ const Headline = ({ isLoaded, type, accommodationsCount }) => {
     } else {
         headlineText = 'No accommodations found!';
     }
-    
+
     return (
         <>
             <div className="headline-section">

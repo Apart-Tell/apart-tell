@@ -116,8 +116,8 @@ const Checklist = ({ updateContainerClass, updateFilters, isLoaded, type }) => {
       <div className="checklist-section">
         <div className="filter-icon" onClick={toggleDropdown}>
           <img src="src/assets/svg/filter.svg"
-          alt="Filter Icon"
-          className="filter-icon-img"
+            alt="Filter Icon"
+            className="filter-icon-img"
           />
         </div>
 
@@ -140,23 +140,29 @@ const Checklist = ({ updateContainerClass, updateFilters, isLoaded, type }) => {
 
             <form className="rental-fee-room checklist-item">
               <h5>Rental Fee (per room)</h5>
-              <input
-                type="number"
-                name="rentalFeeRoom"
-                value={rentalFeeRoomInput.rentalFeeRoom}
-                onChange={handleRentalFeeRoomInput}
-              />
+              <div className="input-group">
+                <span className="currency-symbol">&#8369;</span>
+                <input
+                  type="number"
+                  name="rentalFeeRoom"
+                  value={rentalFeeRoomInput.rentalFeeRoom}
+                  onChange={handleRentalFeeRoomInput}
+                />
+              </div>
               <hr />
             </form>
 
             <form className="rental-fee-head checklist-item">
               <h5>Rental Fee (per head)</h5>
-              <input
-                type="number"
-                name="rentalFeeHead"
-                value={rentalFeeHeadInput.rentalFeeHead}
-                onChange={handleRentalFeeHeadInput}
-              />
+              <div className="input-group">
+                <span className="currency-symbol">&#8369;</span>
+                <input
+                  type="number"
+                  name="rentalFeeHead"
+                  value={rentalFeeHeadInput.rentalFeeHead}
+                  onChange={handleRentalFeeHeadInput}
+                />
+              </div>
               <hr />
             </form>
 
