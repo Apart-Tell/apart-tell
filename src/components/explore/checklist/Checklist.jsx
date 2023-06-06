@@ -276,8 +276,8 @@ const Checklist = ({ updateContainerClass, updateFilters, isLoaded, type }) => {
               <div className="item">
                 <input
                   type="checkbox"
-                  name="pharmacy"
-                  checked={nearbyValues.pharmacy}
+                  name="Pharmacy"
+                  checked={nearbyValues.Pharmacy}
                   onChange={handleNearbyChange}
                 />
                 <label htmlFor="nearby">Pharmacy</label>
