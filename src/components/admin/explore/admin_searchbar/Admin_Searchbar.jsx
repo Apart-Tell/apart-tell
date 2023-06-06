@@ -34,6 +34,24 @@ const Admin_Searchbar = ({ setFilteredAccommodations, accommodations }) => {
     setSearchQuery(e.target.value);
   };
 
+  // Dynamically update the search button to show search icon if window width is 560px
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileWidth(window.innerWidth <= 560);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Initial check for mobile width on component mount
+    setIsMobileWidth(window.innerWidth <= 560);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="searchbar-section">
       <form onSubmit={handleSearch}>
@@ -43,7 +61,13 @@ const Admin_Searchbar = ({ setFilteredAccommodations, accommodations }) => {
             value={searchQuery}
             onChange={handleSearchInputChange}
           />
-          <button type="submit">Search</button>
+          <button type="submit">
+            {isMobileWidth ? (
+              <img src={searchIcon} alt="Search" />
+            ) : (
+              'Search'
+            )}
+          </button>
         </div>
       </form>
     </div>
