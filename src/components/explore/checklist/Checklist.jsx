@@ -268,7 +268,7 @@ const Checklist = ({ updateContainerClass, updateFilters, isLoaded, type }) => {
                 <input
                   type="checkbox"
                   name="Water Refill Station"
-                  checked={nearbyValues.waterRefillStation}
+                  checked={nearbyValues["Water Refill Station"]}
                   onChange={handleNearbyChange}
                 />
                 <label htmlFor="nearby">Water refill stations</label>
@@ -276,8 +276,8 @@ const Checklist = ({ updateContainerClass, updateFilters, isLoaded, type }) => {
               <div className="item">
                 <input
                   type="checkbox"
-                  name="pharmacy"
-                  checked={nearbyValues.pharmacy}
+                  name="Pharmacy"
+                  checked={nearbyValues.Pharmacy}
                   onChange={handleNearbyChange}
                 />
                 <label htmlFor="nearby">Pharmacy</label>

@@ -26,7 +26,7 @@ const Admin_Container = ({ isLoaded, type }) => {
 
   return (
     <>
-      <div className="explore-page container">
+      <div className="explore-page-container">
         <div className={containerClass}>
           <Admin_Checklist
             updateContainerClass={updateContainerClass}

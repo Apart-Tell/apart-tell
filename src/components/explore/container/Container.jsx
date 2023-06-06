@@ -15,9 +15,14 @@ const Container = ({ isLoaded, type }) => {
   };
 
   const [filterValues, setFilterValues] = useState({
-    checkboxes: {},
-    numberInputs: {},
     selectedOption: 'Select a type',
+    rentalFeeRoom: {},
+    rentalFeeHead: {},
+    amenities: {},
+    crType: {},
+    occupants: {},
+    nearby: {},
+    additional: {}
   });
 
   const updateFilters = (newFilters) => {
@@ -26,7 +31,7 @@ const Container = ({ isLoaded, type }) => {
 
   return (
     <>
-      <div className="explore-page container">
+      <div className="explore-page-container">
         <div className={containerClass}>
           <Checklist
             updateContainerClass={updateContainerClass}
