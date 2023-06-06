@@ -4,11 +4,23 @@
     display: grid;
 
     &.filtered {
-      grid-template-columns: 40% auto;
+      grid-template-columns: 12em auto;
       grid-gap: 10%;
 
         .checklist-container {
             display: block;
+        }
+
+        .searchbar {
+            input {
+                width: 80%;
+            }
+        }
+
+        .headline-text {
+            h2 {
+                text-align: left;
+            }
         }
     }
 

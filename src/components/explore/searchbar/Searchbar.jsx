@@ -36,17 +36,17 @@ const Searchbar = ({ setFilteredAccommodations, accommodations }) => {
     setSearchQuery(e.target.value);
   };
 
-  // Dynamically update the search button to show search icon if window width is 560px
+  // Dynamically update the search button to show search icon if window width is 900px
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileWidth(window.innerWidth <= 560);
+      setIsMobileWidth(window.innerWidth <= 900);
     };
 
     // Add event listener for window resize
     window.addEventListener('resize', handleResize);
 
     // Initial check for mobile width on component mount
-    setIsMobileWidth(window.innerWidth <= 560);
+    setIsMobileWidth(window.innerWidth <= 900);
 
     // Cleanup the event listener on component unmount
     return () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Admin_Checklist from '../admin_checklist/Admin_Checklist';
 import Admin_Listing from '../admin_listing/Admin_Listing';
 import "./admin_container.scss";
@@ -23,6 +23,19 @@ const Admin_Container = ({ isLoaded, type }) => {
   const updateFilters = (newFilters) => {
     setFilterValues(newFilters);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1000) {
+        setContainerClass('main-container');
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
