@@ -1,10 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./admin_searchbar.scss";
+import searchIcon from '../../../../assets/svg/search.svg';
 
 const Admin_Searchbar = ({ setFilteredAccommodations, accommodations }) => {
   // State variable to store the search query
   const [searchQuery, setSearchQuery] = useState('');
+  // State variable to render the search icon
+  const [isMobileWidth, setIsMobileWidth] = useState(false);
 
   // Event handler for the search button click
   const handleSearch = (e) => {
