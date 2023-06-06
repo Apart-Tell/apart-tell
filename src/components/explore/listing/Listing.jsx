@@ -158,14 +158,13 @@ const Listing = ({ isLoaded, type, filterValues }) => {
       const { additional } = filterValues || {};
       if (additional) {
         updatedAccommodations = updatedAccommodations.filter((accommodation) => {
-          if (
-            (accommodation.depositFee === null || accommodation.depositFee === '') ||
-            (accommodation.electricityFee === null || accommodation.electricityFee === '') ||
-            (accommodation.waterFee === null || accommodation.waterFee === '')
-          ) {
-            return true;
-          }
-          return false;
+          let shouldInclude = true;
+          Object.entries(additional).forEach(([key, value]) => {
+            if (value && accommodation[key]) {
+              shouldInclude = false;
+            }
+          });
+          return shouldInclude;
         });
       }
 
@@ -200,8 +199,8 @@ const Listing = ({ isLoaded, type, filterValues }) => {
       ) : (
         filteredAccommodations.map((accommodation) => (
           <div key={accommodation.id} className="listing-section">
-            <div className="listing-img">
-              <img src={accommodation.photos[0]} alt={accommodation.name} />
+            <div className={`listing-img ${!accommodation.photos ? 'no-photos' : ''}`}>
+            {accommodation.photos?.[0] && <img src={accommodation.photos[0]} alt={accommodation.name} />}
             </div>
             <div className="listing-left">
               <div className="type">
