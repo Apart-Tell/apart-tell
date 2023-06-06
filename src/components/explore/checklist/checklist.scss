@@ -5,13 +5,13 @@
         .filter-icon {
             display: none;
         }
-        
+
         .checklist-container {
             display: none;
             height: auto;
             width: 100%;
             background-color: var(--dirtywhite);
-            border: 1px solid var(--loblolly);
+            border: 1px solid var(--wildblueyonder);
             border-radius: 5px;
             padding: 5%;
 
@@ -43,7 +43,7 @@
                 text-align: left;
             }
 
-            
+
             hr {
                 width: 100%;
                 margin-top: 0.5em;
@@ -59,7 +59,7 @@
                 flex-direction: row;
                 justify-content: start;
                 align-items: end;
-    
+
                 input {
                     height: 1em;
                     width: 1em;
