@@ -1,10 +1,9 @@
 .listing-h2 {
-  margin-top: 15%;
+  margin-top: 5rem;
   width: 100%;
 
   h2 {
     text-align: left;
-    margin-top: 3rem;
     margin-bottom: 2rem;
   }
 }
@@ -19,7 +18,7 @@
 }
 
 .listing-card {
-  border-radius: 7.68px;
+  border-radius: 15px;
   width: 30%;
   background-color: var(--white);
   box-shadow: 6px 7px 10px rgba(111, 144, 175, 0.2);
@@ -39,7 +38,7 @@
       width: 100%;
       height: 100%; // Make the image fill the container
       object-fit: cover; // Maintain aspect ratio and cover the container
-      border-radius: 7.68px 7.68px 0 0;
+      border-radius: 15px 15px 0 0;
     }
   }
 
@@ -102,5 +101,6 @@
 @media (max-width: 480px) {
   .listing-card {
     width: 100%; /* Adjust the width for mobile screens */
+    margin-bottom: 15px;
   }
 }

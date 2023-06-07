@@ -1,35 +1,69 @@
 * {
     box-sizing: border-box;
-}
+  }
 
-.option-h2 {
-        text-align: left;
-        margin-top: -8rem;
-}
+  .option-h2 {
+    text-align: left;
+    margin-top: -9rem;
+    width: 100%;
 
-.option-row {
-    padding-top: 3rem;
-    margin-bottom: 3rem;
+    @media (max-width: 768px) {
+        margin-top: -7rem;
+    }
 
-    img {
-        width: 90%;
-        border-radius: 20px;
-        box-shadow: 6px 7px 10px rgba(111, 144, 175, 0.2);
+    @media (max-width: 480px) {
+        margin-top: -7rem; /* Adjust the width for mobile screens */
+    }
+  }
+  
+  .option-row {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+  }
+  
+  .option-column {
+    width: 30%;
+    margin-bottom: 10px;
+  
+    @media (max-width: 768px) {
+      width: 48%; /* Adjust the width for smaller screens */
+    }
+  
+    @media (max-width: 480px) {
+      width: 100%; /* Adjust the width for mobile screens */
+    }
+    
+  
+    h4 {
+      margin-bottom: 1rem;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+  
+      img {
+        width: 100%;
+        height: 200px; // Set a fixed height for the image container
+        overflow: hidden; // Hide any overflow
+        border-radius: 15px;
+        box-shadow: 7px 7px 8px rgba(111, 144, 175, 0.2);
         transition: transform 0.3s, filter 0.3s; // Add smooth transition effect
         &:hover {
-            transform: scale(1.1); // Increase the scale of the image
+          transform: scale(1.1); // Increase the scale of the image
         }
+      }
     }
-
-    .option-column {
-        float: left;
-        width: 33.33%;
-    }
-
-    h4 {
-        margin-bottom: 1rem;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-}
+  }
+  
