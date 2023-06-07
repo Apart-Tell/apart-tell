@@ -8,20 +8,20 @@ const Admin_Headline = ({ isLoaded, type, accommodationsCount }) => {
     if (isLoaded) {
         switch (type) {
         case "Apartment":
-            headlineText = "Apartments";
+            headlineText = "Apartment";
             break;
         case "Boarding house":
             headlineText = "Boarding House";
             break;
         case "Dormitory":
-            headlineText = "Dormitory";
+            headlineText = 'Dormitory';
             break;
         default:
             headlineText = 'Where to stay in Mintal?';
             break;
         }
     } else if (accommodationsCount > 0) {
-        headlineText = `${accommodationsCount} accommodations found!`;
+        headlineText = `${accommodationsCount} accommodation${accommodationsCount > 1 ? 's': ''} found!`;
     } else {
         headlineText = 'No accommodations found!';
     }

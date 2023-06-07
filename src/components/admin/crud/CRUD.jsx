@@ -46,8 +46,8 @@ const CRUD = () => {
     e.preventDefault();
     const query = searchQuery.toLowerCase().trim(); // Normalize and trim the search query
     if (query === "") {
-      setSearchResults([]); // If the query is empty, reset the search results
-      setNoResults(false);
+      // Display an alert message if the search query is empty
+      alert('Please enter a search query.');
       return;
     }
     const filteredAccommodations = accommodations.filter((accommodation) =>

@@ -15,7 +15,7 @@ const Searchbar = ({ setFilteredAccommodations, accommodations }) => {
     // Check if the search query is empty or contains only whitespace
     if (searchQuery.trim() === '') {
       // Display an alert message if the search query is empty
-      alert('Please enter a search query');
+      alert('Please enter a search query.');
       return; // Stop further execution of the function
     }
 
