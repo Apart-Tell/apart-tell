@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Fragment } from "react";
 import "./scss/main.scss";
 export { Link } from 'react-router-dom';
 
@@ -29,6 +29,7 @@ import Dormitory from "./pages/dormitory/Dormitory";
 import AdminApartment from "./pages/admin/apartment/Apartment";
 import AdminBoarding from "./pages/admin/boarding/Boarding";
 import AdminDormitory from "./pages/admin/dormitory/Dormitory";
+import PrivateRoute from './PrivateRoute';
 
 export default function App() {
   return (
@@ -40,26 +41,31 @@ export default function App() {
         <Route path="/about" element={<About/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
-        <Route path="/admin-home" element={<AdminHome/>}/>
-        <Route path="/admin-explore" element={<AdminExplore/>}/>
-        <Route path="/admin-about" element={<AdminAbout/>}/>
-        <Route path="/user/account" element={<Account/>}/>
-        <Route path="/user/directory" element={<Directory/>}/>
-        <Route path="/user/edit-listing/:id" element={<Edit_Listing/>}></Route>
-        <Route path="/page1" element={<Page1/>}/>
-        <Route path="/page2" element={<Page2/>}/>
-        <Route path="/page3" element={<Page3/>}/>
-        <Route path="/page4" element={<Page4/>}/>
         <Route path="/user-display-listing/:id" element={<Display_Listing/>}/>
         <Route path="/display-listing/:id" element={<ViewListing/>}/>
-        <Route path="/admin-search-results" element={<Search_Result_Page/>}></Route>
         <Route path="/search-results" element={<Search_Result/>}></Route>
         <Route path="/apartment" element={<Apartment/>}></Route>
         <Route path="/boarding" element={<Boarding/>}></Route>
         <Route path="/dormitory" element={<Dormitory/>}></Route>
-        <Route path="/admin-apartment" element={<AdminApartment/>}></Route>
-        <Route path="/admin-boarding" element={<AdminBoarding/>}></Route>
-        <Route path="/admin-dormitory" element={<AdminDormitory/>}></Route>
+
+        {/* Private routes, can only be accessed if user is logged in */}
+        <Route path='/' element={<PrivateRoute/>}>
+          <Route path="/admin-home" element={<AdminHome/>}/>
+          <Route path="/admin-explore" element={<AdminExplore/>}/>
+          <Route path="/admin-about" element={<AdminAbout/>}/>
+          <Route path="/user/account" element={<Account/>}/>
+          <Route path="/user/directory" element={<Directory/>}/>
+          <Route path="/user/edit-listing/:id" element={<Edit_Listing/>}></Route>
+          <Route path="/page1" element={<Page1/>}/>
+          <Route path="/page2" element={<Page2/>}/>
+          <Route path="/page3" element={<Page3/>}/>
+          <Route path="/page4" element={<Page4/>}/>
+          <Route path="/admin-search-results" element={<Search_Result_Page/>}></Route>
+          <Route path="/admin-apartment" element={<AdminApartment/>}></Route>
+          <Route path="/admin-boarding" element={<AdminBoarding/>}></Route>
+          <Route path="/admin-dormitory" element={<AdminDormitory/>}></Route>
+        </Route>
+
       </Routes>
     </Router>
   </div>
