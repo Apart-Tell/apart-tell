@@ -408,13 +408,13 @@ const Pg1 = () => {
                       <option value="" className="select-type">
                         Select a type
                       </option>
-                      <option value="apartment" className="select-type">
+                      <option value="Apartment" className="select-type">
                         Apartment
                       </option>
-                      <option value="boarding-house" className="select-type">
+                      <option value="Boarding house" className="select-type">
                         Boarding House
                       </option>
-                      <option value="dormitory" className="select-type">
+                      <option value="Dormitory" className="select-type">
                         Dormitory
                       </option>
                     </select>
@@ -454,9 +454,9 @@ const Pg1 = () => {
                         <input
                           type="checkbox"
                           id="amenities"
-                          value="wifi"
+                          value="Wifi"
                           onChange={handleInputChange1}
-                          checked={formData.amenities.includes("wifi")}
+                          checked={formData.amenities.includes("Wifi")}
                         />
                         Wi-Fi
                       </label>
@@ -464,9 +464,9 @@ const Pg1 = () => {
                         <input
                           type="checkbox"
                           id="amenities"
-                          value="aircon"
+                          value="Air Conditioning"
                           onChange={handleInputChange1}
-                          checked={formData.amenities.includes("aircon")}
+                          checked={formData.amenities.includes("Air Conditioning")}
                         />
                         Air conditioning
                       </label>
@@ -474,9 +474,9 @@ const Pg1 = () => {
                         <input
                           type="checkbox"
                           id="amenities"
-                          value="laundry-area"
+                          value="Laundry Area"
                           onChange={handleInputChange1}
-                          checked={formData.amenities.includes("laundry-area")}
+                          checked={formData.amenities.includes("Laundry Area")}
                         />
                         Laundry area
                       </label>
@@ -484,9 +484,9 @@ const Pg1 = () => {
                         <input
                           type="checkbox"
                           id="amenities"
-                          value="kitchen"
+                          value="Kitchen"
                           onChange={handleInputChange1}
-                          checked={formData.amenities.includes("kitchen")}
+                          checked={formData.amenities.includes("Kitchen")}
                         />
                         Kitchen
                       </label>
@@ -500,9 +500,9 @@ const Pg1 = () => {
                         <input
                           type="checkbox"
                           id="nearby"
-                          value="eatery"
+                          value="Eatery"
                           onChange={handleInputChange1}
-                          checked={formData.nearby.includes("eatery")}
+                          checked={formData.nearby.includes("Eatery")}
                         />
                         Eatery/Restaurant
                       </label>
@@ -510,9 +510,9 @@ const Pg1 = () => {
                         <input
                           type="checkbox"
                           id="nearby"
-                          value="laundry-shop"
+                          value="Laundry Shop"
                           onChange={handleInputChange1}
-                          checked={formData.nearby.includes("laundry-shop")}
+                          checked={formData.nearby.includes("Laundry Shop")}
                         />
                         Laundry shop
                       </label>
@@ -520,9 +520,9 @@ const Pg1 = () => {
                         <input
                           type="checkbox"
                           id="nearby"
-                          value="retail-store"
+                          value="Retail Store"
                           onChange={handleInputChange1}
-                          checked={formData.nearby.includes("retail-store")}
+                          checked={formData.nearby.includes("Retail Store")}
                         />
                         Retail store
                       </label>
@@ -530,10 +530,10 @@ const Pg1 = () => {
                         <input
                           type="checkbox"
                           id="nearby"
-                          value="water-refill-station"
+                          value="Water Refill Station"
                           onChange={handleInputChange1}
                           checked={formData.nearby.includes(
-                            "water-refill-station"
+                            "Water Refill Station"
                           )}
                         />
                         Water refilling station
@@ -542,9 +542,9 @@ const Pg1 = () => {
                         <input
                           type="checkbox"
                           id="nearby"
-                          value="pharmacy"
+                          value="Pharmacy"
                           onChange={handleInputChange1}
-                          checked={formData.nearby.includes("pharmacy")}
+                          checked={formData.nearby.includes("Pharmacy")}
                         />
                         Pharmacy
                       </label>
@@ -633,10 +633,10 @@ const Pg1 = () => {
                     <option value="" className="select-type">
                       Select a type
                     </option>
-                    <option value="communal" className="select-type">
+                    <option value="Communal" className="select-type">
                       Communal/Shared
                     </option>
-                    <option value="private" className="select-type">
+                    <option value="Private" className="select-type">
                       Private
                     </option>
                   </select>
