@@ -199,7 +199,7 @@ const Listing = ({ isLoaded, type, filterValues }) => {
       ) : (
         filteredAccommodations.map((accommodation) => (
           <div key={accommodation.id} className="listing-section">
-            <div className={`listing-img ${!accommodation.photos ? 'no-photos' : ''}`}>
+            <div className={`listing-img ${accommodation.photos.length == 0 ? 'no-photos' : ''}`}>
             {accommodation.photos?.[0] && <img src={accommodation.photos[0]} alt={accommodation.name} />}
             </div>
             <div className="listing-left">
