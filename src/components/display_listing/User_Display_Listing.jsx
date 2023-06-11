@@ -35,6 +35,10 @@ const User_Display_Listing = () => {
     fetchData();
   }, [id]);
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
      <div className="display-style container">
@@ -183,6 +187,9 @@ const User_Display_Listing = () => {
           </>
         )}
       </div>
+      <button className="scroll-to-top-button" onClick={handleScrollToTop}>
+        Scroll to Top
+      </button>
     </>
   )
 }
