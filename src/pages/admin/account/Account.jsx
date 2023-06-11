@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './account.scss';
 import Header from '../../../components/admin/header/Header';
 import Footer from '../../../components/admin/footer/Footer';
@@ -7,7 +7,7 @@ import PasswordVisibilityToggle from '../../../components/admin/account/Password
 // Firebase import section
 import { auth, db } from "../../../firebase"
 // Firebase SDK to update the personal info fields in the Firestore
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 // Firebase SDK to update to a new email
 // Firebase SDK to re-authenticate user when changing password
 import { updateEmail, reauthenticateWithCredential, updatePassword, EmailAuthProvider } from 'firebase/auth';
@@ -33,15 +33,38 @@ const Account = () => {
   }
 
   // User information update states
-  // New personal info
   const [personalInfo, setPersonalInfo] = useState({
     firstName: '',
     lastName: '',
-    // phoneNumber: '',
   });
 
-  // New email
   const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const uid = user.uid;
+          const userRef = doc(db, 'users', uid);
+          const userSnapshot = await getDoc(userRef);
+          if (userSnapshot.exists()) {
+            const userData = userSnapshot.data();
+            setPersonalInfo({
+              firstName: userData.firstName,
+              lastName: userData.lastName,
+            });
+            setEmail(userData.email);
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
 
   // New password
   const [password, setPassword] = useState({
