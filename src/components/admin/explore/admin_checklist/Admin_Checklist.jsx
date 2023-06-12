@@ -5,6 +5,7 @@ const Checklist = ({ updateContainerClass, updateFilters, isLoaded, type }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const [selectedOption, setSelectedOption] = useState('Select a type');
+  const [controlledSelection, setControlledSelection] = useState(false);
   const [rentalFeeRoomInput, setRentalFeeRoomInput] = useState({rentalFeeRoom: 0});
   const [rentalFeeHeadInput, setRentalFeeHeadInput] = useState({rentalFeeHead: 0});
   const [amenityValues, setAmenityValues] = useState({
@@ -48,12 +49,25 @@ const Checklist = ({ updateContainerClass, updateFilters, isLoaded, type }) => {
       crTypeValues, numOfOccupantsInput, nearbyValues, additionalValues]);
 
   useEffect(() => {
-    if (isLoaded && type && type !== selectedOption) {
+    if (isLoaded && type && !controlledSelection) {
       setSelectedOption(type);
     }
-  }, [isLoaded, type, selectedOption]);
+  }, [isLoaded, type, controlledSelection]);
 
-  const handleSelectChange = (e) => {setSelectedOption(e.target.value);};
+  useEffect(() => {
+    if (isLoaded && type) {
+      setSelectedOption(type);
+      setControlledSelection(true);
+    } else {
+      setControlledSelection(false);
+    }
+  }, [isLoaded, type]);
+
+  const handleSelectChange = (e) => {
+    const selectedOption = e.target.selectedOptions[0].value;
+    setSelectedOption(selectedOption);
+    setControlledSelection(true);
+  };
 
   const handleRentalFeeRoomInput = (e) => {
     const { name, value } = e.target;
