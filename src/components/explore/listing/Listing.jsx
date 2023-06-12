@@ -17,6 +17,7 @@ const Listing = ({ isLoaded, type, filterValues }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const accommodationsCount = filteredAccommodations.length;
 
+
   const getAllAccommodations = async () => {
     const accommodationsCollectionRef = collection(db, 'accommodations');
     const q = query(
@@ -232,7 +233,7 @@ const Listing = ({ isLoaded, type, filterValues }) => {
                   <h6>PHP</h6>
                 </div>
                 <div className="fee">
-                  <h2>{accommodation.roomFee}</h2>
+                  <h2>{Number(accommodation.roomFee).toLocaleString('en-US')}</h2>
                 </div>
               </div>
               <div className="view-button">
