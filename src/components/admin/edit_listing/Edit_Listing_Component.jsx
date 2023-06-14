@@ -332,6 +332,7 @@ const Edit_Listing_Component = () => {
               {/*Render editable field for NEARBY*/}
               <div>
                 <label htmlFor="nearby">NEARBY</label>
+                <br/>
                 <div>
                   <label htmlFor="nearby">
                     <input
