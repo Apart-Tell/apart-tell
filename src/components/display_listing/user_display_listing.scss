@@ -1,0 +1,59 @@
+.scroll {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #F0F0F0;
+    border: none;
+    border-radius: 50%;
+    color: #333;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #DDD;
+    }
+  
+    &:active {
+      background-color: #303655;
+  
+      @media (max-width: 480px) {
+        background-color: gray;
+      }
+    }
+  
+    &::before {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border: solid #333;
+      border-width: 0 2px 2px 0;
+      transform: rotate(-135deg);
+      margin-right: 0px;
+    }
+  
+    @media (min-width: 481px) {
+      &:hover::after {
+        content: "Scroll back to top";
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+  
+      &:hover {
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  

@@ -1,8 +1,9 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React from "react";
+import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useParams } from "react-router-dom";
+import './user_display_listing.scss';
 
 const User_Display_Listing = () => {
   const [accommodation, setAccommodations] = useState({});
@@ -36,12 +37,12 @@ const User_Display_Listing = () => {
   }, [id]);
 
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <>
-     <div className="display-style container">
+      <div className="display-style container">
         {accommodation.accName && <h2>{accommodation.accName}</h2>}
         {accommodation.accAddress && <p>{accommodation.accAddress}</p>}
 
@@ -57,126 +58,135 @@ const User_Display_Listing = () => {
           </div>
         )}
 
-        <br/>
+        <br />
 
         <h3>Description</h3>
-        <hr/>
-        {accommodation.accDescription && (
-          <p>{accommodation.accDescription}</p>
-        )}
+        <hr />
+        {accommodation.accDescription && <p>{accommodation.accDescription}</p>}
 
-        <br/>
+        <br />
 
         <h3>Amenities</h3>
-        <hr/>
+        <hr />
         {accommodation.amenities && (
           <p>{accommodation.amenities && accommodation.amenities.join(", ")}</p>
         )}
 
-        <br/>
+        <br />
 
         <h3>Nearby</h3>
-        <hr/>
+        <hr />
         {accommodation.accAddress && (
           <p>{accommodation.nearby && accommodation.nearby.join(", ")}</p>
         )}
 
-        <br/>
+        <br />
 
         <h3>Rules</h3>
-        <hr/>
+        <hr />
         {accommodation.accRules && (
           <ul className="rules-list">
-            {accommodation.accRules.split('\n').map((rule, index) => (
+            {accommodation.accRules.split("\n").map((rule, index) => (
               <li key={index}>{rule}</li>
             ))}
           </ul>
         )}
 
-        <br/>
+        <br />
 
         <h3>Number of occupants (per room)</h3>
-        <hr/>
+        <hr />
         {accommodation.occupants && (
-         <p>Only {accommodation.occupants} occupants are allowed per room.</p>
+          <p>Only {accommodation.occupants} occupants are allowed per room.</p>
         )}
 
         {roomDimension && (
           <>
-          <br/>
-          <h3>Room dimension</h3>
-          <hr/>
-          {accommodation.length && accommodation.width && accommodation.metric && (
-            <p>
-              Each room is approximately {accommodation.length} x {accommodation.width} {accommodation.metric}
-            </p>
-          )}
+            <br />
+            <h3>Room dimension</h3>
+            <hr />
+            {accommodation.length &&
+              accommodation.width &&
+              accommodation.metric && (
+                <p>
+                  Each room is approximately {accommodation.length} x{" "}
+                  {accommodation.width} {accommodation.metric}
+                </p>
+              )}
           </>
         )}
 
-        <br/>
+        <br />
         <h3>Comfort room type</h3>
-        <hr/>
+        <hr />
         {accommodation.crType && (
-          <p>This accommodation have comfort rooms of {accommodation.crType} type.</p>
-        )}
-        <br/>
-
-        <h3>Rental fee (per room)</h3>
-        <hr/>
-          {accommodation.roomFee && (
-            <p>Each room has a rental fee of PHP {accommodation.roomFee}.</p>
-          )}
-        
-        {accommodation.headFee && (
-            <>
-              <br/>
-              <h3>Rental fee (per head)</h3>
-              <hr/>
-              <p>Each room has a rental fee of PHP {accommodation.headFee} per head.</p>
-            </>
-          )}
-
-        {/*Code doesn't display inputted data. Needs to be fixed*/}
-          {accommodation.electricityFee && accommodation.waterFee && accommodation.deposit && (
-          <p className="additional-fees-style">
-            Additional Fees:
-            <p>Electicity: {accommodation.electricityFee}</p>
-            <p>Water: {accommodation.waterFee}</p>
-            <p>Deposit: {accommodation.deposit}</p>
+          <p>
+            This accommodation have comfort rooms of {accommodation.crType}{" "}
+            type.
           </p>
         )}
+        <br />
 
-        <br/>
+        <h3>Rental fee (per room)</h3>
+        <hr />
+        {accommodation.roomFee && (
+          <p>Each room has a rental fee of PHP {accommodation.roomFee}.</p>
+        )}
+
+        {accommodation.headFee && (
+          <>
+            <br />
+            <h3>Rental fee (per head)</h3>
+            <hr />
+            <p>
+              Each room has a rental fee of PHP {accommodation.headFee} per
+              head.
+            </p>
+          </>
+        )}
+
+        {/*Code doesn't display inputted data. Needs to be fixed*/}
+        {accommodation.electricityFee &&
+          accommodation.waterFee &&
+          accommodation.deposit && (
+            <p className="additional-fees-style">
+              Additional Fees:
+              <p>Electicity: {accommodation.electricityFee}</p>
+              <p>Water: {accommodation.waterFee}</p>
+              <p>Deposit: {accommodation.deposit}</p>
+            </p>
+          )}
+
+        <br />
         <h3>Contact</h3>
-        <hr/>
+        <hr />
         {accommodation.ownerName && (
-            <p>Owner's name: {accommodation.ownerName}</p>   
+          <p>Owner's name: {accommodation.ownerName}</p>
         )}
         {accommodation.ownerPhone && (
-            <p>Owner's phone number: {accommodation.ownerPhone}</p>   
+          <p>Owner's phone number: {accommodation.ownerPhone}</p>
         )}
         {accommodation.ownerEmail && (
           <>
-            <p>Owner's e-mail address: {accommodation.ownerEmail}</p>  
+            <p>Owner's e-mail address: {accommodation.ownerEmail}</p>
           </>
         )}
-         {accommodation.caretakerName && (
+        {accommodation.caretakerName && (
           <>
-            <p>Caretaker's name: {accommodation.caretakerName}</p>  
+            <p>Caretaker's name: {accommodation.caretakerName}</p>
           </>
         )}
-         {accommodation.caretakerPhone && (
+        {accommodation.caretakerPhone && (
           <>
-            <p>Caretaker's phone number: {accommodation.caretakerPhone}</p>  
+            <p>Caretaker's phone number: {accommodation.caretakerPhone}</p>
           </>
         )}
 
         {uploadedPhotos && uploadedPhotos.length > 0 && (
           <>
-            <br/>
+            <br />
             <h3>Gallery</h3>
-            <hr/>
+            <hr />
             <ul className="photo-list">
               {uploadedPhotos.map((photoUrl, index) => (
                 <li key={index}>
@@ -187,11 +197,10 @@ const User_Display_Listing = () => {
           </>
         )}
       </div>
-      <button className="scroll-to-top-button" onClick={handleScrollToTop}>
-        Scroll to Top
+      <button className="scroll" onClick={handleScrollToTop}>
       </button>
     </>
-  )
-}
+  );
+};
 
 export default User_Display_Listing;
