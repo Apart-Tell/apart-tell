@@ -35,7 +35,9 @@
         text-align: left;
     }
 
-    input[type="text"], select {
+    input[type="text"], 
+    input[type="number"],
+    select {
         padding: 0.5rem;
         border-radius: 5px;
         font-size: medium;
@@ -46,6 +48,19 @@
         word-wrap: break-word;
         border: 1px solid var(--martinique);
     }
+
+    .room-dimension {
+      display: flex;
+      text-align: left;
+
+      .room-dimension-inputs {
+          display: flex
+      }   
+      select, option {
+          text-align: left;
+          width: 10rem;
+      }
+  }
 
     select {
       cursor: pointer;
@@ -137,6 +152,13 @@
       transition: opacity 0.3s;
       border-radius: 5px;
     }    
+
+    .error-message {
+      color: red;
+      text-align: left;
+      font-size: 14px;
+      margin-top: 5px;
+    }
 
     button{
         margin-top: 1rem;

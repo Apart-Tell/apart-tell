@@ -28,6 +28,9 @@ const General = () => {
           if (data.photos) {
             setUploadedPhotos(data.photos);
           }
+          if (data.length && data.width && data.metric) {
+            setRoomDimension(`${data.length} x ${data.width} ${data.metric}`);
+          }
         } else {
           console.log("No such document!");
         }
@@ -110,7 +113,7 @@ const General = () => {
          <p>Only {accommodation.occupants} occupants are allowed per room.</p>
         )}
 
-        {/* NEEDS ATTENTION: Display room dimension if available */}
+        {/*Display room dimension if available*/}
         {roomDimension && (
           <>
           <br/>
@@ -119,7 +122,7 @@ const General = () => {
           {/* Display the room dimensions if available */}
           {accommodation.length && accommodation.width && accommodation.metric && (
             <p>
-              Each room is approximately {accommodation.length} x {accommodation.width} {accommodation.metric}
+              Each room is approximately {accommodation.length} x {accommodation.width} {accommodation.metric}.
             </p>
           )}
           </>
@@ -151,15 +154,22 @@ const General = () => {
             </>
           )}
 
-        {/* Display additional fees if available */}
-        {/*Code doesn't display inputted data. Needs to be fixed*/}
-          {accommodation.electricityFee && accommodation.waterFee && accommodation.deposit && (
-          <p className="additional-fees-style">
-            Additional Fees:
-            <p>Electricity: {accommodation.electricityFee}</p>
-            <p>Water: {accommodation.waterFee}</p>
+        {/* REQUIRES ATTENTION: Display additional fees if available */}
+        {accommodation.electricityFee || accommodation.waterFee || accommodation.deposit && (
+        <>
+        <br/>
+        <h3>Additional Fees</h3>
+            <p className="additional-fees-style">{accommodation.electricityFee && (
+              <p>Electricity: {accommodation.electricityFee}</p>
+            )}
+            {accommodation.waterFee && (
+              <p>Water: {accommodation.waterFee}</p>
+            )}
+            {accommodation.deposit && (
             <p>Deposit: {accommodation.deposit}</p>
-          </p>
+              )}
+            </p>
+          </>
         )}
 
         <br/>
