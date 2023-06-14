@@ -34,8 +34,13 @@
         margin-bottom: 0.5rem;
         text-align: left;
     }
-
-    input[type="text"], select {
+    input[type="checkbox"] {
+      margin-right: 0.5rem;
+      font-size: small;
+    }
+    input[type="text"], 
+    input[type="number"],
+    select {
         padding: 0.5rem;
         border-radius: 5px;
         font-size: medium;
@@ -46,6 +51,19 @@
         word-wrap: break-word;
         border: 1px solid var(--martinique);
     }
+
+    .room-dimension {
+      display: flex;
+      text-align: left;
+
+      .room-dimension-inputs {
+          display: flex
+      }   
+      select, option {
+          text-align: left;
+          width: 10rem;
+      }
+  }
 
     select {
       cursor: pointer;
@@ -62,7 +80,7 @@
         padding: 0.5rem;
         text-align: left;
         max-width: 100%;
-        font-size: larger;
+        font-size: medium;
     }
 
     input[type="number"], 
@@ -137,6 +155,13 @@
       transition: opacity 0.3s;
       border-radius: 5px;
     }    
+
+    .error-message {
+      color: red;
+      text-align: left;
+      font-size: 14px;
+      margin-top: 5px;
+    }
 
     button{
         margin-top: 1rem;

@@ -8,9 +8,10 @@ const Edit_Listing_Component = () => {
   // State variables to store data from Firestore and other UI states
   const [accommodation, setAccommodation] = useState({});
   const [editData, setEditData] = useState({});
-  const [uploadedPhotos, setUploadedPhotos] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [emailError, setEmailError] = useState("");
   const [roomDimension, setRoomDimension] = useState("");
+  const [uploadedPhotos, setUploadedPhotos] = useState([]);
 
   // Retrieve the ID parameter from the URL
   const { id } = useParams();
@@ -29,6 +30,9 @@ const Edit_Listing_Component = () => {
           setAccommodation(data);
           if (data.photos) {
             setUploadedPhotos(data.photos);
+          }
+          if (data.length && data.width && data.metric) {
+            setRoomDimension(`${data.length} x ${data.width} ${data.metric}`);
           }
           setEditData(data);
         } else {
@@ -73,7 +77,117 @@ const Edit_Listing_Component = () => {
       }));
     }
   };
+
+  const handleInputChangeAmenities = (e) => {
+    const { name, value, checked } = e.target;
   
+    if (name === 'amenities') {
+      if (checked) {
+        setEditData((prevData) => ({
+          ...prevData,
+          amenities: [...(prevData.amenities || []), value],
+        }));
+      } else {
+        setEditData((prevData) => ({
+          ...prevData,
+          amenities: (prevData.amenities || []).filter((amenity) => amenity !== value),
+        }));
+      }
+    } else {
+      setEditData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleInputChangeNearby = (e) => {
+    const { name, value, checked } = e.target;
+  
+    if (name === 'nearby') {
+      if (checked) {
+        setEditData((prevData) => ({
+          ...prevData,
+          nearby: [...(prevData.nearby || []), value],
+        }));
+      } else {
+        setEditData((prevData) => ({
+          ...prevData,
+          nearby: (prevData.nearby || []).filter((nearby) => nearby !== value),
+        }));
+      }
+    } else {
+      setEditData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
+  
+  const handlePhotoUpload = (e) => {
+    const files = Array.from(e.target.files);
+
+    // Create an array of objects containing the selected files
+    const uploadedPhotosArray = files.map((file) => ({
+      file,
+      url: URL.createObjectURL(file),
+    }));
+
+    // Update the uploadedPhotos state with the selected files
+    setUploadedPhotos(uploadedPhotosArray);
+  };
+
+  // ISSUE: Input fields for owner's and caretaker's phone number should only accept numerical values (up to 11 digits) 
+  const handleInputChangePhoneEmail = (e) => {
+    // Destructure the id and value properties from the event target
+    const { name, value } = e.target;
+
+   // Check if the input field corresponds to ownerPhone or caretakerPhone
+   if (name === "ownerPhone" || name === "caretakerPhone") {
+    // Remove non-digit characters from the entered value
+    const phoneNumber = value.replace(/\D/g, "");
+
+    // Check if the phone number exceeds 11 digits
+    if (phoneNumber.length > 11) {
+      // If it exceeds, truncate the value to 11 digits
+      e.target.value = phoneNumber.slice(0, 11);
+    } else {
+      // If it doesn't exceed, assign the modified phone number value
+      e.target.value = phoneNumber;
+      setEditData((prevData) => ({
+        ...prevData,
+        [name]: phoneNumber,
+      }));
+    }
+  }
+
+  // Check if the input field corresponds to ownerEmail
+  if (name === "ownerEmail") {
+    // Define a regular expression pattern for validating email format
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Check if the value exists and does not match the email pattern
+    if (value && !emailPattern.test(value)) {
+      // If it doesn't match, set the email error message
+      setEmailError("Please enter a valid email address!");
+    } else {
+      // If it matches or no value exists, clear the email error message
+      setEmailError("");
+    }
+    setEditData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    
+  }
+
+    // Update the form data state by merging the new value for the corresponding id
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+    console.log(id, value);
+  };
   
   return (
     <>
@@ -157,7 +271,7 @@ const Edit_Listing_Component = () => {
 
               {/* Render editable field for RULES */}
               <div>
-                <label htmlFor="accRules">RULES</label>
+                <label htmlFor="accRules">RULES & REGULATION</label>
                   <textarea
                     name="accRules"
                     value={editData.accRules||""}
@@ -167,19 +281,111 @@ const Edit_Listing_Component = () => {
 
               <br/>
 
-              {/* NOTE: CORRECTLY Render editable field for AMENITIES */}
+              {/*Render editable field for AMENITIES */}
               <div>
                 <label htmlFor="amenities">AMENITIES</label>
+                <br/>
+                <div>
+                  <label htmlFor="amenities">
+                    <input
+                      type="checkbox"
+                      name="amenities"
+                      value="Wifi"
+                      checked={editData.amenities && editData.amenities.includes("Wifi")}
+                      onChange={handleInputChangeAmenities}
+                    />
+                    Wi-Fi
+                  </label>
+                  <label htmlFor="amenities">
+                    <input
+                      type="checkbox"
+                      name="amenities"
+                      value="Air Conditioning"
+                      checked={editData.amenities && editData.amenities.includes("Air Conditioning")}
+                      onChange={handleInputChangeAmenities}
+                    />
+                    Air conditioning
+                  </label>
+                  <label htmlFor="amenities">
+                    <input
+                      type="checkbox"
+                      name="amenities"
+                      value="Laundry Area"
+                      checked={editData.amenities && editData.amenities.includes("Laundry Area")}
+                      onChange={handleInputChangeAmenities}
+                    />
+                    Laundry area
+                  </label>
+                    <label htmlFor="amenities">
+                      <input
+                        type="checkbox"
+                        name="amenities"
+                        value="Kitchen"
+                        checked={editData.amenities && editData.amenities.includes("Kitchen")}
+                        onChange={handleInputChangeAmenities}
+                      />
+                      Kitchen
+                    </label>
+                  </div>
               </div>
 
-              <br/>
-
-              {/* NOTE: CORRECTLY Render editable field for NEARBY */}
+              {/*Render editable field for NEARBY*/}
               <div>
                 <label htmlFor="nearby">NEARBY</label>
+                <br/>
+                <div>
+                  <label htmlFor="nearby">
+                    <input
+                      type="checkbox"
+                      name="nearby"
+                      value="Eatery"
+                      checked={editData.nearby && editData.nearby.includes("Eatery")}
+                      onChange={handleInputChangeNearby}
+                    />
+                    Eatery/Restaurant
+                  </label>
+                  <label htmlFor="nearby">
+                    <input
+                      type="checkbox"
+                      name="nearby"
+                      value="Laundry Shop"
+                      checked={editData.nearby && editData.nearby.includes("Laundry Shop")}
+                      onChange={handleInputChangeNearby}
+                    />
+                    Laundry Shop
+                  </label>
+                  <label htmlFor="nearby">
+                    <input
+                      type="checkbox"
+                      name="nearby"
+                      value="Retail Store"
+                      checked={editData.nearby && editData.nearby.includes("Retail Store")}
+                      onChange={handleInputChangeNearby}
+                    />
+                    Retail Store
+                  </label>
+                  <label htmlFor="nearby">
+                    <input
+                      type="checkbox"
+                      name="nearby"
+                      value="Water Refill Station"
+                      checked={editData.nearby && editData.nearby.includes("Water Refill Station")}
+                      onChange={handleInputChangeNearby}
+                    />
+                    Water refilling station
+                  </label>
+                  <label htmlFor="nearby">
+                    <input
+                      type="checkbox"
+                      name="nearby"
+                      value="Pharmacy"
+                      checked={editData.nearby && editData.nearby.includes("Pharmacy")}
+                      onChange={handleInputChangeNearby}
+                    />
+                    Pharmacy
+                  </label>
+                  </div>
               </div>
-
-              <br/>
               <br/>
 
               {/* NOTE: Page 2 of Add Listing Form starts here*/}
@@ -203,6 +409,42 @@ const Edit_Listing_Component = () => {
               </div>
 
               {/* NOTE: CORRECTLY Render editable field for ROOM DIMENSIONS (NOT REQUIRED INPUT FIELD)*/}
+              <div className="room-dimension">
+                <br />
+                <label htmlFor="room-dimension">ROOM DIMENSION</label>
+                <div className="room-dimension-inputs">
+                <input
+                  type="number"
+                  name="length"
+                  min={1}
+                  className="length-style"
+                  placeholder="Length"
+                  onChange={handleInputChange}
+                  value={editData.length||""}
+                />
+                <span style={{ margin: "0 5px" }}>x</span>
+                <input
+                  type="number"
+                  name="width"
+                  min={1}
+                  className="width-style"
+                  placeholder="Width"
+                  onChange={handleInputChange}
+                  value={editData.width||""}
+                />
+              </div>
+              <select
+                name="metric"
+                className="metric-style"
+                onChange={handleInputChange}
+                value={editData.metric||""}
+              >
+                <option value="">Select</option>
+                <option value="feet">Feet</option>
+                <option value="inches">Inches</option>
+                <option value="meters">Meters</option>
+              </select>
+            </div>
               
               <br/>
 
@@ -227,7 +469,27 @@ const Edit_Listing_Component = () => {
                   </select>
               </div>
 
+              <br/>
+
               {/* NOTE: CORRECTLY render editable field for UPLOADED PHOTOS*/}
+              <div>
+              <label htmlFor="uploadedPhotos">UPLOAD PHOTOS</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  name="uploadedPhotos"
+                  multiple
+                  onChange={handlePhotoUpload} // Add onChange event handler
+                />
+                {uploadedPhotos.map((photo, index) => (
+                  <div key={index} className="uploaded-photo">
+                    <img src={photo.url} alt={`Uploaded photo ${index + 1}`} />
+                    <button onClick={() => handleDeletePhoto(index)}>
+                      <a>Delete</a>
+                      </button>
+                  </div>
+                ))}
+              </div>
 
               <br/>
               <br/>
@@ -309,7 +571,7 @@ const Edit_Listing_Component = () => {
                   name="ownerPhone"
                   pattern="\d{11}"
                   title="Please enter a valid Philippine phone number (11 digits, starting with '09')"
-                  onChange={handleInputChange}
+                  onChange={handleInputChangePhoneEmail}
                   value={editData.ownerPhone||""}
                 ></input>
               </div>
@@ -317,16 +579,16 @@ const Edit_Listing_Component = () => {
               <br/>
 
               {/* Render editable field for OWNER'S E-MAIL ADDRESS*/}
-              {/* Issue: Add pattern validation*/}
               <div>
                 <label htmlFor="owner-email">OWNER'S E-MAIL</label>
                   <input
                     type="email"
                     name="ownerEmail"
                     title="Please enter a valid e-mail"
-                    onChange={handleInputChange}
-                    value={editData.ownerEmail}
+                    onChange={handleInputChangePhoneEmail}
+                    value={editData.ownerEmail||""}
                   ></input>
+                  {emailError && <span className="error-message">{emailError}</span>}
               </div>
 
               <br/>
@@ -354,8 +616,8 @@ const Edit_Listing_Component = () => {
                   name="caretakerPhone"
                   pattern="\d{11}"
                   title="Please enter a valid Philippine phone number (11 digits, starting with '09')"
-                  onChange={handleInputChange}
-                  value={editData.caretakerPhone}
+                  onChange={handleInputChangePhoneEmail}
+                  value={editData.caretakerPhone||""}
                 ></input>
               </div>
           
@@ -440,20 +702,20 @@ const Edit_Listing_Component = () => {
             <p>Only {accommodation.occupants} occupants are allowed per room.</p>
             )}
 
-            {/* NEEDS ATTENTION: Display room dimension if available */}
+            {/*Display room dimension if available*/}
             {roomDimension && (
-              <>
-              <br/>
-              <h3>Room dimension</h3>
-              <hr/>
-              {/* Display the room dimensions if available */}
-              {accommodation.length && accommodation.width && accommodation.metric && (
+            <>
+            <br/>
+            <h3>Room dimension</h3>
+            <hr className='hr-edit-style'/>
+                {/* Display the room dimensions if available */}
+                {accommodation.length && accommodation.width && accommodation.metric && (
                 <p>
-                  Each room is approximately {accommodation.length} x {accommodation.width} {accommodation.metric}
+                  Each room is approximately {accommodation.length} x {accommodation.width} {accommodation.metric}.
                 </p>
-              )}
+                )}
               </>
-            )}
+            )}    
 
             <br/>
             
@@ -534,7 +796,7 @@ const Edit_Listing_Component = () => {
                     <>
                       <br/>
                       <h3>Gallery</h3>
-                      <hr className='hr-edit-style'/>
+                      <hr/>
                       <ul className="photo-list">
                         {uploadedPhotos.map((photoUrl, index) => (
                           <li key={index}>

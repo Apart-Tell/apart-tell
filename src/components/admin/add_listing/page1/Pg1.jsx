@@ -338,11 +338,40 @@ const Pg1 = () => {
 
     validateForm3();
   };
+  
   const handleInputChange4 = (e) => {
     // Destructure the id and value properties from the event target
     const { id, value } = e.target;
 
-    // Check if the input field corresponds to ownerPhone or caretakerPhone
+   // Check if the input field corresponds to ownerPhone or caretakerPhone
+   if (id === "ownerPhone" || id === "caretakerPhone") {
+    // Remove non-digit characters from the entered value
+    const phoneNumber = value.replace(/\D/g, "");
+
+    // Check if the phone number exceeds 11 digits
+    if (phoneNumber.length > 11) {
+      // If it exceeds, truncate the value to 11 digits
+      e.target.value = phoneNumber.slice(0, 11);
+    } else {
+      // If it doesn't exceed, assign the modified phone number value
+      e.target.value = phoneNumber;
+    }
+  }
+
+  // Check if the input field corresponds to ownerEmail
+  if (id === "ownerEmail") {
+    // Define a regular expression pattern for validating email format
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Check if the value exists and does not match the email pattern
+    if (value && !emailPattern.test(value)) {
+      // If it doesn't match, set the email error message
+      setEmailError("Please enter a valid email address!");
+    } else {
+      // If it matches or no value exists, clear the email error message
+      setEmailError("");
+    }
+  }
 
     // Update the form data state by merging the new value for the corresponding id
     setFormData((prevFormData) => ({
@@ -882,6 +911,7 @@ const Pg1 = () => {
                     value={formData.ownerEmail}
                     name="Owner's Email"
                   ></input>
+                  {emailError && <span className="error-message">{emailError}</span>}
                 </div>
                 <br />
                 <div>
