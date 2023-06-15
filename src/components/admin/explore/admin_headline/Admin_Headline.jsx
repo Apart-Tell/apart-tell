@@ -44,7 +44,9 @@ const Admin_Headline = ({ isLoaded, type, accommodationsCount }) => {
         <>
             <div className="headline-section">
                 {isLoading ? (
-                    <div className="spinner">Loading...</div>
+                    <div className="spinner">
+                    <h2>Loading...</h2>
+                    </div>
                 ) : (
                     <div className="headline-text">
                         <h2>{headlineText}</h2>

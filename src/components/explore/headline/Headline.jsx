@@ -10,7 +10,7 @@ const Headline = ({ isLoaded, type, accommodationsCount }) => {
         // Simulating API fetch
         setTimeout(() => {
             setIsLoading(false);
-        }, 2000);
+        }, );
     }, []);
 
     let headlineText = '';
@@ -44,7 +44,9 @@ const Headline = ({ isLoaded, type, accommodationsCount }) => {
         <>
             <div className="headline-section">
                 {isLoading ? (
-                    <div className="spinner">loading...</div>
+                    <div className="spinner">
+                        <h2>Loading...</h2>
+                    </div>
                 ) : (
                     <div className="headline-text">
                         <h2>{headlineText}</h2>
