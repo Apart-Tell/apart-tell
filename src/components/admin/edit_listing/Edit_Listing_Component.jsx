@@ -861,7 +861,7 @@ const Edit_Listing_Component = () => {
         <>
           {/* Display other non-editable fields */}
           {/* Display the accommodation data */}
-          <div className="edit-listing-style  container">
+          <div className="edit-listing-style container">
             {/* Display the accommodation name if available */}
             {accommodation.accName && <h2>{accommodation.accName}</h2>}
 

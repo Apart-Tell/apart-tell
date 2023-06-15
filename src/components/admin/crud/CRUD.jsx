@@ -73,16 +73,19 @@ const CRUD = () => {
   
     if (confirmed) {
       const email = prompt("Please enter your email:"); // Prompt the user for their email
-      if (email) {
+      if (email == currentUser.email) {
         await deleteDoc(doc(db, "accommodations", accommodationId)); // Delete the accommodation document from Firestore
         setAccommodations((prevAccommodations) =>
           prevAccommodations.filter((item) => item.id !== accommodationId)
-        ); // Update the accommodations state by removing the deleted accommodation
+        ); // Update the accommodations state by removing the deleted accommodationS
         console.log("Delete clicked:", accommodationId);
+        alert("Deleting the selected listing..");
       } else {
         console.log("Deletion cancelled");
+        alert("Incorrect e-mail! Please try again.");
       }
     } else {
+      alert("Deletion cancelled!");
       console.log("Cancelled");
     }
   };
