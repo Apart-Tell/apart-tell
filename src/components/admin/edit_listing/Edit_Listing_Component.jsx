@@ -923,8 +923,6 @@ const Edit_Listing_Component = () => {
               </ul>
             )}
 
-            <br />
-
             {/* Display the number of occupants allowed per room if available */}
             <h3>Number of occupants (per room)</h3>
             <hr className="hr-edit-style" />
@@ -1049,7 +1047,7 @@ const Edit_Listing_Component = () => {
               <>
                 <br />
                 <h3>Gallery</h3>
-                <hr />
+                <hr className="hr-edit-style" />
                 <ul className="photo-list">
                   {uploadedPhotos.map((photoUrl, index) => (
                     <li key={index}>
