@@ -79,7 +79,7 @@ const CRUD = () => {
           prevAccommodations.filter((item) => item.id !== accommodationId)
         ); // Update the accommodations state by removing the deleted accommodationS
         console.log("Delete clicked:", accommodationId);
-        alert("The selected listing has been deleted!");
+        alert("Deleting the selected listing..");
       } else {
         console.log("Deletion cancelled");
         alert("Incorrect e-mail! Please try again.");

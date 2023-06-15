@@ -11,21 +11,21 @@ const Options = () => {
         <div className='option-column'>
           <Link to='/admin-apartment'>
             <h4>Apartment</h4>
-            <img src='src/assets/images/apartment-img.png' alt='apartment-img'></img>
+            <img src='src/assets/images/apartment-img.jpg' alt='apartment-img'></img>
           </Link>
         </div>
 
         <div className='option-column'>
           <Link to='/admin-boarding'>
             <h4>Boarding House</h4>
-            <img src='src/assets/images/bh-img.png' alt='bh-img'></img>
+            <img src='src/assets/images/bh-img.jpg' alt='bh-img'></img>
           </Link>
         </div>
 
         <div className='option-column'>
           <Link to='/admin-dormitory'>
             <h4>Dormitory</h4>
-            <img src='src/assets/images/dorm-img.png' alt='dorm-img'></img>
+            <img src='src/assets/images/dorm-img.jpg' alt='dorm-img'></img>
           </Link>
         </div>
 
