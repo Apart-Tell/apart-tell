@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./register.scss";
 import Footer from "../../components/footer/Footer";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -48,7 +48,8 @@ const Register = () => {
               .then(() => {
                 const message =
                   "You have been registered. Your account is awaiting approval from the superadmin.";
-                alert(message); // Display the alert message
+                alert(message);
+                signOut(auth); // Display the alert message
               })
               .catch((error) => {
                 console.log(

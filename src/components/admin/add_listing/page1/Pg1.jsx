@@ -57,7 +57,7 @@ const Pg1 = () => {
   const handleNext = (e) => {
     e.preventDefault();
     const requiredInputs = document.querySelectorAll(
-      "input[required], select[required], textarea[required]"
+      "input[required], select[required], textarea[required], checkbox[required]"
     );
     const unfilledInputs = [];
 
@@ -67,6 +67,22 @@ const Pg1 = () => {
         unfilledInputs.push(input);
       }
     });
+    
+    if (formData.amenities.length === 0) {
+      const firstAmenitiesInput = document.querySelector("#amenities");
+      if (firstAmenitiesInput) {
+        unfilledInputs.push(firstAmenitiesInput);
+      }
+    }
+    
+    if (formData.nearby.length === 0) {
+      const firstNearbyInput = document.querySelector("#nearby");
+      if (firstNearbyInput) {
+        unfilledInputs.push(firstNearbyInput);
+        console.log(unfilledInputs);
+      }
+    }
+    
 
     if (formData.electricityChecked && !formData.electricityFee) {
       unfilledInputs.push(document.querySelector("#electricityFee"));
@@ -338,7 +354,6 @@ const Pg1 = () => {
 
     validateForm3();
   };
-  
   const handleInputChange4 = (e) => {
     // Destructure the id and value properties from the event target
     const { id, value } = e.target;
@@ -484,7 +499,9 @@ const Pg1 = () => {
                           type="checkbox"
                           id="amenities"
                           value="Wifi"
+                          name="Amenities"
                           onChange={handleInputChange1}
+                          required={formData.amenities.length === 0}
                           checked={formData.amenities.includes("Wifi")}
                         />
                         Wi-Fi
@@ -494,6 +511,7 @@ const Pg1 = () => {
                           type="checkbox"
                           id="amenities"
                           value="Air Conditioning"
+                          //name="Amenities"
                           onChange={handleInputChange1}
                           checked={formData.amenities.includes("Air Conditioning")}
                         />
@@ -504,6 +522,7 @@ const Pg1 = () => {
                           type="checkbox"
                           id="amenities"
                           value="Laundry Area"
+                          //name="Amenities"
                           onChange={handleInputChange1}
                           checked={formData.amenities.includes("Laundry Area")}
                         />
@@ -514,6 +533,7 @@ const Pg1 = () => {
                           type="checkbox"
                           id="amenities"
                           value="Kitchen"
+                          //name="Amenities"
                           onChange={handleInputChange1}
                           checked={formData.amenities.includes("Kitchen")}
                         />
@@ -528,8 +548,10 @@ const Pg1 = () => {
                       <label htmlFor="nearby">
                         <input
                           type="checkbox"
+                          required={formData.nearby.length === 0}
                           id="nearby"
                           value="Eatery"
+                          name="Nearby"
                           onChange={handleInputChange1}
                           checked={formData.nearby.includes("Eatery")}
                         />
@@ -540,6 +562,7 @@ const Pg1 = () => {
                           type="checkbox"
                           id="nearby"
                           value="Laundry Shop"
+                          //name="Nearby"
                           onChange={handleInputChange1}
                           checked={formData.nearby.includes("Laundry Shop")}
                         />
@@ -549,6 +572,7 @@ const Pg1 = () => {
                         <input
                           type="checkbox"
                           id="nearby"
+                          //name="Nearby"
                           value="Retail Store"
                           onChange={handleInputChange1}
                           checked={formData.nearby.includes("Retail Store")}
@@ -560,6 +584,7 @@ const Pg1 = () => {
                           type="checkbox"
                           id="nearby"
                           value="Water Refill Station"
+                          //name="Nearby"
                           onChange={handleInputChange1}
                           checked={formData.nearby.includes(
                             "Water Refill Station"
@@ -572,6 +597,7 @@ const Pg1 = () => {
                           type="checkbox"
                           id="nearby"
                           value="Pharmacy"
+                          //name="Nearby"
                           onChange={handleInputChange1}
                           checked={formData.nearby.includes("Pharmacy")}
                         />
@@ -881,7 +907,7 @@ const Pg1 = () => {
                     type="text"
                     id="ownerName"
                     onChange={handleInputChange4}
-                    defaultValue={formData.ownerName}
+                    value={formData.ownerName}
                     required
                     name="Owner's Name"
                   ></input>
@@ -895,7 +921,7 @@ const Pg1 = () => {
                     pattern="\d{11}"
                     title="Please enter a valid Philippine phone number (11 digits, starting with '09')"
                     onChange={handleInputChange4}
-                    defaultValue={formData.ownerPhone}
+                    value={formData.ownerPhone}
                     required
                     name="Owner's Phone Number"
                   ></input>
