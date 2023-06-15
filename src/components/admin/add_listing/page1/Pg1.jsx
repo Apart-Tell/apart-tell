@@ -765,7 +765,7 @@ const Pg1 = () => {
                     max="9999999.99"
                     placeholder="ex. 1000.00"
                     onChange={handleInputChange3}
-                    defaultValue={formData.headFee}
+                    value={formData.headFee}
                     required
                     name="Room Fee per Head"
                   ></input>
@@ -895,7 +895,7 @@ const Pg1 = () => {
                     pattern="\d{11}"
                     title="Please enter a valid Philippine phone number (11 digits, starting with '09')"
                     onChange={handleInputChange4}
-                    defaultValue={formData.ownerPhone}
+                    value={formData.ownerPhone}
                     required
                     name="Owner's Phone Number"
                   ></input>
