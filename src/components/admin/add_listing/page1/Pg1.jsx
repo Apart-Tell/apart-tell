@@ -908,7 +908,7 @@ const Pg1 = () => {
                     id="ownerEmail"
                     title="Please enter a valid e-mail"
                     onChange={handleInputChange4}
-                    value={formData.ownerEmail}
+                    defaultValue={formData.ownerEmail}
                     name="Owner's Email"
                   ></input>
                   {emailError && <span className="error-message">{emailError}</span>}

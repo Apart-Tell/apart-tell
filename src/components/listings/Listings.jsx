@@ -63,7 +63,7 @@ const Listings = () => {
               </div>
               <div className="card-text">
                 <h4 className="accommodation-name">{accommodation.accName}</h4>
-                <h4 className="accommodation-price">PHP {accommodation.roomFee}</h4>
+                <h4 className="accommodation-price">PHP {Number(accommodation.roomFee).toLocaleString('en-US')}</h4>
               </div>
               <div className="card-text">
                 <h5 className="accommodation-occupants">
