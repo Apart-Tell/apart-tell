@@ -881,7 +881,7 @@ const Pg1 = () => {
                     type="text"
                     id="ownerName"
                     onChange={handleInputChange4}
-                    defaultValue={formData.ownerName}
+                    value={formData.ownerName}
                     required
                     name="Owner's Name"
                   ></input>
@@ -895,7 +895,7 @@ const Pg1 = () => {
                     pattern="\d{11}"
                     title="Please enter a valid Philippine phone number (11 digits, starting with '09')"
                     onChange={handleInputChange4}
-                    defaultValue={formData.ownerPhone}
+                    value={formData.ownerPhone}
                     required
                     name="Owner's Phone Number"
                   ></input>
