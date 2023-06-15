@@ -70,16 +70,23 @@ const CRUD = () => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this listing?"
     ); // Prompt the user for confirmation
+  
     if (confirmed) {
-      await deleteDoc(doc(db, "accommodations", accommodationId)); // Delete the accommodation document from Firestore
-      setAccommodations((prevAccommodations) =>
-        prevAccommodations.filter((item) => item.id !== accommodationId)
-      ); // Update the accommodations state by removing the deleted accommodation
-      console.log("Delete clicked:", accommodationId);
+      const email = prompt("Please enter your email:"); // Prompt the user for their email
+      if (email) {
+        await deleteDoc(doc(db, "accommodations", accommodationId)); // Delete the accommodation document from Firestore
+        setAccommodations((prevAccommodations) =>
+          prevAccommodations.filter((item) => item.id !== accommodationId)
+        ); // Update the accommodations state by removing the deleted accommodation
+        console.log("Delete clicked:", accommodationId);
+      } else {
+        console.log("Deletion cancelled");
+      }
     } else {
-      console.log("cancelled");
+      console.log("Cancelled");
     }
   };
+  
 
   const handleUpdateClick = async (accommodationId) => {
      // Redirect to the page where the listing data is displayed and editable
