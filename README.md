@@ -1,6 +1,6 @@
 # Project Name: Apart-Tell
 
-A directory of available accomodations within Mintal.
+An online directory of available accomodations within Mintal.
 
 ## Installation
 1. Clone the repository to your local machine using git clone <repository-url>  
