@@ -18,19 +18,19 @@ const AdminAbout = () => {
           <div className="people">
 
               <div className="team">
-                  <img src="src/assets/images/dev-danica.jpg" alt="" />
+                  <img src="../assets/images/dev-danica.jpg" alt="" />
                   <h4>Danica Apostol</h4>
               </div>
               <div className="team">
-                  <img src="src/assets/images/dev-meekah.jpg" alt="" />
+                  <img src="../assets/images/dev-meekah.jpg" alt="" />
                   <h4>Meekah Yzabelle Carballo</h4>
               </div>
               <div className="team">
-                  <img src="src/assets/images/dev-sanyiah.png" alt="" />
+                  <img src="../assets/images/dev-sanyiah.png" alt="" />
                   <h4>Sanyiah Piang</h4>
               </div>
               <div className="team">
-                  <img src="src/assets/images/dev-satori.jpg" alt="" />
+                  <img src="../assets/images/dev-satori.jpg" alt="" />
                   <h4>Khublei Mo Satori Pelayo</h4>
               </div>
           </div>
@@ -38,19 +38,19 @@ const AdminAbout = () => {
           <div className="people">
 
               <div className="team">
-                  <img src="src/assets/images/PM-dani.jpg" alt="" />
+                  <img src="../assets/images/PM-dani.jpg" alt="" />
                   <h4>Daniel Gabriel Manabat</h4>
               </div>
               <div className="team">
-                  <img src="src/assets/images/PM-jeff.jpg" alt="" />
+                  <img src="../assets/images/PM-jeff.jpg" alt="" />
                   <h4>Jeff Erxon Palen</h4>
               </div>
               <div className="team">
-                  <img src="src/assets/images/PM-kit.jpg" alt="" />
+                  <img src="../assets/images/PM-kit.jpg" alt="" />
                   <h4>Keith Napolitano</h4>
               </div>
               <div className="team">
-                  <img src="src/assets/images/PM-paolo.jpg" alt="" />
+                  <img src="../assets/images/PM-paolo.jpg" alt="" />
                   <h4>Paolo Lumontod</h4>
               </div>
           </div>

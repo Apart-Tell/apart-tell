@@ -77,7 +77,7 @@ function Login() {
     <>
       <div className="logo-login">
         <a href="/">
-          <img src="../../../src/assets/brand/logo-icon.png" alt="apart-tell logo" />
+          <img src="../assets/brand/logo-icon.png" alt="apart-tell logo" />
         </a>
       </div>
       <div className="login">

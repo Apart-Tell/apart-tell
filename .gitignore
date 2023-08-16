@@ -11,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+# Added here to exclude them when pushing to the public repo
+.firebase
+.firebaserc
+firebase.json
 
 # Editor directories and files
 .vscode/*

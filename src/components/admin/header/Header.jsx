@@ -88,7 +88,7 @@ export default function Header() {
         <div className="logo">
           <a href="/admin-home">
             <img
-              src="../../../src/assets/brand/logo-transparent-small.png"
+              src="../assets/brand/logo-transparent-small.png"
               alt="apart-tell logo"
             />
           </a>
