@@ -17,12 +17,12 @@ function Login() {
 
   const login = (e) => {
     e.preventDefault();
-    
+
     if (!email || !password) {
       setErrorMessage("Please fill in the fields");
       return;
     }
-    
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
@@ -68,7 +68,7 @@ function Login() {
   }, []);
 
   const [showConfirmationPassword, setShowConfirmationPassword] = useState(false);
-  
+
   const toggleConfirmationPasswordVisibility = () => {
     setShowConfirmationPassword(!showConfirmationPassword);
   };
@@ -77,7 +77,7 @@ function Login() {
     <>
       <div className="logo-login">
         <a href="/">
-          <img src="logo-icon.png" alt="apart-tell logo" />
+          <img src="../../../src/assets/brand/logo-icon.png" alt="apart-tell logo" />
         </a>
       </div>
       <div className="login">
@@ -106,7 +106,7 @@ function Login() {
                 <PasswordVisibilityToggle onToggle={toggleConfirmationPasswordVisibility}/>
               </div>
             </div>
-            
+
             {errorMessage && <p>{errorMessage}</p>}
 
             <div className="login-button">

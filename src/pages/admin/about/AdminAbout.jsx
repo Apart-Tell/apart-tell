@@ -1,5 +1,5 @@
 import React from 'react';
-import "./adminabout.scss";
+import "../../about us/about.scss";
 import Header from '../../../components/admin/header/Header';
 import Footer from '../../../components/admin/footer/Footer';
 
