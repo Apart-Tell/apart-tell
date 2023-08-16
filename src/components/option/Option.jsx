@@ -11,21 +11,21 @@ export default function Option() {
         <div className='option-column'>
           <Link to='/apartment'>
             <h4>Apartment</h4>
-            <img src='src/assets/images/apartment-img.jpg' alt='apartment-img' />
+            <img src='../../../src/assets/images/apartment-img.jpg' alt='apartment-img' />
           </Link>
         </div>
 
         <div className='option-column'>
           <Link to='/boarding'>
             <h4>Boarding House</h4>
-            <img src='src/assets/images/bh-img.jpg' alt='bh-img' />
+            <img src='../../../src/assets/images/bh-img.jpg' alt='bh-img' />
           </Link>
         </div>
 
         <div className='option-column'>
           <Link to='/dormitory'>
             <h4>Dormitory</h4>
-            <img src='src/assets/images/dorm-img.jpg' alt='dorm-img' />
+            <img src='../../../src/assets/images/dorm-img.jpg' alt='dorm-img' />
           </Link>
         </div>
 
