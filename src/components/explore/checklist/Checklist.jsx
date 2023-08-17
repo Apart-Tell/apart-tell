@@ -129,7 +129,7 @@ const Checklist = ({ updateContainerClass, updateFilters, isLoaded, type }) => {
     <>
       <div className="checklist-section">
         <div className="filter-icon" onClick={toggleDropdown}>
-          <img src="src/assets/svg/filter.svg"
+          <img src="../../../assets/svg/filter.svg"
             alt="Filter Icon"
             className="filter-icon-img"
           />
